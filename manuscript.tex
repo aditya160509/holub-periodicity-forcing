@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amsthm,amssymb,booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=black]{hyperref}
+\hypersetup{pdftitle={The word aabbaba forces periodicity}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\eps}{\varepsilon}
+\title{The word \(\mathtt{aabbaba}\) forces periodicity}
+\author{}
+\date{Research manuscript, 24 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem.
+\end{abstract}
+\section{Statement}
+Holub's problem at WORDS 2025 asks which patterns \(a^i b a^j b a^k b a^\ell\) force periodicity when \(V\) is at least as long as each of \(X,Y,U\) \cite[pp.~3--5]{words}. The simplest unknown case identified there has \((i,j,k,\ell)=(2,0,1,1)\). The slides use finite words and a morphism formulation without an explicit nonerasing requirement. Our theorem covers both conventions.
+\begin{theorem}\label{main}
+Over any alphabet, all finite words satisfying \(XXYYXYX=UUVVUVU\) commute pairwise or satisfy \(X=U,\ Y=V\).
+\end{theorem}
+\begin{lemma}[Transport of a power]\label{transport}
+If \(P^m Z=Z Q\) with \(m\ge1\), there is a word \(K\) with \(PZ=ZK\) and \(Q=K^m\). In particular \(|K|=|P|\).
+\end{lemma}
+\begin{proof}
+If \(P=\eps\), length gives \(Q=\eps\). Otherwise induct on \(|Z|\). At length zero take \(K=P\). If \(Z=cZ'\), the first letter of \(P\) is \(c\); write \(P=cR\). Cancelling \(c\) in the hypothesis gives \((Rc)^m Z'=Z'Q\), since \((cR)^m c=c(Rc)^m\). Induction gives \(RcZ'=Z'K\) and \(Q=K^m\). Prepending \(c\) gives \(PZ=ZK\).
+\end{proof}
+If \(P,Q\) commute with a nonempty \(H\), then \(PQ=QP\). Indeed both concatenations commute with every \(H^n\); for \(|H^n|\ge |PQ|\) both are prefixes of \(H^n\) of the same length.
+
+\section{Proof of Theorem~\ref{main}}
+Exchange the two substitutions if necessary to arrange \(|Y|\le |V|\). Length gives \(4(|X|-|U|)=3(|V|-|Y|)\), hence
+\[
+ |X|-|U|=3t,\qquad |V|-|Y|=4t,\qquad t\in\mathbb Z_{\ge0}.
+\]
+If \(t=0\), corresponding boundaries coincide and the corresponding words agree. Henceforth \(t>0\).
+
+At each boundary compare the two prefixes of the common expanded word. The diagram shows the left prefix length minus the right, in units of \(t\).
+\[
+\begin{array}{c|rrrrrrrr}
+\text{boundary}&0&1&2&3&4&5&6&7\\ \hline
+\text{left block just read}&-&X&X&Y&Y&X&Y&X\\
+\text{right block just read}&-&U&U&V&V&U&V&U\\
+\text{signed difference}/t&0&3&6&2&-2&1&-3&0\\
+\text{intervening word}&-&A&B&C&D&E&F&-
+\end{array}
+\]
+At boundary three the left prefix is the right prefix followed by \(C\); at boundary four the right prefix is the left prefix followed by \(D\). Appending the next blocks and cancelling common prefixes gives
+\[
+ X=UA,\quad AX=UB,\quad BY=VC,\quad V=CYD,\quad
+ X=DUE,\quad V=EYF,\quad X=FU .
+\]
+Only the order of the corresponding boundaries matters; an intervening word may cross other block boundaries.
+
+\paragraph{The forced cube.}
+Compare \(CYD=EYF\). Since \(|C|=2t,\ |E|=t\), write \(C=EG\). Since \(|F|=3t,\ |D|=2t\), comparison at the right gives \(F=HD\) with \(|H|=t\). Now \(DUE=X=HDU\). Its first \(2t\) letters form \(D\). Its first \(t\) letters are \(H\), and its next \(t\) letters are the first \(t\) of \(D\), again \(H\). Thus
+\[
+ D=H^2,\qquad F=H^3,\qquad HU=UE.
+\]
+In particular \(X=H^3U=UE^3\). Since \(X=UA\), cancellation gives \(A=E^3\).
+
+\paragraph{The first transport.}
+The equation \(AX=UB\) becomes \(AUA=UB\). Since \(|B|=6t\), it ends in \(A\); write \(B=B_0 A\). Right cancellation gives \(E^3 U=U B_0\). Lemma~\ref{transport} gives \(EU=UK\) and \(B_0=K^3\), with \(|K|=t\). But \(BY=VC\), and \(V=EYF\). Comparing their first \(t\) letters gives \(K=E\). Therefore \(EU=UE=HU\); right cancellation gives \(H=E\). Consequently \(HU=UH\) and \(B=H^6\).
+
+\paragraph{The second transport.}
+Substitute \(C=HG,\ V=HYH^3\) into \(BY=VC\) and cancel the first \(H\):
+\[
+ H^5Y=YH^4G .
+\]
+Lemma~\ref{transport} gives \(HY=YL\) and \(L^5=H^4G\), with \(|L|=t\). Their first \(t\) letters give \(L=H\). Thus \(Y\) commutes with \(H\). So do \(U\), \(X=UH^3\), and \(V=HYH^3\). Since \(|H|=t>0\), the common-centralizer observation proves the claim. \qed
+
+\section{All fixed-length solutions}
+\begin{corollary}\label{gcd}
+Fix nonnegative lengths \(x,y,u,v\) with \(4x+3y=4u+3v\). For \(x=u\) the solutions are precisely the identical substitutions. Otherwise set \(d=\gcd(x,y,u,v)>0\). The solutions are exactly
+\[
+ (X,Y,U,V)=(P^{x/d},P^{y/d},P^{u/d},P^{v/d}),\qquad |P|=d .
+\]
+The graph identifying corresponding letter positions has exactly \(d\) components, indexed by the local position modulo \(d\).
+\end{corollary}
+\begin{proof}
+Commuting words are powers of a common primitive word: for a pair \(AB=BA\) with \(0<|A|\le |B|\), write \(B=AC\) and cancel to get \(AC=CA\), reducing total length. Uniqueness of primitive roots lets us apply this fact to each pair with a fixed nonempty word; see also \cite[Lemma 1]{hs}. The common root length divides \(d\); repeat the root to length \(d\) to obtain \(P\). Conversely both expansions are powers of \(P\) of equal length.
+
+Assign each component its own symbol. This is a solution, so all positions of equal residue carry the same symbol. Distinct residues cannot be identified because each occurrence starts at an expanded position divisible by \(d\). Every residue occurs. For \(t>0\), the same \(d\) is \(\gcd(u,y,t)\), since \(\gcd(3,4)=1\).
+\end{proof}
+
+For any fixed pattern and lengths, build this graph by expanding into references rather than letters. All solutions are exactly the component labelings. A mismatch between symbolic \(AB\) and \(BA\) survives a binary letter map separating the two offending symbols. In the target case unequal corresponding lengths already guarantee distinct substitutions. In general, preserving both noncommutation and unequal substitutions needs at most two unequal-symbol constraints: any differing-length comparison survives automatically. A graph with at most two edges between distinct symbols is bipartite. This proves binary completeness at the same lengths. Scaling lengths by \(k\) replaces the graph with \(k\) independent copies, one per residue inside a scaled letter slot.
+
+\section{Other exponent quadruples}
+\begin{corollary}
+For \(d\ge1\) and \(r,s\ge0\), the quadruple
+\[
+ (2d+r,\ s+r,\ d+s+r,\ d+s)
+\]
+forces periodicity without length restrictions, as does its reversal.
+\end{corollary}
+\begin{proof}
+Replace \(a\) by \(a^d\) and \(b\) by \(a^r b a^s\) in the base pattern. Apply Theorem~\ref{main} to the four composite blocks \(X^d,X^rYX^s,U^d,U^rVU^s\). Equality of substitutions gives \(X=U\) by comparing equal-length prefixes of equal \(d\)-th powers, then \(Y=V\) by cancellation. Otherwise the four blocks are powers of a common primitive word, unless all are empty, when the conclusion is immediate. By uniqueness of primitive roots, \(X,U\) themselves are powers of this word (zeroth powers allowed). Removing their powers at the ends of the other blocks gives the same for \(Y,V\). Reversing each word proves the reversal assertion. The padding closure for \(d=1\) is \cite[Lemma 26]{hs}; the forcing seed here is Theorem~\ref{main}.
+\end{proof}
+For an infinite negative family satisfying the maximum-length condition, take \(a^m b^3\) with \(m\ge3\). Put \(T=0^{3m}\) and
+\[
+ X=(T1)^3,\quad Y=0^m,\quad U=000,\quad V=(1T)^m .
+\]
+The identity \((T1)^{3m}T=T(1T)^{3m}\) verifies the equation. Here \(X\ne U\), \(X,Y\) do not commute, and \(|V|=m(3m+1)\ge 3(3m+1)=|X|\). This specializes the construction in the proof of \cite[Theorem 30]{hs}.
+
+\paragraph{Small exponents.}
+For \(i,j,k,\ell\in\{0,1\}\), the table gives eleven nonforcing cases with nonempty binary certificates. Four other tuples force periodicity: \(0011,1100,0101,1010\). Their words are \(bbaba,ababb,babba,abbab\), covered up to reversal and letter exchange by \cite[Lemmas 14--15]{hs} for nonempty images (equal corresponding lengths give identical substitutions). If a substitution erases a letter, it is periodic. If just one substitution is periodic, \cite[Theorem 1]{periodic} requires the equality word to be unary or a power of a word having a letter occurring precisely once. Our four patterns are primitive by their coprime multiplicities 2 and 3, and each letter occurs at least twice. If both substitutions are periodic, their equal nonempty image has one primitive root; equality with the empty image forces all images empty. This covers erasures.
+
+The tuple \(1001\), or \(ab^3a\), is left undecided here under the maximum-length condition. For this tuple the odd-exponent example in \cite[conclusion]{hh} has \(|X|>|V|\) when its outer padding is nonempty. Thus the entire twelve-element slice \(i\ell=0\) is classified, as are fifteen of the sixteen tuples in the cube.
+\begin{center}\small\ttfamily
+\begin{tabular}{lllll}\toprule
+tuple & X & Y & U & V\\\midrule
+0000&1&0&0&0\\
+0001&0001&000&1&0000\\
+0010&0010&000&1&0000\\
+0100&0100&000&1&0000\\
+0110&1010101&010&1&0101010\\
+0111&10&0&0&01\\
+1000&1000&000&1&0000\\
+1011&101&0&1&010\\
+1101&101&0&1&010\\
+1110&10&0&1&00\\
+1111&1010101&0&1&010101010\\\bottomrule
+\end{tabular}
+\end{center}
+Without length restrictions, existence of a counterexample for any fixed pattern is decidable in principle by Makanin's theorem \cite{mak}: over a binary alphabet a disequality is a finite disjunction of proper-prefix and first-mismatching-letter cases, each expressible with word equations. Empty variables can be guessed separately. This gives no direct encoding here of the extra length comparisons. The fixed-length method and Corollary~\ref{gcd} do not classify all exponent quadruples.
+
+\section{Verification and priority}
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. The compiled module was replayed with \texttt{leanchecker}. Sections 3 and 4 have written proofs. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+
+The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
+
+\paragraph{Contribution disclosure.}
+An AI assistant developed the proof, implemented the searches, wrote and checked the Lean formalization, and drafted this manuscript in response to a user-supplied problem.
+
+\begin{thebibliography}{9}
+\bibitem{words}\v S. Holub, Periodicity forcing, WORDS 2025 Open Problems, Nancy, 1 July 2025, slides 3--5. \href{https://words2025.loria.fr/files/2025/07/webpage-open-problems.pdf}{Conference collection}.
+\bibitem{hh}J. Hadravov\'a and \v S. Holub, \emph{Equation \(x^iy^jx^k=u^iv^ju^k\) in words}, 15 January 2015, Theorem 1. \href{https://arxiv.org/abs/1501.03602}{arXiv:1501.03602}.
+\bibitem{hs}\v S. Holub and J. S\'ykora, \emph{Binary equality words with two b's}, Comment. Math. Univ. Carolin. 59(2) (2018), 153--172. \href{https://cmuc.karlin.mff.cuni.cz/pdf/cmuc1802/holsyk.pdf}{Article}.
+\bibitem{periodic}\v S. Holub, \emph{Binary equality words for periodic morphisms}, author version, Theorem 1; published as \emph{Binary equality languages for periodic morphisms}, RIMS K\^oky\^uroku 1366 (2004). \href{https://www.karlin.mff.cuni.cz/~holub/soubory/rimsrevised.pdf}{Author manuscript}.
+\bibitem{mak}G. S. Makanin, \emph{The problem of solvability of equations in a free semigroup}, Math. USSR-Sb. 32(2) (1977), 129--198. \href{https://doi.org/10.1070/SM1977v032n02ABEH002376}{Article}.
+\end{thebibliography}
+\end{document}
