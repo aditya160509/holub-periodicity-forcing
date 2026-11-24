@@ -11,6 +11,7 @@
 \title{The word \(\mathtt{aabbaba}\) forces periodicity}
 \author{Aditya Balaji}
 \date{Research manuscript, 24 November 2026}
+\theoremstyle{remark}\newtheorem*{remark}{Remark}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -245,13 +246,98 @@ A solution \(X,Y,U,V\) of the padded equation gives the solution \(X,\ Y'=X^rYX^
 \end{proof}
 Among the \(625\) tuples with exponents at most \(4\), Theorem~\ref{balanced} applies to \(178\). The \(30\) of them in \(A\cup C\cup D\) are exactly the nonforcing ones found by the search, so the remaining \(148\) are now proved forcing for all lengths. The open cases of the conjecture are the tuples outside the families with no balanced prefix, for example \(2011\) and \(1001\), which needed the arguments of Sections~2 and~5. By Lemma~\ref{perred}, any remaining counterexample has \(XY\ne YX\) and \(UV\ne VU\).
 
+\section{Infinite slices proved by periodicity arguments}
+Throughout, \(x,y,u,v\) are the lengths of \(X,Y,U,V\), and \(W\) is the common word. We use the Fine--Wilf theorem: a word with periods \(p,q\) and length at least \(p+q-\gcd(p,q)\) has period \(\gcd(p,q)\). We also use two standard facts about a primitive word \(R\) with \(r=|R|\). (P1) If a factor of \(R^\omega\) of length at least \(r+c\) has period \(c\), then \(r\mid c\): by Fine--Wilf it has period \(\gcd(r,c)\), and a proper divisor would make a conjugate of \(R\) imprimitive. (P2) A factor of \(R^\omega\) whose length is a multiple of \(r\) is a power of a conjugate of \(R\), so any word \(Z\) with \(Z^m\) such a factor and \(Z\ne\eps\) has \(r\mid |Z|\). In each proof, if \(x=u\) the length equation gives \(y=v\) and the substitutions coincide, so we assume \(x\ne u\), and by exchanging the substitutions, \(x>u\).
+
+\begin{theorem}\label{ijjl}
+Let \(0\le i,\ell\le j\), \(j\ge2\) and \(i+\ell\ne j\). Then \((i,j,j,\ell)\) forces periodicity, even without the length condition.
+\end{theorem}
+\begin{proof}
+Let \(\delta=x-u\). Then \((i+2j+\ell)\delta=3(v-y)\). Put \(P=jx+y\), \(Q=ju+v\). Since \(i,\ell\le j\), \(W\) is a factor of \((X^jY)^\omega\) and of \((U^jV)^\omega\), so it has periods \(P\) and \(Q\), and \(P-Q=\tfrac{j-i-\ell}{3}\delta\ne0\). As \(|W|\ge2P,2Q\), Fine--Wilf gives the period \(\gcd(P,Q)\). Let \(R\) be the primitive root of the prefix of that length and \(p=|R|\). Then \(p\mid P,Q\) and \(p\le|P-Q|\le j\delta/3\le jx/3\).
+
+The factor \(X^j\) has periods \(x\) and \(p\), and \(jx\ge x+p\) because \((j-1)x\ge jx/2\ge p\). So it has period \(\gcd(x,p)\), and primitivity of \(R\) gives \(p\mid x\), hence \(p\mid y\). Every left block boundary is a multiple of \(p\), so \(X,Y\in R^*\) and \(p\mid|W|\). Now \(|W|=3Q+(i+\ell-j)u\) gives \(p\mid mu\) with \(m=|i+\ell-j|\in[1,j]\). The factor \(U^m\) of \(U^j\) has length divisible by \(p\), so \(p\mid u\) by (P2), and \(p\mid v\). All right block boundaries are multiples of \(p\), so \(U,V\in R^*\).
+\end{proof}
+
+\begin{theorem}\label{0jk0}
+For \(j,k\ge1\), the tuple \((0,j,k,0)\) forces periodicity, even without the length condition, unless \(j=2k\), \(k=2j\) or \(j=k=1\).
+\end{theorem}
+\begin{proof}
+By reversal assume \(j\le k\). Let \(\delta=x-u>0\), so \(3(v-y)=(j+k)\delta\). Put \(A=YX^j\), \(B=VU^j\), \(P=|A|\), \(Q=|B|\). Then \(Q-P=\tfrac{k-2j}{3}\delta\), and \(A^2\), \(B^2\) are both prefixes of \(W\). The case \(j=k\ge2\) is Theorem~\ref{ijjl}.
+
+\emph{Case \(j<k<2j\).} Then \(j\ge2\). Put \(h=P-Q=\tfrac{2j-k}{3}\delta\), so \(0<h\le(j-1)x/3\). Write \(A=BC\) with \(|C|=h\). From \(BB\preceq BCBC\) we get \(B\preceq CBC\), so \(B\) has period \(h\) and \(B\preceq R^\omega\), where \(R\) is the primitive root of \(C\) and \(r=|R|\mid h\). The word \(B\) contains a prefix of \(X^j\) of length \(jx-h\ge x+r\). By Fine--Wilf and primitivity, \(r\mid x\), and that prefix of \(X^j\) is a power of the rotation of \(R\) by \(y\bmod r\). The suffix of \(X^j\) of length \(h\) is \(C=R^{h/r}\), so this rotation is \(R\) itself, and \(r\mid y\). Hence \(X,Y\in R^*\) and \(r\mid P,Q\). From \(|W|=3Q+(k-2j)u\) we get \(r\mid(2j-k)u\) with \(1\le 2j-k<j\), so (P2) gives \(r\mid u\) and \(r\mid v\). All four words lie in \(R^*\).
+
+\emph{Case \(k>2j\).} Put \(h=Q-P>0\) and \(F=YX^k\), so \(W=AFY\). Since \(B^2\) is a prefix of \(W\), \(W[s:t]=W[Q+s:Q+t]\) for \(0\le s\le t\le Q\). With \(s=y\), \(t=Q\) the left side is \(X^jF[0:h]\). The right side starts \(h\) letters into \(X^k\) and has length \(jx+h\), and \(jx+2h\le kx\), so
+\[X^jF[0:h]=X^k[h:jx+2h].\]
+Comparing the first \(x\) letters (\(j\ge1\)), the rotation of \(X\) by \(h\) equals \(X\), so \(r\mid h\), where \(R\) is the primitive root of \(X\). Hence the right side is \(X^jH\) with \(H=R^{h/r}\), and \(F[0:h]=H\). With \(s=0\), \(t=y\) we get \(Y=F[h:h+y]\), so \(F[0:h+y]=HY\). But \(F=YX^k\) begins with \(YH\). Thus \(HY=YH\), and since \(H\) is a nonempty power of \(R\), \(Y\in R^*\). Then \(r\mid P,Q\), and \(|W|=3Q+(k-2j)u\) with \(1\le k-2j\le k\) gives \(r\mid u\) and \(r\mid v\) by (P2).
+\end{proof}
+
+\begin{theorem}\label{0020}
+The tuple \((0,0,2,0)\) forces periodicity.
+\end{theorem}
+\begin{proof}
+The equation is \(Y^2X^2Y=V^2U^2V\). Lengths give \(2(x-u)=3(v-y)\), and \(v\ge y\) forces \(x=u+3s\), \(v=y+2s\) with \(s\ge0\). If \(s=0\) the substitutions coincide, so let \(s>0\). The condition \(v\ge x\) gives \(y\ge u+s\). Write \(V=YA=DY\) with \(|A|=|D|=2s\).
+
+If \(y\ge2s\), then \(V\preceq Y^2\), so \(A\) and \(D\) both equal the prefix of \(Y\) of length \(2s\). Hence \(YA=AY\), and \(Y\), \(V\) commute.
+
+If \(y<2s\), put \(e=2s-y\). Then \(0<e\le s\), \(u\le s-e\), and \(V=YZY\) with \(|Z|=e\). Comparing \(Y^2\) with \(V^2\) gives \(ZY=YT\) with \(|T|=e\), so \(Y\) has period \(e\) and \(V=Y^2T\). Cancelling \(Y^2\) and the final \(Y\) gives \(X^2=TY^2TU^2YZ\). Reading the two copies of \(X\),
+\[TY\,Y[0:s+u]=LU^2YZ,\]
+where \(L\) is the suffix of \(YT\) of length \(s-u\). The marked occurrences of \(Y\) start at \(e\) and at \(s+u\). Put \(d=s+u-e\ge0\). If \(d=0\), then \(u=0\), \(e=s=y\), and \(ZY=YT\) gives \(Z=Y=T\). Otherwise \(Y\) has periods \(d\) and \(e\), and \(y\ge d+e\), so it has period \(g=\gcd(d,e)\). The overlap of \(Y[0:s+u]\) on the left with the occurrence of \(Y\) on the right gives \(Y[q]=Y[s-u+q]\) for \(0\le q<d\). Since \(g\mid e\) and \(g\mid s+u\), we have \(s-u\equiv 2s\equiv y\pmod g\). So the prefix \(Y[0:g]\) is fixed by rotation by \(y\bmod g\). Its primitive root \(\rho\) therefore satisfies \(|\rho|\mid y\), and \(Y\) is a power of \(\rho\). The words \(Z\) and \(T\) are a prefix and a suffix of \(Y\) of length \(e\), a multiple of \(|\rho|\), so they are powers of \(\rho\) too, and \(V=YZY\) commutes with \(Y\).
+
+In both cases \(Y=R^a\), \(V=R^b\) with \(R\) primitive and \(b>a\). Cancelling gives \(X^2=H^2U^2H\) with \(H=R^{b-a}\ne\eps\). If \(HU\ne UH\), then \(\{H,U\}\) is a binary code, and every primitive word over it whose image is imprimitive is conjugate to a word in \(a^*b\cup ab^*\) (see \cite{hh}, Section~2). The word \(a^2b^2a\) is primitive and not of that form, so \(H^2U^2H\) would be primitive, contradicting \(X\ne\eps\). So \(U\in R^*\), and then \(X\in R^*\).
+\end{proof}
+
+\begin{corollary}\label{0jk0full}
+For all \(j,k\ge0\), the tuple \((0,j,k,0)\) is nonforcing exactly when \((j,k)\in\{(0,0),(0,1),(1,0),(1,1)\}\), or \(j,k>0\) and \(j=2k\) or \(k=2j\).
+\end{corollary}
+\begin{proof}
+For \(j,k>0\) this is Theorem~\ref{0jk0} with families \(D\) and \(0110\). By reversal let \(j=0\). The tuple \((0,0,k,0)\) is the word \(b^2a^kb\), so for \(k\ge3\) it forces periodicity by \cite[Theorem~1]{hh}, which has no length condition and covers periodic morphisms through its Lemma~9. The case \(k=2\) is Theorem~\ref{0020}, and \(k=0,1\) are \(0000\in A\) and the sporadic \(0010\).
+\end{proof}
+
+\begin{theorem}\label{ijj0}
+If \(i>j\ge1\), then \((i,j,j,0)\) forces periodicity, even without the length condition. By reversal, so does \((0,j,j,\ell)\) for \(\ell>j\).
+\end{theorem}
+\begin{proof}
+Put \(n=i-j\), \(A=X^jY\), \(B=U^jV\), \(P=|A|\), \(Q=|B|\). The equation is \(X^nA^3=U^nB^3\), and \(Q-P=n\delta/3>0\) with \(\delta=x-u\). The factor \(X^i\) overlaps the suffix \(B^3\) in a word of length \(ix-nu=jx+3(Q-P)\).
+
+If \(Q\le2P\), the suffix \(A^3\) of \(B^3\) has length \(3P\ge P+Q\), so by Fine--Wilf the primitive roots of \(A\) and \(B\) are conjugate, of a common length \(r\) with \(r\mid P,Q\) and \(r\le Q-P\). The overlap has length at least \(x+r\), so the primitive root of \(X\) is conjugate to them as well.
+
+If \(Q>2P\), the overlap has length greater than \(x+Q\), so the primitive roots of \(X\) and \(B\) are conjugate, of length \(r\le x\le P\). Fine--Wilf on the suffix \(A^3\) brings in the root of \(A\).
+
+In both cases \(X\) and \(A=X^jY\) start at the same phase, so they are powers of one primitive word \(R\), and \(Y\in R^*\). Then \(W\in R^*\) and \(r\mid Q\), so \(r\mid |W|-3Q=nu\). The prefix \(U^n\) is a power of \(R\), so \(U\in R^*\), and then \(V\in R^*\).
+\end{proof}
+
+\begin{corollary}\label{ijjlfull}
+The tuple \((i,j,j,\ell)\) is nonforcing exactly when it is in family \(A\) (\(i+\ell=j\)), in family \(B\) (\(j=0\) and \(i\ell=0\)), or equals \(0110\) or \(1111\).
+\end{corollary}
+\begin{proof}
+For \(j\ge2\) and \(i,\ell\le j\), use Theorem~\ref{ijjl}. If one outer exponent is \(0\) and the other exceeds \(j\ge1\), use Theorem~\ref{ijj0}. If \(i,\ell>0\) and \(\max(i,\ell)>j\), choose \(r+s=j\) with \(r<i\), \(s<\ell\). With \(Y'=X^rYX^s\) and \(V'=U^rVU^s\), the tuple is a padding of \((i-r,0,0,\ell-s)\), which forces periodicity by Corollary~\ref{outer}, so Lemma~\ref{padding} applies. The cases \(j\le1\) with \(i,\ell\le j\), and \(j=0\), are the listed exceptions or Corollary~\ref{outer}.
+\end{proof}
+
+\begin{lemma}\label{single}
+Suppose \(P^2XP=Q^2UQ\), where \(X\) is a prefix or a suffix of \(P\) and \(U\) is a prefix or a suffix of \(Q\). Then \(X=U\) and \(P=Q\), or all four words commute.
+\end{lemma}
+\begin{proof}
+Lengths give \(x-u=3(|Q|-|P|)\). By symmetry let \(h=|Q|-|P|>0\). Then \(|P|\ge x\ge3h\), and \(P\) is both a prefix and a suffix of \(Q\), so \(Q=PA=DP\) with \(|A|=|D|=h\). Because \(|Q|\le2|P|\), both \(A\) and \(D\) are the prefix of \(P\) of length \(h\). So \(PA=AP\), and \(P,Q,A\in R^*\) for a primitive \(R\). Cancelling gives \(X=A^2UA\). Since \(X\) is a prefix or suffix of \(P\in R^*\) and begins and ends with the nonempty power \(A\), we get \(|R|\mid x\), so \(X\in R^*\), and then \(U\in R^*\).
+\end{proof}
+
+\begin{theorem}\label{region}
+If \(\min(j,k)\ge i+\ell\), the tuple \((i,j,k,\ell)\) forces periodicity unless it lies in \(A\cup C\cup D\) or is sporadic.
+\end{theorem}
+\begin{proof}
+Let \(c=i+\ell\). With \(Y'=X^iYX^\ell\), the tuple is a padding of \((0,j-c,k-c,0)\). If the reduced tuple forces periodicity, Lemma~\ref{padding} finishes. By Corollary~\ref{0jk0full}, the remaining reduced tuples are: \((0,0)\), which gives family \(A\); \((1,1)\), covered by Corollary~\ref{ijjlfull}; \(j-c=2(k-c)>0\) or the reverse, where \(S=3(c+\min)\) and Theorem~\ref{balanced} applies; and \((0,1)\) or \((1,0)\). In the last case the equation is \(P^2XP=Q^2UQ\) or its reversal, with \(P=X^iYX^\ell\), and Lemma~\ref{single} applies when \(c>0\). If \(c=0\) the tuple is the sporadic \(0010\) or \(0100\).
+\end{proof}
+
+\begin{remark}
+If \(\min(j,k)<i+\ell\) and \(j\le k\), choose \(r+s=j\) with \(r\le i\), \(s\le\ell\). Padding reduces \((i,j,k,\ell)\) to \((i-r,0,k-j,\ell-s)\). So the full conjecture reduces to classifying the family \((i,0,k,\ell)\), that is \(X^iY^2X^kYX^\ell=U^iV^2U^kVU^\ell\), together with the padded descendants of its exceptions, since padding only transfers forcing. All results of this section agree with \texttt{map4.txt} and with the conjectured list for every exponent up to \(29\).
+\end{remark}
+
 \section{Verification and priority}
-Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Section~7 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Sections~7--8 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
 
 The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
 
 \paragraph{Contribution disclosure.}
-The author selected the problem from the WORDS 2025 collection, directed the investigation, and audited and independently re-verified the results, including compiling the Lean proof with Lean~4.33.0 and \texttt{leanchecker}, rerunning the exhaustive search, and checking small cases by direct enumeration. The AI system Astra~6.2 developed the written proof, implemented the searches, wrote the Lean formalization and drafted the manuscript under this direction.
+The author selected the problem from the WORDS 2025 collection, directed the investigation, and audited and independently re-verified the results, including compiling the Lean proof with Lean~4.33.0 and \texttt{leanchecker}, rerunning the exhaustive search, and checking small cases by direct enumeration. The AI system Astra~6.2 developed the written proof, implemented the searches, wrote the Lean formalization and drafted the manuscript under this direction. The reductions and periodicity arguments of Sections~7--8 came from an AI-assisted review and were checked line by line and against the search data.
 
 \begin{thebibliography}{99}
 \bibitem{words}\v S. Holub, Periodicity forcing, WORDS 2025 Open Problems, Nancy, 1 July 2025, slides 3--5. \href{https://words2025.loria.fr/files/2025/07/webpage-open-problems.pdf}{Conference collection}.
