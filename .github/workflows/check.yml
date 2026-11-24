@@ -7,6 +7,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
       - run: ~/.elan/bin/lean --version
+      - run: time ~/.elan/bin/lean Case1001.lean
       - run: time ~/.elan/bin/lean -o Holub.olean Holub.lean
       - run: LEAN_PATH=. ~/.elan/bin/leanchecker -v Holub || echo "leanchecker not available"
       - run: c++ -O3 -std=c++17 search.cpp -o search && time ./search 320
