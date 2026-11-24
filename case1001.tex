@@ -1,0 +1,61 @@
+% Section for the Holub manuscript: the tuple (1,0,0,1).
+% Uses \eps for the empty word, as in the main manuscript.
+\section{The tuple \((1,0,0,1)\)}
+\begin{theorem}\label{t1001}
+Over any alphabet, if \(XYYYX=UVVVU\) and \(|X|,|Y|\le|V|\), then \(X=U,\ Y=V\), or all four words commute pairwise. Hence \(ab^3a\) is periodicity forcing in Holub's sense.
+\end{theorem}
+Without \(|X|\le|V|\) the statement fails \cite{hh}; the proof uses that inequality exactly once, in Step~4. Write \(|Z|\) for length, \(Z[i{:}j]\) for the factor of positions \(i,\dots,j-1\) (from \(0\)), and \(\operatorname{rot}_r(w)=w[r{:}]\,w[{:}r]\). We use three standard facts.
+\begin{itemize}
+\item[(F1)] If \(ZW=WZ\) and \(W\ne\eps\), then \(Z\) is a power of the primitive root of \(W\).
+\item[(F2)] If \(\operatorname{rot}_c(\tau)=\tau\) and \(\tau=\rho^k\) with \(\rho\) primitive, then \(|\rho|\) divides \(c\).
+\item[(F3)] (Fine--Wilf) A word with periods \(p,q\) and length at least \(p+q-\gcd(p,q)\) has period \(\gcd(p,q)\).
+\end{itemize}
+
+\begin{lemma}\label{lemC}
+If \(|B|=|D|=s>0\) and \(K\,BDB=DBD\,K\), then \(B=D\).
+\end{lemma}
+\begin{proof}
+If \(|K|\ge3s\) then \(K=DBD\,K_1\) and \(K_1\) satisfies the same equation, so assume \(r=|K|<3s\). Then \(DBD=KL\), \(BDB=LK\), so \(BDB=\operatorname{rot}_r(DBD)\). If \(r\in\{0,s,2s\}\), compare blocks: \(BDB\) equals \(DBD\), \(BDD\) or \(DDB\), and in each case one block gives \(B=D\).
+
+Otherwise \(r=qs+t\) with \(0<t<s\). For a word \(Z\) of length \(s\) put \(Z'=Z[{:}t]\), \(Z''=Z[t{:}]\). With \(\alpha=\alpha_1\alpha_2\alpha_3=\operatorname{rot}_{qs}(DBD)\), the blocks of \(BDB=\operatorname{rot}_t(\alpha)\) are \(\alpha_j''\alpha_{j+1}'\), indices mod 3.
+
+\emph{Case \(q=0\), \(\alpha=DBD\):} \(B=D''B'\), \(D=B''D'\), \(B=D''D'\). The first and third give \(B'=D'\). Hence \(B=\operatorname{rot}_t(D)\) and \(D=\operatorname{rot}_t(B)\), so \(\operatorname{rot}_{2t}(B)=B\). Let \(\rho\) be the primitive root of \(B\), \(p=|\rho|\); by (F2) \(p\mid 2t\). If \(p\mid t\), then \(D=\operatorname{rot}_t(B)=B\). Otherwise \(p\) is even and \(t\equiv p/2\pmod p\), so \(t\ge p/2\). Now \(B'=D'\) reads \(B[i]=B[(i+t)\bmod s]\) for \(i<t\). For \(i<p/2\) this gives \(\rho[i]=\rho[i+p/2]\), so \(\rho\) is a square, contradicting primitivity.
+
+\emph{Case \(q=1\), \(\alpha=BDD\):} \(B=B''D'\), \(D=D''D'\), \(B=D''B'\). Prefixes of length \(s-t\) of the first two show that \(B\) and \(D\) both have period \(t\). The suffixes of length \(t\) of the first and third give \(D'=B[s-t{:}]=B'\). Words of length \(s\) with period \(t<s\) are determined by their first \(t\) letters, so \(B=D\).
+
+\emph{Case \(q=2\):} from \(DBD=KL\), \(BDB=LK\) we get \(L\,DBD=BDB\,L\) with \(|L|=3s-r\in(0,s)\). This is the case \(q=0\) with the roles of \(B\) and \(D\) exchanged, so again \(B=D\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{t1001}]
+\emph{Step 1 (lengths).} Put \(x=|X|\) and so on. Then \(2x+3y=2u+3v\) and \(y\le v\) give \(x-u=3s\), \(v-y=2s\) with \(s\ge0\). If \(s=0\), corresponding block boundaries coincide, so \(X=U\) and \(Y=V\). Let \(s>0\). The hypothesis \(x\le v\) becomes
+\begin{equation}\label{len}
+ y\ \ge\ u+s .
+\end{equation}
+
+\emph{Step 2 (boundaries).} Comparing the two factorizations at their block boundaries (left prefix minus right prefix: \(3s,\ s,\ -s,\ -3s,\ 0\)) gives words with \(|A|=|E|=3s\), \(|B|=|D|=s\) and
+\[
+ X=UA=EU,\qquad AY=VB,\qquad V=BYD,\qquad YE=DV .
+\]
+Substituting \(V\) and cancelling (\(A\) begins with \(B\), \(E\) ends with \(D\)), we write \(A=BA'\), \(E=E'D\), \(P=DB\) with \(|A'|=|E'|=|P|=2s\), and get
+\begin{equation}\label{core}
+ A'Y=YP,\qquad YE'=PY,\qquad X=UBA'=E'DU .
+\end{equation}
+
+\emph{Step 3 (it suffices that \(YP=PY\)).} Suppose \(YP=PY\). Then \(A'Y=PY\) and \(YE'=YP\), so \(A'=E'=P\) and \eqref{core} becomes \(U\,BDB=DBD\,U\). Lemma~\ref{lemC} gives \(B=D\), hence \(P=B^2\) and \(UB^3=B^3U\). Let \(\rho\) be the primitive root of \(B\ne\eps\). By (F1), \(U\) and \(Y\) (which commutes with \(B^2\)) are powers of \(\rho\), and so are \(X=UB^3\) and \(V=BYB\). All four words commute.
+
+\emph{Step 4 (\(YP=PY\)).} If \(y\ge2s\), then \(YE'=PY\) shows \(Y[{:}2s]=P\), and \(A'Y=YP\) shows \(A'=Y[{:}2s]=P\); hence \(PY=YP\).
+
+Let \(y<2s\) and \(\ell=2s-y\). By \eqref{len}, \(s\le y\), \(u<s\) and \(0<\ell\le s\le y\). From \(YE'=PY\) the word \(Y\) is a prefix of \(P\): \(P=YR\) with \(|R|=\ell\), and \(E'=RY\). From \(A'Y=YYR\) we get \(A'=Y\,Y[{:}\ell]\) and \(Y=Y[\ell{:}]R\). So \(Y\) has period \(\ell\) and ends with \(R\). Also \(D=Y[{:}s]\) and \(B=Y[s{:}]R\). Hence \eqref{core} reads
+\[
+ \mathcal W:=R\,Y\,Y[{:}s]\,U\;=\;U\,Y[s{:}]\,R\,Y\,Y[{:}\ell].
+\]
+Let \(\delta=u+y-s=|U\,Y[s{:}]|\), so \(0\le\delta<y\). If \(\delta=0\), then \(y=s=\ell\) and \(R=Y\). Otherwise \(RY\) occurs in \(\mathcal W\) at positions \(0\) and \(\delta\), so \(\mathcal W[i]=\mathcal W[i+\delta]\) for \(i<2s\). In particular \(Y=\mathcal W[\ell{:}2s]\) has periods \(\delta\) and \(\ell\). Since \(y\ge u+s=\delta+\ell\) by \eqref{len}, (F3) gives \(Y\) period \(g=\gcd(\delta,\ell)\).
+
+Next, \(\mathcal W[2s{:}3s]=Y[{:}s]\). For \(j<\min(s,\delta)\), the index \(2s+j-\delta\) lies in \([0,2s)\), so
+\[
+ Y[j]=\mathcal W[2s+j]=\mathcal W[2s+j-\delta]=Y[y-\delta+j].
+\]
+Both indices are below \(y\) and \(g\mid\delta\), so with \(c=y\bmod g\) and \(\tau=Y[{:}g]\) we get \(\tau=\operatorname{rot}_c(\tau)\), using \(j<g\le\min(s,\delta)\) and \(y\ge2g\). By (F2) the primitive root \(\rho\) of \(\tau\) has \(|\rho|\mid c\) and \(|\rho|\mid g\), hence \(|\rho|\) divides \(y\) and \(\ell\). Thus \(Y=\rho^{y/|\rho|}\), and its suffix \(R\) is \(\rho^{\ell/|\rho|}\). So \(YR=RY\), and \(P=YR\) commutes with \(Y\).
+
+Steps 3 and 4 prove the theorem.
+\end{proof}

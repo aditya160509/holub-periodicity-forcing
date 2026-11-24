@@ -14,7 +14,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem.
+We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem. We also prove that \(ab^3a\) forces periodicity under Holub's length condition, completing all sixteen tuples with exponents at most one, and we give explicit nonforcing families for all exponents together with a conjectured complete classification that matches an exact search over all 625 tuples with exponents at most four.
 \end{abstract}
 \section{Statement}
 Holub's problem at WORDS 2025 asks which patterns \(a^i b a^j b a^k b a^\ell\) force periodicity when \(V\) is at least as long as each of \(X,Y,U\) \cite[pp.~3--5]{words}. The simplest unknown case identified there has \((i,j,k,\ell)=(2,0,1,1)\). The slides use finite words and a morphism formulation without an explicit nonerasing requirement. Our theorem covers both conventions.
@@ -106,7 +106,7 @@ The identity \((T1)^{3m}T=T(1T)^{3m}\) verifies the equation. Here \(X\ne U\), \
 \paragraph{Small exponents.}
 For \(i,j,k,\ell\in\{0,1\}\), the table gives eleven nonforcing cases with nonempty binary certificates. Four other tuples force periodicity: \(0011,1100,0101,1010\). Their words are \(bbaba,ababb,babba,abbab\), covered up to reversal and letter exchange by \cite[Lemmas 14--15]{hs} for nonempty images (equal corresponding lengths give identical substitutions). If a substitution erases a letter, it is periodic. If just one substitution is periodic, \cite[Theorem 1]{periodic} requires the equality word to be unary or a power of a word having a letter occurring precisely once. Our four patterns are primitive by their coprime multiplicities 2 and 3, and each letter occurs at least twice. If both substitutions are periodic, their equal nonempty image has one primitive root; equality with the empty image forces all images empty. This covers erasures.
 
-The tuple \(1001\), or \(ab^3a\), is left undecided here under the maximum-length condition. For this tuple the odd-exponent example in \cite[conclusion]{hh} has \(|X|>|V|\) when its outer padding is nonempty. Thus the entire twelve-element slice \(i\ell=0\) is classified, as are fifteen of the sixteen tuples in the cube.
+The tuple \(1001\), or \(ab^3a\), forces periodicity under the length condition by Theorem~\ref{t1001} below, although the odd-exponent example in \cite[conclusion]{hh} shows it fails without it. Thus all sixteen tuples in the cube \(\{0,1\}^4\) are classified.
 \begin{center}\small\ttfamily
 \begin{tabular}{lllll}\toprule
 tuple & X & Y & U & V\\\midrule
@@ -125,8 +125,86 @@ tuple & X & Y & U & V\\\midrule
 \end{center}
 Without length restrictions, existence of a counterexample for any fixed pattern is decidable in principle by Makanin's theorem \cite{mak}: over a binary alphabet a disequality is a finite disjunction of proper-prefix and first-mismatching-letter cases, each expressible with word equations. Empty variables can be guessed separately. This gives no direct encoding here of the extra length comparisons. The fixed-length method and Corollary~\ref{gcd} do not classify all exponent quadruples.
 
+% Section for the Holub manuscript: the tuple (1,0,0,1).
+% Uses \eps for the empty word, as in the main manuscript.
+\section{The tuple \((1,0,0,1)\)}
+\begin{theorem}\label{t1001}
+Over any alphabet, if \(XYYYX=UVVVU\) and \(|X|,|Y|\le|V|\), then \(X=U,\ Y=V\), or all four words commute pairwise. Hence \(ab^3a\) is periodicity forcing in Holub's sense.
+\end{theorem}
+Without \(|X|\le|V|\) the statement fails \cite{hh}; the proof uses that inequality exactly once, in Step~4. Write \(|Z|\) for length, \(Z[i{:}j]\) for the factor of positions \(i,\dots,j-1\) (from \(0\)), and \(\operatorname{rot}_r(w)=w[r{:}]\,w[{:}r]\). We use three standard facts.
+\begin{itemize}
+\item[(F1)] If \(ZW=WZ\) and \(W\ne\eps\), then \(Z\) is a power of the primitive root of \(W\).
+\item[(F2)] If \(\operatorname{rot}_c(\tau)=\tau\) and \(\tau=\rho^k\) with \(\rho\) primitive, then \(|\rho|\) divides \(c\).
+\item[(F3)] (Fine--Wilf) A word with periods \(p,q\) and length at least \(p+q-\gcd(p,q)\) has period \(\gcd(p,q)\).
+\end{itemize}
+
+\begin{lemma}\label{lemC}
+If \(|B|=|D|=s>0\) and \(K\,BDB=DBD\,K\), then \(B=D\).
+\end{lemma}
+\begin{proof}
+If \(|K|\ge3s\) then \(K=DBD\,K_1\) and \(K_1\) satisfies the same equation, so assume \(r=|K|<3s\). Then \(DBD=KL\), \(BDB=LK\), so \(BDB=\operatorname{rot}_r(DBD)\). If \(r\in\{0,s,2s\}\), compare blocks: \(BDB\) equals \(DBD\), \(BDD\) or \(DDB\), and in each case one block gives \(B=D\).
+
+Otherwise \(r=qs+t\) with \(0<t<s\). For a word \(Z\) of length \(s\) put \(Z'=Z[{:}t]\), \(Z''=Z[t{:}]\). With \(\alpha=\alpha_1\alpha_2\alpha_3=\operatorname{rot}_{qs}(DBD)\), the blocks of \(BDB=\operatorname{rot}_t(\alpha)\) are \(\alpha_j''\alpha_{j+1}'\), indices mod 3.
+
+\emph{Case \(q=0\), \(\alpha=DBD\):} \(B=D''B'\), \(D=B''D'\), \(B=D''D'\). The first and third give \(B'=D'\). Hence \(B=\operatorname{rot}_t(D)\) and \(D=\operatorname{rot}_t(B)\), so \(\operatorname{rot}_{2t}(B)=B\). Let \(\rho\) be the primitive root of \(B\), \(p=|\rho|\); by (F2) \(p\mid 2t\). If \(p\mid t\), then \(D=\operatorname{rot}_t(B)=B\). Otherwise \(p\) is even and \(t\equiv p/2\pmod p\), so \(t\ge p/2\). Now \(B'=D'\) reads \(B[i]=B[(i+t)\bmod s]\) for \(i<t\). For \(i<p/2\) this gives \(\rho[i]=\rho[i+p/2]\), so \(\rho\) is a square, contradicting primitivity.
+
+\emph{Case \(q=1\), \(\alpha=BDD\):} \(B=B''D'\), \(D=D''D'\), \(B=D''B'\). Prefixes of length \(s-t\) of the first two show that \(B\) and \(D\) both have period \(t\). The suffixes of length \(t\) of the first and third give \(D'=B[s-t{:}]=B'\). Words of length \(s\) with period \(t<s\) are determined by their first \(t\) letters, so \(B=D\).
+
+\emph{Case \(q=2\):} from \(DBD=KL\), \(BDB=LK\) we get \(L\,DBD=BDB\,L\) with \(|L|=3s-r\in(0,s)\). This is the case \(q=0\) with the roles of \(B\) and \(D\) exchanged, so again \(B=D\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{t1001}]
+\emph{Step 1 (lengths).} Put \(x=|X|\) and so on. Then \(2x+3y=2u+3v\) and \(y\le v\) give \(x-u=3s\), \(v-y=2s\) with \(s\ge0\). If \(s=0\), corresponding block boundaries coincide, so \(X=U\) and \(Y=V\). Let \(s>0\). The hypothesis \(x\le v\) becomes
+\begin{equation}\label{len}
+ y\ \ge\ u+s .
+\end{equation}
+
+\emph{Step 2 (boundaries).} Comparing the two factorizations at their block boundaries (left prefix minus right prefix: \(3s,\ s,\ -s,\ -3s,\ 0\)) gives words with \(|A|=|E|=3s\), \(|B|=|D|=s\) and
+\[
+ X=UA=EU,\qquad AY=VB,\qquad V=BYD,\qquad YE=DV .
+\]
+Substituting \(V\) and cancelling (\(A\) begins with \(B\), \(E\) ends with \(D\)), we write \(A=BA'\), \(E=E'D\), \(P=DB\) with \(|A'|=|E'|=|P|=2s\), and get
+\begin{equation}\label{core}
+ A'Y=YP,\qquad YE'=PY,\qquad X=UBA'=E'DU .
+\end{equation}
+
+\emph{Step 3 (it suffices that \(YP=PY\)).} Suppose \(YP=PY\). Then \(A'Y=PY\) and \(YE'=YP\), so \(A'=E'=P\) and \eqref{core} becomes \(U\,BDB=DBD\,U\). Lemma~\ref{lemC} gives \(B=D\), hence \(P=B^2\) and \(UB^3=B^3U\). Let \(\rho\) be the primitive root of \(B\ne\eps\). By (F1), \(U\) and \(Y\) (which commutes with \(B^2\)) are powers of \(\rho\), and so are \(X=UB^3\) and \(V=BYB\). All four words commute.
+
+\emph{Step 4 (\(YP=PY\)).} If \(y\ge2s\), then \(YE'=PY\) shows \(Y[{:}2s]=P\), and \(A'Y=YP\) shows \(A'=Y[{:}2s]=P\); hence \(PY=YP\).
+
+Let \(y<2s\) and \(\ell=2s-y\). By \eqref{len}, \(s\le y\), \(u<s\) and \(0<\ell\le s\le y\). From \(YE'=PY\) the word \(Y\) is a prefix of \(P\): \(P=YR\) with \(|R|=\ell\), and \(E'=RY\). From \(A'Y=YYR\) we get \(A'=Y\,Y[{:}\ell]\) and \(Y=Y[\ell{:}]R\). So \(Y\) has period \(\ell\) and ends with \(R\). Also \(D=Y[{:}s]\) and \(B=Y[s{:}]R\). Hence \eqref{core} reads
+\[
+ \mathcal W:=R\,Y\,Y[{:}s]\,U\;=\;U\,Y[s{:}]\,R\,Y\,Y[{:}\ell].
+\]
+Let \(\delta=u+y-s=|U\,Y[s{:}]|\), so \(0\le\delta<y\). If \(\delta=0\), then \(y=s=\ell\) and \(R=Y\). Otherwise \(RY\) occurs in \(\mathcal W\) at positions \(0\) and \(\delta\), so \(\mathcal W[i]=\mathcal W[i+\delta]\) for \(i<2s\). In particular \(Y=\mathcal W[\ell{:}2s]\) has periods \(\delta\) and \(\ell\). Since \(y\ge u+s=\delta+\ell\) by \eqref{len}, (F3) gives \(Y\) period \(g=\gcd(\delta,\ell)\).
+
+Next, \(\mathcal W[2s{:}3s]=Y[{:}s]\). For \(j<\min(s,\delta)\), the index \(2s+j-\delta\) lies in \([0,2s)\), so
+\[
+ Y[j]=\mathcal W[2s+j]=\mathcal W[2s+j-\delta]=Y[y-\delta+j].
+\]
+Both indices are below \(y\) and \(g\mid\delta\), so with \(c=y\bmod g\) and \(\tau=Y[{:}g]\) we get \(\tau=\operatorname{rot}_c(\tau)\), using \(j<g\le\min(s,\delta)\) and \(y\ge2g\). By (F2) the primitive root \(\rho\) of \(\tau\) has \(|\rho|\mid c\) and \(|\rho|\mid g\), hence \(|\rho|\) divides \(y\) and \(\ell\). Thus \(Y=\rho^{y/|\rho|}\), and its suffix \(R\) is \(\rho^{\ell/|\rho|}\). So \(YR=RY\), and \(P=YR\) commutes with \(Y\).
+
+Steps 3 and 4 prove the theorem.
+\end{proof}
+
+\section{A conjectured complete classification}
+For \(n,m\ge1\) put \(X_n=a^nba^n\), \(Y_n=(ba^{2n})^{n-1}b\), \(V_n=Y_na^nY_n\). Since \(X_n^n=a^nY_na^n\), substituting \((X,Y,U,V)=(X_n,Y_n,a,V_n)\) makes both sides of the equation equal for the tuples
+\[
+(n,0,n,n),\ (n,n,0,n),\ (0,n,2n,0),\ (0,2n,n,0),\ (0,2n,0,n),\ (n,0,2n,0);
+\]
+for instance both sides of \((n,0,n,n)\) expand to \(a^nY_na^nY_nY_na^nY_na^nY_na^nY_na^n\). Here \(|V_n|=2|Y_n|+n\ge 2n+1=|X_n|\) and \(X_n\) does not commute with \(a\). The tuples \((i,m,m,m-i)\) are nonforcing via \(X=a,\ Y=b,\ U=\eps,\ V=a^iba^{m-i}\), whose image is \(V^3\).
+
+\begin{theorem}\label{nonforcing}
+The tuple is not periodicity forcing if it lies in one of: \(A=\{(i,m,m,m-i)\}\); \(B=\{(m,0,0,0),(0,0,0,m)\}\); \(C=\{(n,0,n,n),(n,n,0,n)\}\); \(D=\{(0,n,2n,0),(0,2n,n,0),(0,2n,0,n),(n,0,2n,0)\}\); or \(\{0010,0100,0110,1111\}\).
+\end{theorem}
+\begin{proof}
+Families \(C,D\) and \(A\) are above. Family \(B\) with \(m\ge3\) is the construction of Section~4 and its reversal; \(m=1,2\) and the four sporadic tuples have explicit binary witnesses in the companion files (\texttt{families.py}).
+\end{proof}
+
+\paragraph{Conjecture.} Every other tuple forces periodicity. At fixed lengths, union-find on letter positions yields the most general solution, of which every solution is a letter image; hence a counterexample exists at those lengths if and only if the generic solution is one. For all \(625\) tuples with exponents at most \(4\) and all lengths with \(|V|\le150\), the nonforcing tuples are exactly the \(43\) predicted by Theorem~\ref{nonforcing}; the largest witness needed has \(|V|=60\). Spot checks to \(|V|\le250\) agree for larger exponents. Theorems~\ref{main} and~\ref{t1001} prove the conjecture for \(2011\) and \(1001\).
+
 \section{Verification and priority}
-Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. The compiled module was replayed with \texttt{leanchecker}. Sections 3 and 4 have written proofs. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. The compiled module was replayed with \texttt{leanchecker}. Sections 3--6 have written proofs; Theorem~\ref{t1001} is not formalized. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
 
 The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
 
