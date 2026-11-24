@@ -2,7 +2,9 @@
 
 **Yes.** Every solution of `XXYYXYX = UUVVUVU` either has `X = U` and `Y = V`, or all four words commute pairwise. This holds for every alphabet, even with empty words and without the length inequalities. In the second case with unequal corresponding lengths, choosing one arbitrary block of length equal to the gcd of the four lengths describes all solutions.
 
-Start with the [paper](manuscript.pdf). Section 2 contains the proof and alignment diagram. [Editable LaTeX](manuscript.tex) and [Lean proof](Holub.lean) are included. The result resolves the specific seven-letter equation. The general four-exponent classification remains incomplete.
+Start with the [paper](manuscript.pdf). Section 2 contains the proof and alignment diagram. [Editable LaTeX](manuscript.tex), the Lean proofs [Holub.lean](Holub.lean) and [Case1001.lean](Case1001.lean) are included.
+
+Also proved: `XYYYX = UVVVU` forces periodicity under Holub's length condition (Section 5, Lean `Holub1001.case1001`), so all 16 tuples with exponents 0 or 1 are classified. Section 6 proves explicit nonforcing families for all exponents and states a conjectured complete classification, matching an exact search over all 625 tuples with exponents at most 4 ([classification.md](classification.md), [families.py](families.py), [gen.cpp](gen.cpp), [map4.txt](map4.txt)). The forcing half of the full classification remains open.
 
 ## Reproduce the formal proof
 
@@ -11,7 +13,9 @@ Use Lean 4.33.0 and its standard library. No Mathlib dependency is required.
 ```sh
 lean --version
 lean -o Holub.olean Holub.lean
+lean -o Holub1001.olean Case1001.lean
 LEAN_PATH=. leanchecker -v Holub
+LEAN_PATH=. leanchecker -v Holub1001
 ```
 
 [Checker output](lean-check.txt) records the axioms of both main declarations. The original equation, the unrestricted version and the supporting lemmas were kernel-checked. There are no placeholders or custom axioms. The gcd formula and the exponent-family extensions are proved in the manuscript.
