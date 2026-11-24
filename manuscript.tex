@@ -203,19 +203,63 @@ Families \(C,D\) and \(A\) are above. Family \(B\) with \(m\ge3\) is the constru
 
 \paragraph{Conjecture.} Every other tuple forces periodicity. At fixed lengths, union-find on letter positions yields the most general solution, of which every solution is a letter image; hence a counterexample exists at those lengths if and only if the generic solution is one. For all \(625\) tuples with exponents at most \(4\) and all lengths with \(|V|\le150\), the nonforcing tuples are exactly the \(43\) predicted by Theorem~\ref{nonforcing}; the largest witness needed has \(|V|=60\). Spot checks to \(|V|\le250\) agree for larger exponents. Theorems~\ref{main} and~\ref{t1001} prove the conjecture for \(2011\) and \(1001\).
 
+\section{Reductions toward the full classification}
+Write \(w=a^iba^jba^kba^\ell\), \(S=i+j+k+\ell\), and let \(g,h\) be the morphisms \(g(a)=X,\ g(b)=Y,\ h(a)=U,\ h(b)=V\), so the equation reads \(g(w)=h(w)\). Let \(\mathrm{Eq}(g,h)=\{z: g(z)=h(z)\}\). A binary morphism is \emph{periodic} if its two images commute (this includes erasing morphisms); a binary morphism is injective exactly when it is not periodic.
+
+\begin{lemma}[Periodic morphisms]\label{perred}
+If \(g\) or \(h\) is periodic, then \(X=U,\ Y=V\), or all four words commute, or the tuple lies in family \(A\), family \(B\), or \(\{0100,0010\}\).
+\end{lemma}
+\begin{proof}
+If both are periodic and \(g(w)=h(w)\ne\eps\), the common word has a unique primitive root, which is then the root of all nonempty images; so all four words commute. If \(g(w)=h(w)=\eps\), all images of letters occurring in \(w\) are empty. If exactly one is periodic, \cite[Theorem 1]{periodic} gives, up to exchanging \(a\) and \(b\), \(\mathrm{Eq}(g,h)=a^*\) or \((a^rba^s)^*\). As \(w\) contains \(b\), either \(w=(a^rba^s)^3\), giving \((r,r+s,r+s,s)\in A\), or \(w=(b^rab^s)^c\) with \(c(r+s)=3\): for \(c=1\) the tuple has a single \(a\), so it is \(1000,0001\in B\) or \(0100,0010\); for \(c=3\), \(w\in\{(ab)^3,(ba)^3\}\subseteq A\). The tuple \(0000\) also lies in \(A\).
+\end{proof}
+
+\begin{theorem}[Balanced prefixes]\label{balanced}
+Let \(S=3m\) with \(m\ge1\), and suppose \(i\le m\le i+j\) or \(i+j\le 2m\le i+j+k\). If the tuple is not in \(A\cup C\cup D\), it forces periodicity, even without the length condition.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{perred} assume \(g,h\) injective, and \(g\ne h\) (otherwise \(X=U,\ Y=V\)). Lengths give \(S(x-u)=3(v-y)\), so for every prefix \(p\) of \(w\),
+\[|g(p)|-|h(p)|=(x-u)\,(|p|_a-m|p|_b).\]
+The hypothesis gives a proper nonempty prefix \(p\) with \(|p|_a=m|p|_b\) and \(|p|_b\in\{1,2\}\). Then \(g(p),h(p)\) are prefixes of the same word of equal length, so \(p\in\mathrm{Eq}(g,h)\); writing \(w=pq\) and cancelling gives \(q\in\mathrm{Eq}(g,h)\).
+
+If \(\mathrm{Eq}(g,h)=z^*\), then \(p,w\in z^*\) and \(|z|_b\) divides \(|p|_b\in\{1,2\}\) and \(3\); so \(z=a^rba^s\) and \(w=z^3\in A\).
+
+Otherwise \(\mathrm{Eq}(g,h)\) has at least two generators, and by Holub's structure theorem \cite{uniq} (using \cite{gen2}) it equals \(\{a^nb,ba^n\}^*\) with \(n\ge1\), up to exchanging the letters. In the unexchanged case \(w\) is a product of three generators and \(3n=S\), so \(n=m\). With \(L=a^mb\), \(R=ba^m\) the eight products give
+\[
+LLL,RRR\in A;\quad LLR=(m,m,0,m),\ LRR=(m,0,m,m)\in C;\quad LRL,RLL,RLR,RRL\in D .
+\]
+In the exchanged case \(\{b^na,ab^n\}^*\), \(w\) is a product of \(c\) generators with \(cn=3\). The case \(c=1\) is impossible because \(w\) has the proper nonempty prefix \(p\) in \(\mathrm{Eq}(g,h)\). So \(n=1\) and \(w\) is a product of three words from \(\{ab,ba\}\), which is the list above with \(m=1\).
+\end{proof}
+
+\begin{corollary}\label{outer}
+For \(i,\ell\ge1\), the tuple \((i,0,0,\ell)\) forces periodicity under the length condition. Together with family \(B\), the slice \(j=k=0\) is completely classified.
+\end{corollary}
+\begin{proof}
+For \(i+\ell\ge3\) this is \cite[Theorem 1]{hh} (the word \(a^ib^3a^\ell\)), with Lemma~\ref{perred} covering periodic morphisms. The remaining case \((1,0,0,1)\) is Theorem~\ref{t1001}. If \(i=0\) or \(\ell=0\), the tuple lies in \(B\).
+\end{proof}
+
+\begin{lemma}[Padding preserves forcing]\label{padding}
+If \((i,j,k,\ell)\) forces periodicity under the length condition, so does \((i+r,\,j+r+s,\,k+r+s,\,\ell+s)\) for all \(r,s\ge0\).
+\end{lemma}
+\begin{proof}
+A solution \(X,Y,U,V\) of the padded equation gives the solution \(X,\ Y'=X^rYX^s,\ U,\ V'=U^rVU^s\) of the original one. The condition \(|V|\ge|Y|\) forces \(x\ge u\), so \(|V'|\ge|V|\ge|X|,|U|\), and \(|V'|-|Y'|=\tfrac{S}{3}(x-u)\ge0\), where \(S\) is the original exponent sum. If \(X=U\) and \(Y'=V'\), cancelling powers of \(X\) gives \(Y=V\). Otherwise \(X,Y',U,V'\) are powers of one primitive word, hence so are \(Y\) and \(V\).
+\end{proof}
+Among the \(625\) tuples with exponents at most \(4\), Theorem~\ref{balanced} applies to \(178\). The \(30\) of them in \(A\cup C\cup D\) are exactly the nonforcing ones found by the search, so the remaining \(148\) are now proved forcing for all lengths. The open cases of the conjecture are the tuples outside the families with no balanced prefix, for example \(2011\) and \(1001\), which needed the arguments of Sections~2 and~5. By Lemma~\ref{perred}, any remaining counterexample has \(XY\ne YX\) and \(UV\ne VU\).
+
 \section{Verification and priority}
-Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4 and Theorem~\ref{nonforcing} have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Section~7 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
 
 The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
 
 \paragraph{Contribution disclosure.}
 The author selected the problem from the WORDS 2025 collection, directed the investigation, and audited and independently re-verified the results, including compiling the Lean proof with Lean~4.33.0 and \texttt{leanchecker}, rerunning the exhaustive search, and checking small cases by direct enumeration. The AI system Astra~6.2 developed the written proof, implemented the searches, wrote the Lean formalization and drafted the manuscript under this direction.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{words}\v S. Holub, Periodicity forcing, WORDS 2025 Open Problems, Nancy, 1 July 2025, slides 3--5. \href{https://words2025.loria.fr/files/2025/07/webpage-open-problems.pdf}{Conference collection}.
 \bibitem{hh}J. Hadravov\'a and \v S. Holub, \emph{Equation \(x^iy^jx^k=u^iv^ju^k\) in words}, 15 January 2015, Theorem 1. \href{https://arxiv.org/abs/1501.03602}{arXiv:1501.03602}.
 \bibitem{hs}\v S. Holub and J. S\'ykora, \emph{Binary equality words with two b's}, Comment. Math. Univ. Carolin. 59(2) (2018), 153--172. \href{https://cmuc.karlin.mff.cuni.cz/pdf/cmuc1802/holsyk.pdf}{Article}.
 \bibitem{periodic}\v S. Holub, \emph{Binary equality words for periodic morphisms}, author version, Theorem 1; published as \emph{Binary equality languages for periodic morphisms}, RIMS K\^oky\^uroku 1366 (2004). \href{https://www.karlin.mff.cuni.cz/~holub/soubory/rimsrevised.pdf}{Author manuscript}.
+\bibitem{gen2}\v S. Holub, \emph{Binary equality sets are generated by two words}, J. Algebra 259 (2003), 1--42. \href{https://doi.org/10.1016/S0021-8693(02)00534-3}{Article}.
+\bibitem{uniq}\v S. Holub, \emph{A unique structure of two-generated binary equality sets}, Developments in Language Theory (DLT 2002), LNCS 2450 (2003), 245--257. \href{https://www.karlin.mff.cuni.cz/~holub/soubory/uniq.pdf}{Author version}.
 \bibitem{mak}G. S. Makanin, \emph{The problem of solvability of equations in a free semigroup}, Math. USSR-Sb. 32(2) (1977), 129--198. \href{https://doi.org/10.1070/SM1977v032n02ABEH002376}{Article}.
 \end{thebibliography}
 \end{document}
