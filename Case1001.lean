@@ -131,7 +131,7 @@ private theorem lemCRot (p q B D : Word α) (hl : B.length = D.length) (hs : 0 <
     · exact (lemCLt q p D B hl.symm (by omega) (by omega) h2 h1).symm
     · obtain ⟨hp, hq⟩ := List.append_inj (s₁ := p) (s₂ := D ++ B) (t₁ := q) (t₂ := D) h1
         (by simp only [List.length_append]; omega)
-      subst hp; subst hq
+      rw [hp, hq] at h2
       exact (List.append_inj_left (s₁ := D) (s₂ := B)
         (by simpa only [List.append_assoc] using h2) hl.symm).symm
   · obtain ⟨hp, hq⟩ := List.append_inj (s₁ := p) (s₂ := D) (t₁ := q) (t₂ := B ++ D)
