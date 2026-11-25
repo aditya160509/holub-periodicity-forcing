@@ -1,0 +1,226 @@
+\section{A finite cutoff for unrestricted witnesses}
+Let $S=i+k+\ell$, $w=a^ibb a^kb a^\ell$, and assume $k>0$ and
+$i+\ell>0$. Write $d=x-u>0$, $D=v-y=Sd/3$. We may orient an
+unrestricted witness this way by exchange; under Holub's condition the
+length identity already gives this orientation for distinct substitutions.
+Indeed $d=0$ gives identical images by reading corresponding occurrences.
+
+\begin{theorem}
+Define the following explicit integers:
+\[
+ n=1000(S+10),\qquad q=1000n,\qquad
+ N=(100q)^{4q},\qquad d_0=(204n)^N .
+\]
+If there is an unrestricted counterexample, there is one with
+$0<d\le d_0$. For $k>2(i+\ell)$, the same implication
+holds with Holub's condition on both the premise and the conclusion.
+\end{theorem}
+
+\begin{proof}
+First choose a noncommuting ordered pair $E,F$ of the four images.
+The equal-length words $EF,FE$ disagree at some letter. A letterwise
+projection to a binary alphabet preserving that mismatch preserves all
+lengths and the equation. Choose constants $b_0,b_1$ for the two
+different letters at the first mismatch (either order is allowed).
+Add to the original equation the equations
+\[
+ EF=P b_0 Q,\qquad FE=P b_1 T .
+\]
+If $i>0$, $U$ is a proper prefix of $X$, so add $X=UcZ$;
+if $i=0$ use $X=ZcU$ since $\ell>0$. Here $c$ is one of the two
+constants. Conversely each branch gives $d>0$ and a genuine mismatch.
+
+For clarity we give numerical constants in the small-solution bound.
+Combine the four equations in two rounds, using for a pair
+$L=R$, $L'=R'$ the single equation
+\[
+ L b_0 L' L b_1 L'=R b_0 R' R b_1 R'.
+\]
+Both halves on either side have equal length, hence the left and right
+half lengths agree. Comparing the two split equalities, the unique
+position at which the halves differ is $|L|$ on the left and $|R|$
+on the right. Thus $L=R$ and $L'=R'$ by cancellation. The original
+sum of side lengths is $2(S+3)+5+5+4$. Each round doubles this
+sum and adds four per combination. Including the five constant
+symbols of the involutive alphabet below, the input size is at most $n$.
+
+Apply Ciobanu--Diekert--Elder, \emph{Solution sets for equations over
+free groups are EDT0L languages}, arXiv:1508.02149, Theorem~4,
+in its free \emph{monoid} case. Use the two positive binary constants,
+their formal inverses and the marker. Any positive witness is reduced.
+Any returned solution in reduced words solves literal monoid equalities;
+mapping each inverse letter to its positive counterpart preserves the two
+marked constants, every length, and every branch equation.
+
+Here are details of the state count. In that construction, Definition~8
+and Section~3.10.4 give state data $(W,B,\mathcal X,\theta,\mu)$:
+$|W|\le204n$, with at most $615n$ constants and $6n$ variables.
+There are fewer than $(q+1)^{204n+1}$ choices of word, at most $2^q$
+choices of the active symbols (the constant and variable pools are
+disjoint), at most $(q+1)^q$ partial type maps, and at most $19^q$
+partial constraint maps. Indeed the constraint monoid consists of the
+sixteen pairs of signed binary letters, zero, and the identity.
+Their product is below $N$. Section~3.7 labels substitution edges by the
+identity on constants. Compression edges expand a letter by at most two
+except on the final transition, where the sum of active image lengths
+is at most $|W|\le204n$; inactive symbols are fixed.
+A nonempty accepting path can be shortened by deleting cycles, giving
+fewer than $N$ edges. The theorem reads each variable image by composing
+these labels on a single distinguished letter. Every resulting length
+is at most $(204n)^N$. All branch equations still hold on this path,
+so this bounds $d$ as claimed. The constrained assertion follows from
+the middle-block lemma and the edge-case argument below.
+\end{proof}
+
+\begin{lemma}
+Let $k>2(i+\ell)$, $i+\ell>0$, $u>0$.
+If $ku\ge x+u-\gcd(x,u)$, every solution with $d>0$ commutes.
+\end{lemma}
+\begin{proof}
+In the middle $X^k$, the subword $U^k$ begins after $L=2D-id$
+letters and ends $Q=D-\ell d$ letters before the end. Both numbers
+are positive by hypothesis. The factor of length $ku$ has periods
+$x,u$, so Fine--Wilf gives period $g=\gcd(x,u)$. Since it contains
+$x$ and $u$ consecutive letters, the bi-infinite periodic extensions
+of the two blocks agree with a common $g$-periodic sequence there,
+possibly in different phases at their respective block starts.
+Consequently their primitive roots are rotations of one another of
+length $r\mid g$. The outer run with positive exponent makes $U$ a
+prefix or suffix of $X$ (as $u<x$). As $r$ divides both lengths, this
+aligns their roots: $X,U\in R^*$ for one primitive $R$.
+The occurrence at offset $L$ now starts with a full $R$, whence $r\mid L$.
+Since $r\mid d$, this gives $r\mid 2D$, and $3D=Sd$ gives $r\mid D$.
+In particular $r\mid Q$. Read from the end of $U^k$ to the end of
+the equation and cancel $U^\ell$. This gives
+\[
+ V=R^{Q/r}Y R^{\ell d/r}.
+\]
+If $R,Y$ do not commute, they constitute a two-word code (the standard
+two-word defect theorem). After the substitution, the left side has
+adjacent $Y$ tokens and the first two right-side $Y$ tokens are
+separated by $D/r>0$ copies of $R$. This contradicts unique decoding.
+Thus $Y$, and then $V$, commute with $R$.
+Finally if $k\ge4$ and $v<x$, then $u>(S/3-1)d\ge2d/3$, since
+$S\ge5$. Hence $(k-2)u>d$, implying the required Fine--Wilf bound.
+It follows that every oriented unrestricted counterexample in this
+subfamily already satisfies $v\ge x>u$ and $v\ge y$.
+\end{proof}
+
+\paragraph{The two edge tuples.}
+For $k>2(i+\ell)$ with $k<4$ the only possibilities have $k=3$ and
+$i+\ell=1$. Write $d=3s$, $D=4s$ with $s>0$.
+We show that in every counterexample a full copy of $X$ occurs in $V^2$.
+Indeed the first $L=2D-id$ letters of the middle $X^3$ are in $V^2$
+by the start and end positions above. If $i=0$ and $x>L=8s$ then
+$u>5s>d$, so the middle-block lemma applies.
+
+Suppose $i=1$, $\ell=0$, $x>L=5s$. Write $X=UT$, $|T|=3s$.
+The initial $V$ starts with $T$ because it starts just after the initial
+$U$ and $v\ge4s$. The final $V$ is $AY$ where $A$ is the suffix of
+$X^3$ of length $4s$. Since $x>5s$, $A$ is a suffix of $X$.
+Thus $A$ begins and ends with $T$, so it has period $s$ and equals
+$C^4$ for a word $C$ of length $s$. In particular $X=UC^3$.
+The middle-block lemma covers $u\ge3s$, so assume $2s<u<3s$.
+From the nested middle occurrence, $U^3 C^4$ is a suffix of $X^3$.
+Cancel $C^3$ at the right: $U^3 C$ is a suffix of $X^2 U$.
+Consequently $U$ is a suffix of $U^3 C$, giving period $s$ on $U$
+and suffix $C$. Inside the middle $X^3$, the second $X$ starts
+$x-L=h=u-2s$ letters after the start of $U^3$. It starts with $U$,
+and $0<h<s$, so the length-$u$ window in $U^3$ at offset $h$ equals
+$U$. The primitive root length $r$ of $U$ divides $h$, by invariance
+under this rotation. Fine--Wilf on $U$ with periods $s,r$ now gives
+$r\mid s$ since $u>2s>s+r$. Hence $C$, its length-$s$ suffix, has
+the same primitive root, and $X,U,A$ are powers of it. As $V=AY$ with
+$A$ a nonempty such power, the adjacent-$Y$ code argument above forces
+$Y$ to commute as well. This proves the full-copy claim.
+
+For a Holub-admissible counterexample, $x\le v$, so a copy of $X$
+in $V^2$ is a prefix of one rotation of $V$. Add the two equations
+$V=JK$, $KJ=XH$ to the branch. These equations themselves guarantee
+$v\ge x$ on every returned solution. Conversely the copy just proved
+supplies $J,K,H$ in every admissible counterexample. Pad these six
+equations with two empty identities and combine in three rounds.
+The original total side length is at most $2S+27$; the successive
+totals are at most $2(2S+27)+16$, twice that plus eight, and twice
+the latter plus four. Including the alphabet still gives input size
+below $n$. Pad the system
+to eight equations with empty equalities and use three combination
+rounds. The input is still below $1000(S+10)$: the two new equations
+add seven symbols, each original symbol is copied eight times, and
+all combination constants together contribute $48$. The same numerical
+bound therefore applies.
+
+\paragraph{A smaller exact box at fixed $d$.}
+For one input letter let $A,B$ be its left and right images, of lengths
+$a,b$, and $m,M$ its extreme start displacements (left minus right).
+Write $P=M-m>0$, $z=\max(0,m)$, $t=z-m$.
+A minimum unrestricted counterexample cannot satisfy all three bounds
+\[
+ a\ge t+2P,\qquad a\ge t+P+d,\qquad b\ge z+2P+d.
+\]
+Indeed $B[j]=A[j-m]=B[j+P]$ throughout $[z,z+P+d)$.
+Thus $B[z:z+2P+d]$ has period $P$. Cut $P$ letters at $t$ in
+every left copy and at $t+e$ in each corresponding right copy of
+displacement $e$. These are paired cuts in the common word. Their
+starts in $B$ range from $z$ to $z+P$, and all yield the same shortened
+$B$ because deleting one period anywhere between these starts gives
+the same word. The deleted block at $z$ can be recovered from
+$B[z+P:z+2P]$. In the left image the two adjacent $P$-blocks at $t$
+are equal as well: the occurrence with displacement $m$ copies them
+from $B$, using $a\ge t+2P$. If the shortened solution commutes,
+its primitive root has length $r\mid d$ since $d$ was preserved.
+The retained $P+d$ letters in the right image have periods $P,r$.
+Fine--Wilf and the presence of a full primitive rotation give $r\mid P$.
+Inserting the following $P$ letters again in either image thus preserves
+the periodic phase. This contradicts the original noncommutation.
+The old and new bounds can be intersected since each applies to the
+same minimum unrestricted witness.
+
+\paragraph{Exact component criterion.}
+At any fixed lengths let $h=\gcd(x,y,u,v)$. Every position equality
+preserves the offset modulo $h$ inside the corresponding image; upon
+division by $h$ the graph is $h$ interleaved copies of the normalized
+graph, with identical adjacencies. If the normalized graph is connected,
+every image is a power of the same length-$h$ word. Conversely if it
+is disconnected assign distinct symbols to normalized components.
+Commuting images would have a primitive root whose length divides all
+four normalized lengths, hence would be unary, impossible. Replacing
+each symbol by $h$ copies lifts this witness injectively. This proves
+both the test and a genuine $d\mapsto d/h$ descent for $h>1$, preserving
+Holub's inequality. Literal equality and inequality of words suffice to
+verify each resulting witness.
+
+\paragraph{Finite verification.}
+For all 210 residual tuples through exponent six, the exact computation
+in the accompanying checks excludes every unrestricted counterexample
+with $1\le d\le12$. In particular it excludes every admissible one.
+For each integrally possible $D$ it uses $x=u+d,v=y+D$ and enumerates
+the intersection of the two minimum-witness boxes, independently in $u,y$.
+Impossibility of an unrestricted minimum excludes the entire original box
+and all lengths beyond it at that same $d$.
+
+\paragraph{Endpoint order alone loses information.}
+For the nonforcing control $w=abbaba$, the lengths $(x,y,u,v)$
+given by $(2,1,1,2)$ and $(3,1,1,3)$ both satisfy Holub's inequality
+and have gcd one. Their cumulative left and right endpoints are,
+respectively, $(2,3,4,6,7,9),(1,3,5,6,8,9)$ and
+$(3,4,5,8,9,12),(1,4,7,8,11,12)$.
+All cross-comparisons have the same sign. In the first case write
+$U=p,Y=q$. Reading the first two letters gives $X=pV[0]$;
+the third letter gives $V[1]=q$, the fourth gives $V[0]=q$,
+and the fifth gives $p=q$. All images are unary.
+In the second case $(X,Y,U,V)=(101,0,1,010)$ is an admissible
+noncommuting solution by direct concatenation. Thus even the addition
+of the maximum-length test and primitive length normalization does not
+make counterexample existence constant on the endpoint-order cells.
+
+\paragraph{Coverage check.}
+A second run directly joins positions for every length vector in the
+original unrestricted rectangle $0\le u<T_a$, $0\le y<T_b$.
+For the admissible run, keep the rows with $y+D\ge u+d$, and append
+all such rows with
+$T_b\le y<\max(T_b,T_a+d+3P_b-D)$ at the same $u$.
+This is precisely the previous section's admissible box.
+In each mode the minimum-counterexample argument removes the upper
+length restriction at fixed $d$. The exponent-four run is also tabulated
+independently of the exponent-six run.

@@ -1,0 +1,123 @@
+\section{Shortening at fixed length difference}
+Write $w=a^ibb a^kb a^\ell$, $S=i+k+\ell>0$, and let $g(w)=h(w)$.
+Exchange the morphisms if needed so $d=x-u>0$; equal corresponding
+lengths give identical substitutions by reading the occurrences.
+Put $D=Sd/3=v-y$. The following descent concerns unrestricted solutions.
+
+\begin{lemma}
+Choose one input letter $c$ occurring in $w$. Write $A=g(c)$, $B=h(c)$,
+and let $e_j$ be the left start minus the right start for its $j$th
+occurrence in the common word (positions start at zero).
+Set $m=\min e_j$, $M=\max e_j$, $H=\max(|m|,|M|)$,
+and assume $P=M-m>0$.
+If $\min(|A|,|B|)\ge 2H+7P$, a nontrivial noncommuting solution
+gives another such solution with both $c$-images shorter by $3P$,
+and with the other images unchanged.
+\end{lemma}
+\begin{proof}
+Use half-open intervals and put $z=H+m$. For each occurrence,
+$B[e_j+s]=A[s]$ whenever both indices exist.
+For $P=M-m>0$ and $z\le t<z+6P$, the extreme occurrences give
+$B[t]=A[t-m]=B[t+P]$. Indeed $0\le t-m<H+6P$
+and $0\le t<t+P<2H+7P$. Thus $B[z:z+7P]$ has period $P$.
+
+In this case remove $3P$ letters starting at $H$ in each left occurrence,
+and at $H+e_j$ in its corresponding right occurrence. These cuts coincide
+in the common word and cuts in distinct left blocks are disjoint.
+All right deletions produce one word $B'$: moving a deletion of length
+$3P$ one position to the right leaves the result unchanged whenever the
+letters at the old start and $3P$ places later coincide. This applies
+throughout $[z,z+P)$. All left deletions give one word $A'$.
+Furthermore the deleted segment equals the immediately following $3P$
+letters in each block, by the period on $[z,z+7P)$ and the correspondence $A[s]=B[m+s]$ near $s=H$.
+
+The shortened equation holds by the coincident cuts, and its difference
+of $a$-image lengths is still $d$. If all four shortened images were
+powers of a primitive word $R$, then $|R|$ would divide $d$.
+Every start displacement is an integral combination of $d$ and $D$,
+so $3P$ is a multiple of $d$. Reinserting a duplicate of the following
+$3P$ letters at a cut in an $R$-power preserves that power's phase
+and produces another $R$-power. This reconstructs both original images,
+a contradiction.
+\end{proof}
+
+\begin{corollary}
+For $k\ge1$ outside the listed exceptions, it suffices to exclude
+unrestricted counterexamples for which, for each letter $c$,
+$\min(|g(c)|,|h(c)|)<2H_c+7P_c$, provided $P_c$ is computed from
+distinct extreme displacements. Both bounds are constants times $d$.
+\end{corollary}
+\begin{proof}
+For $b$ the first two displacements differ by $D>0$.
+For $a$, two consecutive copies have displacements differing by $d$.
+If there are no consecutive copies, $i,k,\ell\le1$ and $k=1$.
+The tuple with only one $a$ is sporadic. For the other possibilities
+the displacements on the initial, middle and final runs, when present,
+start at $0,id-2D,-\ell d$, respectively. For $(i,k,\ell)=(1,1,0)$
+or $(0,1,1)$ these are distinct on the two occupied runs; for
+$(1,1,1)$ the first and last are distinct.
+Choose an unrestricted counterexample of minimum total length at fixed
+$d$. The lemma applies whenever either inequality fails. The displacements
+depend only on the pattern and $d$, as follows by summing the preceding
+letter differences.
+\end{proof}
+
+\paragraph{Three forcing rays.}
+For $n\ge1$ the tuples $(0,0,n,n)$, $(n,0,n,0)$ and $(2n,0,n,n)$
+force periodicity without a length condition. For $n=1$ the first two
+seeds are the letter exchanges of $aabab$ and $baaba$, respectively.
+Their nonempty-image cases follow from Lemmas 15 and 14 of
+\cite{hs} (using reversal as needed); the small-exponents argument
+in the manuscript covers erasures. The third seed is Theorem~\ref{main}.
+For general $n$, apply the corresponding seed to $X^n,Y,U^n,V$.
+Equality of the two $n$th powers implies $X=U$ by length and prefix
+comparison. In the periodic case each nonempty base of an $n$th
+power has the same primitive root as the power. This proves the claim.
+
+\paragraph{Padded descendants.}
+Padding replaces $b$ by $a^rba^s$ and adds $(r,r+s,r+s,s)$ to the
+tuple. The three forcing rays therefore transfer by the manuscript's
+padding lemma. For a C or D seed of parameter $n$, a proper balanced
+prefix is the first of the three factors $a^nb$ or $ba^n$ in its
+factorization. Its padded image has one $b$ and $n+r+s$ letters $a$,
+one third of the total $a$ count. Hence the balanced-prefix theorem
+classifies all these descendants, with precisely its listed exceptions.
+Padded B seeds have equal internal exponents and fall under the
+manuscript's equal-internal-exponents classification. Padded $0010$
+has tuple $(r,r+s,1+r+s,s)$; for positive total padding this is
+the single-interior-letter reduction in Section~8.
+
+\paragraph{Using both ends at once.}
+Suppose $u>0$. Across the join in two consecutive copies of the
+common word, $U^{\ell+i}$ is a factor of $X^{\ell+i}$ whose join
+between the two runs is at a block boundary for both words.
+If $(\ell+i)u\ge x+u-\gcd(x,u)$, Fine--Wilf gives the period
+$h=\gcd(x,u)$ on this factor. Its length is at least $x$, so one
+full rotation of $X$ is an $h$-power, as is $U$.
+To compare phases, extend the factor periodically in both directions:
+its $x$-periodic and $u$-periodic extensions are the same $h$-periodic
+sequence since it contains at least $x$ and $u$ letters. At the join
+both extensions start a fresh block. Thus $X$ and $U$ commute.
+
+Write $X,U\in R^*$ with $R$ primitive, $r=|R|$. If $k\ge1$ and
+$\min(id,2v)\ge v+r-\gcd(v,r)$ with $v\ge r$, all four words commute.
+Indeed the prefix of $V^2$ of that minimum length is read inside
+$X^i$ starting at $iu$, in phase zero. Fine--Wilf makes this prefix
+periodic with period $\gcd(v,r)$; its first $r$ letters are $R$, so
+primitivity forces $r\mid v$ and $V\in R^*$. Now $W\in R^*$.
+The internal $X^k$ begins at phase $2y$ and starts with $R$, so
+$r\mid 2y$. Counting lengths on the left gives $r\mid 3y$, hence
+$r\mid y$. Reading the first $Y$ at phase zero completes the proof.
+
+\paragraph{Finite check at prescribed $d$ under Holub's condition.}
+Put $T_c=2H_c+7P_c$ with the hypotheses of the corollary.
+In a minimum-total-length counterexample at fixed $d$ satisfying
+$v\ge x,y,u$, we have
+\[
+ u<T_a,\qquad
+ y<\max\{T_b,T_a+d+3P_b-D\}.
+\]
+Shortening the $a$-images preserves the maximum-length condition,
+so $u<T_a$. If $y\ge T_b$, the $b$-images can be shortened.
+Minimality then requires $v-3P_b<x$, since their difference stays
+$D$ and $x>u$. Substituting $v=y+D$ and $x=u+d$ gives the claim.
