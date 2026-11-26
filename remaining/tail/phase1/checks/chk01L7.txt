@@ -1,0 +1,1 @@
+(0,1,l), l >= 7 : certificates verified 356 covering pieces 351 pieces without admissible points 0 OK

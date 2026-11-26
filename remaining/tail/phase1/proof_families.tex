@@ -1,0 +1,46 @@
+% Fragment for paper/sec13_tail.tex (after Theorem tail:certified).
+% Data and checker: remaining/tail/phase1/checks/.
+\subsection{Families with a free final exponent}\label{tail:fam-sec}
+
+The covering of Theorem~\ref{tail:certified} treats one tuple at a time. Here we fix \(i\) and \(k\) and let \(\ell\) be arbitrary: one finite set of certificates handles all \(\ell\ge\ell_0\) at once. The point is that for fixed \(i,k\) every length in~\eqref{eq:reduced} is a linear form in \((d,u,y,D)\), because
+\[
+\ell d=3D-(i+k)d,\quad |C|=id,\quad |A|=D-id,\quad |H|=2D-kd,\quad |G|=2D-(i+k)d,\quad p=D-kd .
+\]
+The exponent \(\ell\) survives in only two places: the suffix \(U^\ell\) of \(X^\ell\), and the outer bound. We weaken both to linear statements valid for all \(\ell\ge\ell_0\).
+
+\begin{lemma}\label{tail:famy}
+Let \(k\ge1\), \(\ell\ge\max(2k-i+1,2i-k)\) and \(i+k<2\ell\). In a counterexample, \(y+id<D\).
+\end{lemma}
+\begin{proof}
+Here \(m=i+\ell-2k>0\), so \(|H|\ge D\). If \(y+id\ge D\), then Lemma~\ref{tail:astar} applies with \(\kappa=D\) and gives \(\Pi[t]=\Pi[t+p]\) for \(0\le t<kx\). This is a factor of length \(kx+p\ge x+p\) with period \(p\), and Lemma~\ref{tail:rp} applies, since \(0<m\le i+\ell-2\).
+\end{proof}
+
+\paragraph{The linear system.} Fix \(i\ge0\), \(k\ge1\), \(\ell_0\ge3\) and \(n_0=3\le\ell_0\). In the variables \((d,u,y,D)\), the system \(\Sigma_{i,k}\) consists of the identities \(X^i=U^iC\), \(YH=GCY\) and \(YX^kG=ACYAU^k\) of~\eqref{eq:reduced}, with the blocks given by the forms above. In place of \(X^\ell=HAU^\ell\) it has the statement that \(\Pi[-n_0u,0)=U^{n_0}\). Every relation of \(\Sigma_{i,k}\) holds in every counterexample for the tuple \((i,k,\ell)\) with \(\ell\ge\ell_0\), because \(U^{n_0}\) is a suffix of \(U^\ell\). The parameter region is the cone
+\[
+R_{i,k,\ell_0}=\{d,u,y>0,\ y+id<D,\ 3D\ge(i+k+\ell_0)d,\ (i+\ell_0-2)u<d\}.
+\]
+It contains the length vector of every counterexample for \((i,k,\ell)\) with \(\ell\ge\ell_0\), by Corollary~\ref{outerbound} and Lemma~\ref{tail:famy}. In the section \(D=1\) it is a bounded polytope. Its face \(d=0\) corresponds to \(\ell\to\infty\), and the tuple \((i,k,\ell)\) occupies the slice \(d=3/(i+k+\ell)\).
+
+Certificates are as in Lemma~\ref{tail:rules}, now with forms in four variables, and with one more rule.
+\begin{enumerate}
+\item[(W3)] If \(\Pi\) has period \(P_\Gamma\) and \(j\in\Lambda(\Gamma)\), then translating a window by \(j\) gives a window.
+\end{enumerate}
+Rule (W3) replaces the translations by multiples of \(x\) in (W2). It lets a certificate align windows whose positions differ by a form such as \(|H|+y\), which is far from any fixed multiple of \(x\) when \(\ell\) is large. Using it, every certificate uses only forms with bounded coefficients. Without it, the covering does not terminate: the cells accumulate at \(d=0\), one slab per multiple of \(x\).
+
+\begin{theorem}\label{tail:families}
+For every pair \((i,k)\) in Table~\ref{tab:fam} and every \(\ell\ge\ell_0(i,k)\), where \(\ell_0=\max(7,2k-i+1,2i-k)\), the tuple \((i,0,k,\ell)\) forces periodicity. In particular, \((0,0,1,\ell)\) forces periodicity for every \(\ell\).
+\end{theorem}
+\begin{proof}
+For each pair, the file \texttt{covIK\_\(i\)\_\(k\).json} (and \texttt{cov01L7.json} for \((0,1)\)) lists certificates for \(\Sigma_{i,k}\). The program \texttt{check3f.py} verifies them without using the code that produced them. It re-derives the relations of \(\Sigma_{i,k}\), checks every step on the section \(D=1\) of the cone in exact integer arithmetic, and checks that the cones cover \(R_{i,k,\ell_0}\). Any uncovered piece must be a point or a segment. For every admissible slice \(d=3/(i+k+\ell)\) that meets such a piece, the program either shows that the true outer bound \((i+\ell-2)u<d\) excludes the point, or closes it by union-find on the true equation together with Lemma~\ref{tail:dilation}. For the listed pairs, no uncovered pieces occurred.
+
+The second claim combines this with Theorem~\ref{tail:certified} for \(3\le\ell\le6\), Theorem~\ref{rightray} for \(\ell=2\), Theorem~\ref{tail:diagonal} for \(\ell=1\), and the slice \(\ell=0\).
+\end{proof}
+
+%FAMTABLE%
+
+\begin{corollary}\label{tail:upto11}
+Every tuple \((i,0,k,\ell)\) with \(i,k,\ell\le11\) is classified: it forces periodicity unless it lies in the nonforcing families. More generally, so is every tuple with \(i,k\le6\), whatever \(\ell\).
+\end{corollary}
+\begin{proof}
+A residual tuple, one not covered by Theorems~\ref{tail:band}, \ref{tail:general}, \ref{tail:windows}, \ref{rightray}, \ref{tail:diagonal}, Lemma~\ref{tail:div} and the slices, with exponents at most \(11\) has \(i,k\le6\) (direct enumeration, \texttt{residual.py}). For \(\ell\ge\ell_0(i,k)\), Theorem~\ref{tail:families} applies. The finitely many residual tuples with \(7\le\ell<\ell_0(i,k)\) are covered tuple by tuple, as in Theorem~\ref{tail:certified} (Table~\ref{tab:fam}, last rows). Those with \(\ell\le6\) are covered by Theorem~\ref{tail:certified} itself.
+\end{proof}
