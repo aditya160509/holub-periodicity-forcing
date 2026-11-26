@@ -1,0 +1,9 @@
+{
+  "title": "Periodicity forcing for the patterns a^i b a^j b a^k b a^l: Holub's WORDS 2025 problem",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "Proof that XXYYXYX=UUVVUVU forces X=U, Y=V or all four words commute (Lean-checked); complete classification of periodicity forcing for all 625 tuples with exponents at most four; the family (i,0,k,l) settled through exponent six via a certified Fine-Wilf cone covering with an independent checker. Manuscript, Lean files and certificates.",
+  "creators": [{"name": "Balaji, Aditya", "affiliation": "Independent researcher"}],
+  "license": "cc-by-4.0",
+  "keywords": ["combinatorics on words", "word equations", "periodicity forcing", "Fine-Wilf", "Lean"]
+}

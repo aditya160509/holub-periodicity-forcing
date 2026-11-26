@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it."
+title: "Periodicity forcing for the patterns a^i b a^j b a^k b a^l: Holub's WORDS 2025 problem"
+authors:
+  - family-names: Balaji
+    given-names: Aditya
+    affiliation: Independent researcher
+license: CC-BY-4.0
