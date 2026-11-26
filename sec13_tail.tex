@@ -296,3 +296,88 @@ c_{j'}=c_{j'+e+y+2u}\qquad(0\le j'<\delta).
 
 Each case contradicts \(XU\ne UX\). Lemma~\ref{commouter} completes the proof.
 \end{proof}
+
+\subsection{Two local periods}
+Throughout this subsection we assume \(i+k<2\ell\), \(2i\le k+\ell\), and \(XU\ne UX\). We use \eqref{eq:tail}, write \(\Pi=X^\omega\) and \(p=|G|-|A|=(i+\ell-2k)d/3\), and recall \(|H|=h=|G|+id\), \(|T'|=D\), \(B=HA\) and \(V=CYA\).
+
+\begin{lemma}\label{tail:twoper}
+\begin{enumerate}
+\item[(i)] If \(y\le\min(|A|,|G|)\), then \(\Pi[t]=\Pi[t+p]\) for \(|A|-y\le t<kx\), and \(\Pi[t]=\Pi[t+p+y]\) for \(0\le t<|G|-y\).
+\item[(ii)] If \(p>0\) and \(|A|\le y<D\), then \(\Pi[t]=\Pi[t+p]\) for \(0\le t<kx\).
+\item[(iii)] Let \(\gamma=\gcd(D,h)\). If \(id+y+\min(D,kx,h)\ge D+h-\gamma\), then \(H\) has period \(\gamma\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+For \(y<\min(D,h)\), the conjugacies \(TY=YT'\) and \(GCY=YH\) give \(AC=Y\tau\), \(T'=\tau Y\), \(GC=Y\tau'\) and \(H=\tau'Y\), where \(\tau=(AC)[y,D)\) and \(\tau'=(GC)[y,h)\). Hence
+\[
+X^kG=\tau YAU^k\quad(\text{the }k\text{-line}),\qquad X^\ell=\tau'YAU^\ell\quad(\text{the }\ell\text{-line}).
+\]
+Both \(\tau\) and \(\tau'\) end with a nonempty suffix of \(C\). Let \(\kappa\) be the length of their common suffix. Then \(\kappa YAU^k\) — that is, the common suffix followed by \(YAU^k\) — occurs in the \(k\)-line at position \(D-y-\kappa\) and in the \(\ell\)-line at position \(h-y-\kappa\). These positions differ by \(p\), and the occurrence in the \(\ell\)-line lies inside \(X^\ell\), because it ends at \(\ell d+ku\le\ell x\). The first \(kx\) letters of the \(k\)-line are \(\Pi\).
+
+(i) Here \(\tau=A[y,|A|)C\) and \(\tau'=G[y,|G|)C\), so \(\kappa\ge id\). This gives the first relation. The same alignment applied to the last \(|G|\) letters of the \(k\)-line gives \(G=\Pi[kx+p,kx+p+|G|)=\Pi[p,p+|G|)\). Since \(y\le|G|\), the relation \(YH=GCY\) gives \(Y=G[0,y)\) and \(H=G[y,|G|)\,CY\). Thus \(\Pi[0,|G|-y)=\Pi[p+y,p+|G|)\), which is the second relation.
+
+(ii) Now \(\tau\) is a suffix of \(C\) of length \(D-y\le id\), and \(\tau'\) ends with \(C\) and is longer. So \(\kappa=|\tau|\), and the common factor is the entire \(k\)-line, which occurs at position \(p\) in \(\Pi\).
+
+(iii) Align \((AC)^{\mathbb Z}\) and \((GC)^{\mathbb Z}\) at the starts of the blocks \(AC\) and \(GC\). Both are preceded by \(C\) and followed by \(Y\). After \(Y\), they continue with \(T'\) and with \(H\) respectively. The first \(\min(D,kx)\) letters of \(T'\) and all of \(H\) are prefixes of \(\Pi\). So the two words agree on an interval of length \(id+y+\min(D,kx,h)\). By Fine--Wilf, this interval has period \(\gamma\). It is longer than both periods, so both bi-infinite words have period \(\gamma\), and so does their factor \(H\).
+\end{proof}
+
+\begin{lemma}\label{tail:rp}
+In a counterexample with \(m=i+\ell-2k\ne0\) and \(|m|\le i+\ell-2\), no integer \(q\) with \(q\mid p\) is a period of a factor of \(\Pi\) of length at least \(x+q\).
+\end{lemma}
+\begin{proof}
+By Fine--Wilf, such a factor has period \(\gcd(q,x)\) and length at least \(x\). Hence \(r\mid q\mid p\), and so \(r\mid 3p=md\). Since \(r\mid mx\), it follows that \(r\mid mu\). But \(0<|m|u<(i+\ell-1)u<r\) by Corollary~\ref{outerbound}, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{tail:124}
+The triples \((1,2,4)\) and \((2,2,4)\) force periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Write \(d=3e\). Then \(x=u+3e<4e\), by Corollary~\ref{outerbound} (\(3u<3e\), resp.\ \(4u<3e\)). The table lists \((|A|,|G|,p,D,h,kx)\) for each triple:
+\[
+(1,2,4):(4e,5e,e,7e,8e,2u+6e),\qquad (2,2,4):(2e,4e,2e,8e,10e,2u+6e).
+\]
+In both cases \(m\in\{1,2\}\), so Lemma~\ref{tail:rp} applies.
+
+\emph{Case \(y\le|A|\).} By Lemma~\ref{tail:twoper}(i), \(\Pi\) has period \(p\) on \(W_a=[|A|-y,kx+p)\), and period \(p+y\) on \(W_b=[0,|G|+p)=[0,6e)\). Their overlap \([|A|-y,6e)\) has length \(6e-|A|+y=(e,\text{resp. }2e)+p+y\), which is at least \(p+(p+y)\), at least \(p+y\), and at least \(p\). By Fine--Wilf, the overlap has period \(g=\gcd(p,y)\). That period spreads to \(W_a\) and to \(W_b\), since each has a period that \(g\) divides and contains the overlap of length at least that period. It then spreads to their union \([0,2u+6e+p)\). The union has length at least \(x+p\ge x+g\). Lemma~\ref{tail:rp} with \(q=g\) gives a contradiction.
+
+\emph{Case \(|A|<y<D\).} Here \(p>0\), so Lemma~\ref{tail:twoper}(ii) gives period \(p\) on \([0,kx+p)\), which has length at least \(x+p\). Contradiction by Lemma~\ref{tail:rp}.
+
+\emph{Case \(y\ge D\).} We have \(\min(D,kx,h)\ge6e\), so \(id+y+\min(D,kx,h)\ge 3e+7e+6e=16e\ge D+h-\gamma=14e\) in the first case, and \(\ge 6e+8e+6e=20e\ge16e\) in the second. By Lemma~\ref{tail:twoper}(iii), \(H=\Pi[0,h)\) has period \(\gamma=\gcd(D,h)\), which is \(e\) resp.\ \(2e\) and divides \(p\). Since \(h\ge 8e\ge x+\gamma\), Lemma~\ref{tail:rp} gives a contradiction.
+\end{proof}
+
+\begin{theorem}\label{tail:general}
+Let \(i+k<2\ell\), \(2i\le k+\ell\), \(m=i+\ell-2k\ne0\), \(c=i+\ell-2\ge|m|\), \(c\ge1\). Put
+\[
+a=k+\ell-2i,\quad g_*=2\ell-i-k,\quad s=i+k+\ell,\quad \eta=2i+2\ell-k,\quad g_0=\gcd(s,\eta),
+\]
+and assume \((\eta-3-g_0)c\ge3\). Then \((i,0,k,\ell)\) forces periodicity, provided that
+\begin{itemize}
+\item[(P)] \(m>0\), \(\bigl(3k\ge g_*\) or \(3(k-1)\ge a\bigr)\), and \(\min(s,3k,\eta)\ge g_*-g_0\); or
+\item[(N)] \(m<0\), \(3(k-1)\ge a\), and \(\min(s,3k,\eta)\ge a-g_0\).
+\end{itemize}
+\end{theorem}
+\begin{proof}
+Put \(f=d/3\). Then \(|A|=af\), \(|G|=g_*f\), \(p=mf\), \(D=sf\), \(h=\eta f\), \(id=3if\) and \(kd=3kf\). Also \(\gamma=\gcd(D,h)=g_0f\) divides \(p=h-D\). In a counterexample, Corollary~\ref{outerbound} gives \(u<3f/c\), so \(h\ge x+\gamma\) by the assumption on \(\eta\). We use Lemmas~\ref{tail:twoper} and~\ref{tail:rp}. Recall \(kx\ge kd\) and \(kx-x\ge(k-1)d\).
+
+\emph{(P).} Here \(p>0\) and \(|A|<|G|\).
+
+\emph{Case \(y\le|A|\).} By Lemma~\ref{tail:twoper}(i), period \(p\) holds on \(W_a=[|A|-y,kx+p)\). If \(3(k-1)\ge a\), then \(|W_a|\ge x+p\), and Lemma~\ref{tail:rp} gives a contradiction. Otherwise \(kd\ge|G|\). Period \(p+y\) holds on \(W_b=[0,|G|+p)\). The overlap \([|A|-y,|G|+p)\) has length \(2p+y\), so it has period \(\gcd(p,y)\), which spreads to \(W_a\cup W_b=[0,kx+p)\), of length at least \(x+p\). Again Lemma~\ref{tail:rp} gives a contradiction.
+
+\emph{Case \(|A|<y<D\).} Lemma~\ref{tail:twoper}(ii) gives period \(p\) on \([0,kx+p)\).
+
+\emph{Case \(y\ge D\).} We have \(id+y+\min(D,kx,h)\ge D+h-\gamma\), because \(\min(D,kd,h)\ge|G|-\gamma\). So \(H\) has period \(\gamma\mid p\), and \(h\ge x+\gamma\).
+
+\emph{(N).} Here \(p<0\) and \(|G|<|A|\).
+
+\emph{Case \(y\le|G|\).} Lemma~\ref{tail:twoper}(i) gives period \(|p|\) on \([|G|-y,kx)\), of length \(kx-|G|+y\ge x+|A|-|G|=x+|p|\).
+
+\emph{Case \(|G|<y<h\).} The proof of Lemma~\ref{tail:twoper}(ii), with the roles of \(\tau\) and \(\tau'\) exchanged, shows that \(\tau'\) is a suffix of \(\tau\). So \(\Pi[t]=\Pi[t+p]\) for \(-p\le t<kx\), that is, period \(|p|\) on \([0,kx)\), and \(kx\ge x+(k-1)d\ge x+|p|\).
+
+\emph{Case \(y\ge h\).} We have \(\min(D,kd,h)\ge|A|-\gamma=D-id-\gamma\), so Lemma~\ref{tail:twoper}(iii) applies again.
+
+In every case Lemma~\ref{tail:rp} gives a contradiction.
+\end{proof}
+
+\begin{corollary}\label{tail:gencor}
+The hypotheses of Theorem~\ref{tail:general} hold for \((1,2,4)\), \((1,3,4)\), \((1,3,6)\), \((1,4,5)\), \((1,4,6)\), \((2,2,4)\), \((2,2,5)\), \((2,3,6)\), \((3,2,5)\), \((3,2,6)\) and \((3,3,6)\). Hence all eleven force periodicity.
+\end{corollary}
