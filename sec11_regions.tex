@@ -1,0 +1,89 @@
+\section{Commuting outer images and further forcing regions}\label{sec:regions}
+Throughout this section \(w=a^ibba^kba^\ell\) with \(k\ge1\), \(i+\ell\ge1\), \(S=i+k+\ell\), and a counterexample is oriented so that \(d=x-u>0\), \(D=v-y=Sd/3\) (lower-case letters are lengths). Write \(X=R^t\) with \(R\) primitive and \(r=|R|\).
+
+\subsection{Commuting outer images}
+\begin{lemma}\label{commouter}
+Let \(S\ge3\) and let \(X^iY^2X^kYX^\ell=U^iV^2U^kVU^\ell\) with nonempty images and \(x\ne u\). If \(XU=UX\), then all four words commute.
+\end{lemma}
+\begin{proof}
+For a letter \(c\) and a word \(W\) let \(p_W(z)=\sum_{j<|W|}[W_j=c]z^j\), so \(p_{AB}=p_A+z^{|A|}p_B\). Write \(X=R^t\), \(U=R^h\) with \(t>h\ge1\), and set \(\Delta_W=(1-z^r)p_W-(1-z^{|W|})p_R\). Then \(\Delta_W=p_{WR}-p_{RW}\) for this letter, \(\Delta\) satisfies the same concatenation rule, and it vanishes on powers of \(R\). Hence \(\Delta_W=0\) for every letter if and only if \(WR=RW\). Applying \(\Delta\) to both sides and cancelling a common monomial gives
+\[
+z^{id}T_g\Delta_Y=T_h\Delta_V,\qquad T_g=1+z^y+z^{2y+kx},\quad T_h=1+z^v+z^{2v+ku}.
+\]
+By Ljunggren's theorem, the noncyclotomic part of a trinomial \(z^n\pm z^m\pm1\) is \(1\) or irreducible. If \(T_g,T_h\) shared a noncyclotomic factor, their noncyclotomic parts would coincide; since cyclotomic parts not containing \(z-1\) are reciprocal, \(T_g/T_g^*=T_h/T_h^*\). Expanding at \(0\), the first nonconstant terms are \(z^y\) and \(z^v\), and \(y<v\); a contradiction. So \(\gcd(T_g,T_h)\) is cyclotomic. At a root of unity \(\zeta\) of \(T_h\), the three unit summands form an equilateral triangle, so \(\zeta^{3g}=1\ne\zeta^g\) with \(g=\gcd(v,ku)\); such roots are simple (\(zT_h'\) is a sum of two terms of distinct absolute values \(v\) and \(2v+ku\)). Hence the gcd has degree at most \(2g\), and \(\deg(T_h/\gcd)\ge 2v+ku-2g\ge v\) (if \(g<v\) then \(2g\le v\); if \(g=v\) then \(ku\ge v\)). This quotient is coprime to \(z\) and divides \(\Delta_Y\). But \(r\mid d\) and \(S\ge3\) give \(D\ge r\), so \(\deg\Delta_Y\le y+r-1<v\). Thus \(\Delta_Y=0\), hence \(\Delta_V=0\), for every letter.
+\end{proof}
+
+\begin{corollary}[Outer-run bound]\label{outerbound}
+In any counterexample with \(S\ge3\), \(r>(i+\ell-1)u+\gcd(r,u)\), and hence \((i+\ell-2)u<d\).
+\end{corollary}
+\begin{proof}
+\(U^i\) is a prefix of \(X^i\) and \(U^\ell\) a suffix of \(X^\ell\), so \(U^{i+\ell}\) is a factor of \(R^{\mathbb Z}\) across phase zero. If its length is at least \(r+u-\gcd(r,u)\), Fine--Wilf makes the primitive roots conjugate, and the prefix (or suffix) alignment makes them equal, so \(XU=UX\), contradicting Lemma~\ref{commouter}. The second inequality follows from \(r\le x=u+d\).
+\end{proof}
+
+\subsection{The left-dominant region}
+\begin{theorem}\label{leftdom}
+If \(i,k,\ell\ge1\) and \(i>2(k+\ell)\), then \((i,0,k,\ell)\) forces periodicity.
+\end{theorem}
+\begin{proof}
+Let \(Q=D-\ell d\) and \(j=id-2D>0\), so \(Q=j+kd>kd\). Write \(X^i=U^iC\), \(X^\ell=BU^\ell\); comparing the final \(V\) with \(YB\) gives \(V=AYB\) with \(|A|=Q\). Cancelling, \(CY^2X^k=V^2U^kA\), and since the first two \(V\) end inside \(CY^2\), \(CY^2=V^2J\), \(JX^k=U^kA\), \(|J|=j\). As \(Q<id\), \(C=AE\), and
+\begin{equation}\label{eq:leftdom}
+EY^2=YBAYBJ,\qquad |E|=\tfrac{(2(i+\ell)-k)d}{3}>D.
+\end{equation}
+\emph{Phase.} If \(Q\ge kx\), then \(X^k\) is a suffix of \(A\) inside \(X^i\), ending at phase \(0\), so \(iu+Q\equiv0\pmod r\). If \(Q<kx\), extend the occurrence of \(A\) as a suffix of \(X^k\) leftwards by the common suffix of \(U^i\) and \(U^k\); the two equal factors have length \(\min(Q+iu,kx)\ge r\), so again \(iu+Q\equiv0\pmod r\). Hence \(E\) is a positive power of \(R\). By \eqref{eq:leftdom}, \(Y\) is a prefix of \(R^\omega\); write \(EY=YZ\), so \(ZY=BAYBJ\) and \(T=BA\) (length \(D<|Z|\)) is a prefix of \(Z\).
+
+\emph{Case \(\ell d\ge r\).} \(B\) occurs at phase \(0\) in \(X^\ell\) and at phase \(y\) in \(Z\), with \(|B|\ge r\), so \(r\mid y\) and \(Y\) is a power of \(R\). In the free group, with \(a=(iu+Q)/r\), \(A=U^{-i}R^a\), \(B=R^{t\ell}U^{-\ell}\), \(J=U^kAR^{-tk}\). If \(R,U\) do not commute they generate a free group of rank two, and the homomorphism \(R\mapsto0\), \(U\mapsto1\) applied to \eqref{eq:leftdom} gives \(0=k-2(i+\ell)\), impossible. If they commute, Lemma~\ref{commouter} applies.
+
+\emph{Case \(\ell d<r\).} Here \(i\ge5\). If \(\ell\ge2\), Corollary~\ref{outerbound} gives \(x<2d\le\ell d<r\), impossible; so \(\ell=1\), \(r>d\), \(x<2d\), hence \(X=R\). Put \(M=2i+2-k\). The phase condition gives \(r\mid Md\), hence \(r\mid Mu\); with \(r>iu\) and \(M\le2i+1\), \(Mu/r\in\{1,2\}\). If it is \(2\), then \(r=(i+1-k/2)u\le iu\) for \(k\ge2\), and for \(k=1\) the prefix \(U^i\) and suffix \(U\) overlap by \(u/2\) and make \(R\) imprimitive. If it is \(1\), \(R=U^iKU\) with \(|K|=gu\), \(g=i+1-k\in[1,i]\). Since \(Q>d\ge(g+1)u\), \(A\) begins with \(KU\), and \(T=BA\) begins with \(U^iKKU\), of length \(r+gu\); period \(r\) gives \(K=J_0U^{g-1}\) with \(|J_0|=u\). The first \(r\) letters of \(T\) are \(U^iJ_0U^{g-1}J_0\), a rotation of \(R=U^iJ_0U^g\). If \(J_0\ne U\), at least \(M-2>2\) of the length-\(u\) blocks of any rotation of \(R\) are rotations of \(U\), so the rotation fixes \(U^M\) and preserves the Hamming distance to \(U^M\); but that distance is \(h\) before and \(2h\) after, with \(h>0\). If \(J_0=U\), \(R\) is imprimitive.
+\end{proof}
+
+\subsection{Two rays with \(k=1\)}
+On these rays the nested identities of Section~\ref{sec:phase-comparisons} hold: \(X^i=U^iC\), \(X^\ell=BU^\ell\), \(X^k=PU^kA\), \(V=AYB\), \(CY^2P=(AYB)^2\), with \(|P|=2D-id\) and \(|A|=D-\ell d\). With \(k=1\) we further have \(C=AE\), \(B=GP\), and
+\begin{equation}\label{eq:rays}
+EY^2=YBAYG,\qquad T=BA,\quad |T|=D<|E|.
+\end{equation}
+We use \emph{period gluing}: if two intervals have periods \(p,q\) and overlap in at least \(p+q-\gcd(p,q)\) letters, the union has period \(\gcd(p,q)\).
+
+\begin{theorem}\label{kone}
+For every \(\ell\ge1\), the tuples \((2\ell,0,1,\ell)\) and \((2\ell+1,0,1,\ell)\) force periodicity.
+\end{theorem}
+\begin{proof}
+Assume \(XU\ne UX\); by Lemma~\ref{commouter} it suffices to derive a contradiction.
+
+\emph{Ray \(i=2\ell\).} Here \(d=3e\), \(|P|=2e\), \(|A|=e\), and Corollary~\ref{outerbound} gives \(3e>(3\ell-2)u\). Put \(s=e-(\ell-1)u>u/3\) and \(h=2s-u\). The suffix \(PU^\ell\) lies in one copy of \(X\) starting at \(s\), so \(PU\) occurs at \(0\) and \(s\), giving period \(s\) on \([0,x-(\ell-1)u)\). If \(h\le0\), the prefix \(U^{2\ell}\) (period \(u\)) overlaps this interval in at least \(s+u\) letters; gluing, and then aligning the suffix \(U^\ell\), gives period \(\gcd(s,u)\) on \(X\), which divides \(x\) and \(u\): \(X,U\) commute. If \(h>0\), \(UA\) occurs at \(2e\) and at \((2\ell-1)u\), giving period \(h\) on \([(2\ell-1)u,x)\); its overlap with the period-\(s\) interval is \(3s\ge s+h\), and gluing gives period \(\gcd(s,h)=\gcd(s,u)\) on \(X\): again commutation.
+
+\emph{Ray \(i=2\ell+1\).} Here \(d=3e\), \(|P|=e\), \(|A|=2e\). Put \(s=2e-(\ell-1)u>0\) and \(h=e-2\ell u\). As before, period \(s\) holds on \([0,x-(\ell-1)u)\), and \(UA\) occurs at \(e\) and \(2\ell u\). If \(h<0\), period \(-h\) holds on \([e,x-h)\), which meets the prefix \(U^{2\ell+1}\) in \(u-h\) letters; gluing gives period \(\gcd(h,u)\) on \(X\) and commutation. If \(h>0\), period \(h\) on \([2\ell u,x)\) overlaps the period-\(s\) interval in \(s+h+u\) letters, so \(X\) has period \(g=\gcd(s,h)=\gcd(h,(3\ell+1)u)\). If \(g\) is a proper divisor of \((3\ell+1)u\), then \(g\le2\ell u\) and Fine--Wilf on the prefix \(U^{2\ell+1}\) gives period \(\gcd(g,u)\), dividing \(e,x,u\): commutation.
+
+Two cases remain: \(h=0\), and \(h>0\) with \(g=(3\ell+1)u\). By \eqref{eq:rays}, \(Y\) is a prefix of \(E^\omega\), so \(EY=YZ\) with \(Z\) the rotation of \(E\) by \(y\), \(Z=TK'\), and \(K'Y=YG\), so \(K'\) is a rotation of \(G\) by \(y\). In both cases \(|E|,|T|,|G|\) are multiples of \(u\). Let \(H(W)\) be the Hamming distance from \(W\) to \(U^{|W|/u}\). If rotation by \(y\) fixes \(U^{\mathbb Z}\), then
+\begin{equation}\label{eq:hamming}
+H(E)=H(T)+H(G).
+\end{equation}
+We verify that hypothesis by exhibiting a length-\(u\) factor at the start of \(T\) that agrees with \(U^{\mathbb Z}\) at two phases differing by \(y\).
+
+If \(h=0\): \(e=2\ell u\), \(X=U^{2\ell+1}KU^{3\ell}\) with \(|K|=\ell u\), \(P=U^{2\ell}\), \(A=KU^{3\ell}\), \(E=X^{2\ell}\), \(G=X^{\ell-1}U^{2\ell+1}K\), and \(T\) begins with \(U^{2\ell+1}\). In the cyclic word \(E\) the \(K\)-intervals (length \(\ell u\)) are separated by \((5\ell+1)u\) letters agreeing with \(U^{\mathbb Z}\), so the rotated window of length \((2\ell+1)u\) meets at most one \(K\)-interval and keeps \(u\) consecutive clean letters; this pins \(y\). With \(\eta=H(K)\), \eqref{eq:hamming} reads \(2\ell\eta=(\ell+1)\eta+\ell\eta\), so \(\eta=0\), \(K=U^\ell\), and \(X,U\) commute.
+
+If \(g=(3\ell+1)u\): \(e=(2\ell+(3\ell+1)q)u\) with \(q\ge1\), and the initial \(g\)-block is \(U^{3\ell}K\), \(|K|=u\), so \(X=(U^{3\ell}K)^{N}U^{3\ell}\) with \(N=3q+1\). Counting \(K\)-blocks (all cuts are multiples of \(u\)), \(H(E)=(iN-(2q+1))\eta\), \(H(T)=(\ell N+2q+1)\eta\), \(H(G)=(\ell N-q)\eta\). The prefix \(U^{3\ell}\) of \(T\) pins \(y\) as before. Then \eqref{eq:hamming} gives \(0=((i-2\ell)N-2(2q+1)+q)\eta=-\eta\), so \(K=U\) and \(X,U\) commute.
+\end{proof}
+
+\subsection{The ray \(i+\ell=2k\), \(i<k\)}
+In the region \(i+k<2\ell\) with \(id\le D\) put \(E_0=\ell d-D>0\) and write
+\[
+X^i=U^iC,\quad X^\ell=BU^\ell,\quad V=CYA,\quad |A|=D-id,\quad B=HA,\quad |H|=E_0+id.
+\]
+Indeed \(V\) contains \(CY\) since \(id\le D\), and \(YB=GV\) with \(|G|=E_0\). Comparing suffixes gives \(YH=GCY\); cancelling gives \(YX^kG=ACYAU^k\). With \(T=AC\), \(Y\) is a prefix of \(TY\), so \(TY=YT'\) with \(T'\) the rotation of \(T\) by \(y\), and
+\begin{equation}\label{eq:tail}
+X^kG=T'AU^k,\qquad GCY=YH.
+\end{equation}
+
+\begin{theorem}\label{rightray}
+If \(0\le i<k\) and \(\ell=2k-i\), then \((i,0,k,\ell)\) forces periodicity.
+\end{theorem}
+\begin{proof}
+Here \(S=3k\), \(D=kd\), and \(|H|=(i+\ell-k)d=kd=D=|T'|\). Both \(H\) (a prefix of \(X^\ell\)) and \(T'\) (a prefix of \(X^kG\) of length \(kd<kx\)) are prefixes of \(X^\omega\) of length \(D\), so \(T'=H\). Then \(GCY=YH=YT'=TY=ACY\) gives \(G=A\). Write \(X^k=HP\) with \(|P|=ku\); \eqref{eq:tail} becomes \(PA=AU^k\). Since \(\ell>k\), the length-\(ku\) suffixes of \(X^k\) and \(X^\ell\) agree, so \(P=U^k\) and \(AU^k=U^kA\); thus \(A\) commutes with \(U\). Finally \(X^\ell=HAU^\ell\) and \(X^k=HU^k\); cancelling \(H\) from \(X^kX^{\ell-k}=X^\ell\) gives \(X^{\ell-k}=AU^{\ell-k}\), a power of the root of \(U\). So \(X\) commutes with \(U\), and Lemma~\ref{commouter} finishes.
+\end{proof}
+
+\begin{remark}
+This ray contains \((0,0,1,2)\) and lies outside the balanced-prefix criterion and the regions of Section~\ref{sec:phase-comparisons}. The proof of Theorem~\ref{kone} was additionally stress-tested on all \(8{,}448\) local word geometries of the two rays (\(91\) noncommuting, all of the asserted exceptional shapes and all excluded).
+\end{remark}
+
+\subsection{Count}
+Theorems~\ref{leftdom}, \ref{kone} and \ref{rightray} remove \(6\) further tuples through exponent four and \(15\) through exponent six. Every remaining tuple satisfies \(i+k<2\ell\) and \(i+\ell\ne2k\); there are \(30\) with exponents at most \(4\) and \(105\) with exponents at most \(6\), for example \((1,0,1,2)\) and \((0,0,1,3)\). In this tail region the two rotations in \eqref{eq:tail} act on chunks whose lengths differ by \((i+\ell-2k)d/3\); when the difference is zero the proof above closes, and a rigidity lemma for nonzero difference is the missing step.

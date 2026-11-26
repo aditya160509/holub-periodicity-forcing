@@ -1,0 +1,111 @@
+% Section 10 for manuscript.tex. Uses the macros and labels of the manuscript
+% (\ref{perred}, \ref{shorten}, \ref{finite-d}, \ref{d12}). Compiles standalone via checks/section10_check.tex.
+\section{Letter-level reductions and the computation to \(d\le 50\)}\label{sec:letters}
+Throughout, \(w=a^ibba^kba^\ell\) with \(S=i+k+\ell>0\), and a solution is a quadruple \((X,Y,U,V)\) of words over some alphabet \(\Sigma\) with \(X^iY^2X^kYX^\ell=U^iV^2U^kVU^\ell\). For a letter \(c\in\Sigma\) put
+\[
+\delta_c=|X|_c-|U|_c,\qquad \varepsilon_c=|V|_c-|Y|_c .
+\]
+Counting the letter \(c\) on both sides gives \(S\delta_c=3\varepsilon_c\), and summing over \(c\) gives \(d=\sum_c\delta_c\) and \(D=\sum_c\varepsilon_c\). As in Section~\ref{sec:rem}, a \emph{counterexample} is a solution with \(g\ne h\) whose four words do not all commute; we orient it so that \(d=|X|-|U|>0\).
+
+This section does not bound \(d\). It proves that every letter of a counterexample carries a positive share \(\delta_c\) of \(d\), that the search for a least-\(d\) counterexample may be restricted to binary morphisms, and it extends the exhaustive computation of Theorem~\ref{d12} from \(d\le12\) to \(d\le 50\) (see Theorem~\ref{d50}). The remaining gap is stated in Remark~\ref{gap}.
+
+\subsection{Morphic images}
+\begin{lemma}\label{image}
+Let \((X,Y,U,V)\) be a solution and \(\varphi\colon\Sigma^*\to\Gamma^*\) a morphism. Then \((\varphi X,\varphi Y,\varphi U,\varphi V)\) is a solution, and its length difference is \(\sum_c|\varphi(c)|\,\delta_c\). If \(\varphi\) is injective and the original solution is a counterexample, then the image has \(\varphi X\ne\varphi U\) and its four words do not all commute.
+\end{lemma}
+\begin{proof}
+Apply \(\varphi\) to both sides. The length formula is the count of letters. If \(\varphi\) is injective then \(\varphi X\ne\varphi U\), and \(\varphi(P)\varphi(Q)=\varphi(Q)\varphi(P)\) gives \(PQ=QP\); so a noncommuting pair stays noncommuting.
+\end{proof}
+
+\begin{lemma}\label{equal}
+If a solution has \(|X|=|U|\), then \(X=U\) and \(Y=V\).
+\end{lemma}
+\begin{proof}
+The length equation gives \(|Y|=|V|\). If \(i\ge1\), then \(X\) and \(U\) are prefixes of the common word of the same length, so \(X=U\); then \(Y=V\) as the next factors. If \(i=0\), the common word begins with \(YY\) and \(VV\), so \(Y=V\); cancelling \(YY\) leaves \(X^kYX^\ell=U^kYU^\ell\), and \(X=U\) follows from the first factor if \(k\ge1\) and from the last factor if \(k=0\) (then \(\ell=S\ge1\)).
+\end{proof}
+
+\subsection{The sign lemma}
+\begin{lemma}[Sign lemma]\label{sign}
+In every counterexample, \(\delta_c\ge0\) and \(\varepsilon_c\ge0\) for every letter \(c\). Equivalently, \(X\) contains at least as many occurrences of each letter as \(U\), and \(V\) at least as many as \(Y\).
+\end{lemma}
+\begin{proof}
+Let \(P=\{c:\delta_c>0\}\) and \(N=\{c:\delta_c<0\}\), and suppose \(N\ne\emptyset\). Since \(d>0\), also \(P\ne\emptyset\). Put \(A=\sum_{c\in P}\delta_c>0\) and \(B=\sum_{c\in N}|\delta_c|>0\). Let \(\lambda_c=B\) for \(c\in P\), \(\lambda_c=A\) for \(c\in N\), and \(\lambda_c=1\) otherwise, and let \(\varphi(c)=c^{\lambda_c}\). This morphism is injective: a word in its image is decoded run by run, each maximal run of \(c\) having length divisible by \(\lambda_c\). By Lemma~\ref{image} the image solution has \(\varphi X\ne\varphi U\) and length difference \(BA-AB=0\), contradicting Lemma~\ref{equal}. So \(N=\emptyset\), and \(\varepsilon_c=S\delta_c/3\ge0\).
+\end{proof}
+
+\begin{lemma}[Strict sign lemma]\label{strict}
+Let \(S\ge2\) (this includes every open tuple). In every counterexample, every letter that occurs in one of \(X,Y,U,V\) has \(\delta_c\ge1\). Consequently a counterexample uses at most \(d\) letters.
+\end{lemma}
+\begin{proof}
+Suppose \(c\) occurs and \(\delta_c=0\). The projection \(\pi_{\{c\}}\) is a solution with difference \(0\), so Lemma~\ref{equal} gives \(|X|_c=|U|_c\) and \(|Y|_c=|V|_c\). Number the blocks of the two factorizations of the common word \(W\) by the letters of \(w\). Before the \(t\)th left block and before the \(t\)th right block, \(W\) contains the same number of \(c\)'s, and the two blocks contain equally many. Hence the \(t\)th left and right blocks contain exactly the same \(c\)-positions of \(W\).
+
+Since \(c\) occurs in \(X\) or in \(Y\) (it occurs somewhere, and the counts agree), suppose first it occurs in \(Y\). For every \(b\)-block \(t\) the first \(c\) of the left image \(Y\) and of the right image \(V\) is the same position of \(W\), so the start displacement \(L_t-R_t\) equals \(f_V-f_Y\), where \(f_Z\) is the index of the first \(c\) in \(Z\). So all three \(b\)-occurrences have the same displacement. But the first two have displacements \(id\) and \(id-D\), and \(D=Sd/3>0\).
+
+If \(c\) occurs in \(X\), the same argument makes all \(a\)-occurrences have one displacement. For \(S\ge2\) this is false: two \(a\)'s in one run differ by \(d\); if every run has at most one \(a\), the occupied runs have displacements among \(0\) (if \(i=1\)), \(id-2D\) (if \(k=1\)) and \(-\ell d\) (if \(\ell=1\)), namely \((0,-d/3)\) for \((1,0,1,0)\), \((0,-d)\) for \((1,0,0,1)\), \((-4d/3,-d)\) for \((0,0,1,1)\), and \((0,-d,-d)\) for \((1,0,1,1)\), never all equal.
+
+The last claim follows from \(\sum_c\delta_c=d\).
+\end{proof}
+For \(S=1\) the lemma is false: the tuple \(0010\) has the witness \(X=0010\), \(Y=\eps\), \(U=1\), \(V=0\), where \(\delta_1=0\).
+
+\begin{corollary}[Reweighting]\label{reweight}
+If a counterexample has letters \(c_1,\dots,c_r\) with differences \(\delta_1,\dots,\delta_r\ge0\), then for all integers \(\lambda_1,\dots,\lambda_r\ge1\) there is a counterexample with difference \(\sum\lambda_j\delta_j\).
+\end{corollary}
+\begin{proof}
+Lemma~\ref{image} with the injective morphism \(c_j\mapsto c_j^{\lambda_j}\); the new difference is positive by Lemma~\ref{sign}.
+\end{proof}
+
+So the set of differences carrying a counterexample is closed upward under reweighting. Reweighting cannot lower \(d\). The next two results lower it.
+
+\subsection{Projections and alphabet reduction}
+For \(G\subseteq\Sigma\) let \(\pi_G\) be the morphism that fixes the letters of \(G\) and erases the others.
+
+\begin{lemma}[Projection]\label{projection}
+For every \(G\subseteq\Sigma\), \(\pi_G\) maps a solution to a solution with difference \(d_G=\sum_{c\in G}\delta_c\). If the original is a counterexample, \(d_G>0\), and the projected words do not all commute, then the projection is a counterexample with \(0<d_G\le d\).
+\end{lemma}
+\begin{proof}
+The first claim is Lemma~\ref{image}. If \(d_G>0\) then \(\pi_GX\ne\pi_GU\) by length, so \(g\ne h\) for the projection. By Lemma~\ref{sign} the omitted letters have \(\delta_c\ge0\), so \(d_G\le d\).
+\end{proof}
+
+\begin{lemma}\label{pairs}
+A word is determined by its projections onto all two-letter subalphabets. Consequently, a finite set of words commutes if and only if all its projections onto two-letter subalphabets commute.
+\end{lemma}
+\begin{proof}
+If \(|\Sigma|\le2\) there is nothing to prove. Otherwise the lengths \(|z|_c\) are read off the projections, and a nonempty word \(z\) begins with \(c\) if and only if \(\pi_{\{c,e\}}(z)\) begins with \(c\) for every \(e\ne c\) occurring in \(z\). Delete that first letter from \(z\) and from each projection that contains \(c\), and induct on \(|z|\). For the second claim, a set of words commutes iff every two of its nonempty members commute, and \(PQ=QP\) iff \(\pi(PQ)=\pi(QP)\) for every two-letter projection \(\pi\), since \(\pi(PQ)=\pi(P)\pi(Q)\).
+\end{proof}
+
+\begin{theorem}[Alphabet reduction]\label{alphabet}
+Let \(S\ge2\). If the tuple has a counterexample with difference \(d\), it has a counterexample over two letters \(c,e\) with difference \(d'=\delta_c+\delta_e\le d\), where \(\delta_c,\delta_e\ge1\). In particular a counterexample of least difference, and of least total length among those, uses exactly two letters.
+\end{theorem}
+\begin{proof}
+Since the four words do not all commute, Lemma~\ref{pairs} gives letters \(c,e\) whose projection does not commute. By Lemma~\ref{strict}, \(\delta_c,\delta_e\ge1\), so \(d'=\delta_c+\delta_e>0\), and Lemma~\ref{projection} shows that the projection is a counterexample with \(d'\le d\). For the last claim, minimality of \(d\) gives \(d'=d\), and minimality of length then shows that no letter was erased. One letter is impossible, since unary words commute.
+\end{proof}
+
+\begin{corollary}\label{mind}
+For \(S\ge2\), deciding whether a tuple has a counterexample with \(d\le d_0\) is equivalent to deciding it for binary morphisms \(g,h\colon\{a,b\}^*\to\{0,1\}^*\) with \(w\in\mathrm{Eq}(g,h)\). For such a binary counterexample, \(d=\delta_0+\delta_1\) with \(\delta_0,\delta_1\ge1\), and Corollary~\ref{reweight} produces counterexamples at every difference \(p\delta_0+q\delta_1\) with \(p,q\ge1\). So a d-bound is equivalent to a bound on \(\delta_0+\delta_1\) for some binary counterexample.
+\end{corollary}
+
+\begin{remark}
+On the nonforcing controls the lemmas are not vacuous. For every primitive witness with \(d\le12\) (lengths \(\le3d\)) and \(d\le18\) (lengths \(\le2d\)) of the 17 control tuples with exponents at most \(4\), all \(\delta_c\) are nonnegative, they are at least \(1\) with at most \(d\) letters whenever \(S\ge2\), some two-letter projection is a counterexample, and every projection solves the equation literally (\texttt{checks/lemma\_checks.log}; 3592 witnesses, 232{,}954 projections). The strict lemma fails exactly on the \(S=1\) controls, as stated. For family \(C=(2,0,2,2)\), the primitive witnesses with \(u=1\) at \(d=5,\dots,12\) have \(d-2\) letters, and erasing letters walks them down to the two-letter witness at \(d=4\).
+\end{remark}
+
+\subsection{Both outer runs present}
+\begin{lemma}\label{conj}
+If \(i,\ell\ge1\), then every counterexample has \(X=(\alpha\beta)^{m+1}\alpha\) and \(U=(\alpha\beta)^m\alpha\) with \(|\alpha\beta|=d\), \(m=\lfloor u/d\rfloor\) and \(|\alpha|=u-md\). In particular \(X=PU=UQ\) with \(P=\alpha\beta\), \(Q=\beta\alpha\), and \(u<d\) means \(X=U\beta U\).
+\end{lemma}
+\begin{proof}
+Since \(i\ge1\) and \(x>u\), \(U\) is a prefix of \(X\); since \(\ell\ge1\), it is a suffix. So \(X=PU=UQ\) with \(|P|=|Q|=d\), and the standard solution of the conjugacy equation \(PU=UQ\) with \(P\ne\eps\) gives \(P=\alpha\beta\), \(Q=\beta\alpha\), \(U=(\alpha\beta)^m\alpha\).
+\end{proof}
+This puts \(X\) and \(U\) in the two-generator monoid \(\{\alpha,\beta\}^*\) at relative difference \(2\) (one extra \(\alpha\beta\)). If \(Y\) and \(V\) were also in \(\{\alpha,\beta\}^*\) with \(\alpha\beta\ne\beta\alpha\), desubstitution would give a counterexample with \(d=2\), which Theorem~\ref{d50} excludes. The generic solutions of the controls show that \(Y,V\) need not lie in \(\{\alpha,\beta\}^*\) (for \((2,0,2,2)\), \(d=4\): \(X=00100\), \(U=0\), \(Y=100001\)), so this is not a reduction by itself.
+
+\subsection{The exact box at fixed \(d\) and the computation}
+We use the smaller box of \texttt{remaining/astra2/proof.tex} (``A smaller exact box at fixed \(d\)''). We re-checked its proof: for an input letter with images \(A,B\) of lengths \(a,b\), extreme start displacements \(m<M\), \(P=M-m\), \(z=\max(0,m)\), \(t=z-m\), a minimum counterexample at fixed \(d\) cannot satisfy all of \(a\ge t+2P\), \(a\ge t+P+d\), \(b\ge z+2P+d\). The paired cuts of length \(P\) coincide in the common word; \(B\) has period \(P\) on \([z,z+2P+d)\), so all right-hand cut positions in \([z,z+P]\) give the same shortened \(B\); the left copies are cut at the same place; and if the shortened solution commuted with primitive root \(R\), then \(|R|\mid d\le P+d\), Fine--Wilf on the retained \(P+d\) letters gives \(|R|\mid P\), and reinserting the \(P\) letters restores the original as \(R\)-powers. This holds for each letter separately, so a minimum counterexample lies in the intersection of the two boxes, which is what \texttt{scan.cpp} enumerates in its default mode.
+
+\begin{theorem}\label{d50}
+For each of the 210 open tuples \((i,0,k,\ell)\) with \(i,k,\ell\le6\), there is no unrestricted counterexample with \(1\le |X|-|U|\le 50\), and hence none satisfying Holub's length condition.
+\end{theorem}
+\begin{proof}
+By the box above and Corollary~\ref{finite-d}, for each \(d\) with \(3\mid Sd\) it suffices to test the length vectors in the box, and the component criterion of Section~\ref{sec:rem} decides each one. \texttt{checks/scan.cpp} did this for \(d\le50\); every normalized position graph was connected. It visited \(575{,}196{,}445\) length vectors (\(249{,}028{,}580\) admissible) in about \(24\) minutes on two cores, with about \(3.5\) MB of memory per process; counts and timings are in \texttt{checks/scan-d50.log}. As a control, the same program run on families \(C\) and \(D\) with exponents \(\le6\) finds witnesses at every \(d\ge 2n\) up to \(30\) (\texttt{checks/controls\_d30.csv}), and the full manuscript box for \(d\le12\) reproduces the \(132{,}249{,}070\) vectors of Theorem~\ref{d12} with no counterexample.
+\end{proof}
+
+\begin{remark}[What is still missing]\label{gap}
+No explicit \(d_0\) is proved here. Theorem~\ref{alphabet} reduces the question to binary counterexamples, and Lemma~\ref{strict} gives both letters a weight \(\delta_c\ge1\) with \(\delta_0+\delta_1=d\). A bound would follow from either of: (a) a desubstitution step for binary counterexamples, i.e.\ showing that a binary counterexample with \(d>d_0\) lies in \(\{\alpha,\beta\}^*\) for a two-word code other than \(\{0,1\}\), whose preimage has smaller difference by Lemma~\ref{image}; or (b) a direct bound on \(\delta_0\) and \(\delta_1\), for instance by refining the proof of Lemma~\ref{strict}, which uses only the order of \(c\)-positions inside matching blocks. Neither is proved. Evidence: on all 17 nonforcing controls with exponents \(\le4\) the least witness difference is at most \(9\), and at most \(2S/3\) for families \(C\) and \(D\) (\texttt{checks/control\_min\_d.log}), so the computation to \(d=50\) exceeds every observed control minimum by a factor of more than five.
+\end{remark}
