@@ -15,7 +15,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem. We also prove that \(ab^3a\) forces periodicity under Holub's length condition, completing all sixteen tuples with exponents at most one (also checked in Lean), and we give explicit nonforcing families for all exponents together with a conjectured complete classification that matches an exact search over all 625 tuples with exponents at most four. Finally, using Holub's structure theorem for two-generated equality sets and Fine--Wilf arguments, we prove the conjecture on the slices \((0,j,k,0)\), \((i,j,j,\ell)\) and \((i,0,0,\ell)\), for every tuple with a balanced prefix, and whenever \(\min(j,k)\ge i+\ell\). This reduces the full classification to the family \((i,0,k,\ell)\). Within that family we prove three infinite forcing rays, show that each fixed length difference \(d=|X|-|U|\) is a finite check, and verify by exact computation that no counterexample with \(d\le12\) exists for any open tuple with exponents at most \(6\).
+We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem. We also prove that \(ab^3a\) forces periodicity under Holub's length condition, completing all sixteen tuples with exponents at most one (also checked in Lean), and we give explicit nonforcing families for all exponents together with a conjectured complete classification that matches an exact search over all 625 tuples with exponents at most four. Finally, using Holub's structure theorem for two-generated equality sets and Fine--Wilf arguments, we prove the conjecture on the slices \((0,j,k,0)\), \((i,j,j,\ell)\) and \((i,0,0,\ell)\), for every tuple with a balanced prefix, and whenever \(\min(j,k)\ge i+\ell\). This reduces the full classification to the family \((i,0,k,\ell)\). Within that family we prove three infinite forcing rays, show that each fixed length difference \(d=|X|-|U|\) is a finite check, and verify by exact computation that no counterexample with \(d\le12\) exists for any open tuple with exponents at most \(6\). Finally, a phase-comparison argument proves forcing, with no bound on \(d\), on the whole slice \(\ell=0\) (except the nonforcing \(k=2i\)), on \(i=0<2\ell<k\), and on a large region with positive outer exponents. This leaves \(36\) open tuples with exponents at most \(4\), and \(120\) with exponents at most \(6\).
 \end{abstract}
 \section{Statement}
 Holub's problem at WORDS 2025 asks which patterns \(a^i b a^j b a^k b a^\ell\) force periodicity when \(V\) is at least as long as each of \(X,Y,U\) \cite[pp.~3--5]{words}. The simplest unknown case identified there has \((i,j,k,\ell)=(2,0,1,1)\). The slides use finite words and a morphism formulation without an explicit nonerasing requirement. Our theorem covers both conventions.
@@ -380,16 +380,427 @@ By Corollary~\ref{finite-d}, for each \(d\) it is enough to check the finite box
 
 \begin{remark}
 What is still open is a bound on \(d\). If every open tuple had an explicit bound \(d_0\), the classification would become a finite computation. A general theorem on solution sets of word equations (Ciobanu--Diekert--Elder, arXiv:1508.02149) yields such a bound in principle, but it is a tower of exponentials, and we neither rely on it nor have checked the derivation in detail. Natural shortcuts fail. Normalising by the gcd of the lengths leaves gcd-one vectors. Moreover, the order of the boundary positions does not determine the answer: for the nonforcing word \(abbaba\), the admissible vectors \((x,y,u,v)=(2,1,1,2)\) and \((3,1,1,3)\) have the same boundary order, but only the second carries a counterexample, \((X,Y,U,V)=(101,0,1,010)\).
-After Theorems~\ref{rays} and~\ref{d12}, 63 tuples with exponents at most \(4\), and 210 with exponents at most \(6\), remain open in the family \((i,0,k,\ell)\). All of them force periodicity on every length vector checked.
+After Theorems~\ref{rays} and~\ref{d12} (before Section~\ref{sec:phase-comparisons}), 63 tuples with exponents at most \(4\), and 210 with exponents at most \(6\), remain open in the family \((i,0,k,\ell)\). All of them force periodicity on every length vector checked.
 \end{remark}
 
+\section{Phase comparisons and new forcing regions}
+\label{sec:phase-comparisons}
+We work with the equation
+\begin{equation}\label{ph:eq}
+ X^iY^2X^kYX^\ell=U^iV^2U^kVU^\ell,
+ \qquad k\ge1,\quad i+\ell\ge1.
+\end{equation}
+No maximum-length condition is imposed. The result below gives direct
+proofs in infinite exponent regions, rather than a bound on the length
+of a counterexample. The remaining exponent triples are not settled here.
+
+\begin{theorem}\label{ph:main}
+Equation \eqref{ph:eq} forces periodicity in each of the following cases:
+\begin{enumerate}
+\item $\ell=0$, $i,k\ge1$, and $k\ne2i$;
+\item $i=0$, $\ell\ge1$, and $k>2\ell$;
+\item $i,k,\ell\ge1$, $2k>i+\ell$, and $i+k>2\ell$;
+\item $i,k,\ell\ge1$, $k\ge2$, $i+k>2\ell$, and $2k+2\ell>i$.
+\end{enumerate}
+The only exception on the first slice is $k=2i$, for which family D in
+Theorem~\ref{nonforcing} supplies a counterexample satisfying Holub's
+length condition. In particular the whole slice $k>2(i+\ell)$ with
+$i+\ell>0$ is forcing, even without that condition.
+\end{theorem}
+
+\subsection{Preliminaries and notation}
+We may exchange the two substitutions and assume $d=x-u>0$;
+otherwise equal lengths give identical substitutions. Put
+$S=i+k+\ell$, $D=v-y=Sd/3>0$. By Lemma~\ref{perred}, none of
+these tuples can have a counterexample with a periodic morphism.
+In particular all four images are nonempty in a counterexample. (Every
+empty image makes its morphism periodic.) Equivalently, the same
+reduction follows from the Spehner binary-code power theorem: the
+pattern is primitive, has three $b$'s and at least two $a$'s, and the
+image under a nonperiodic morphism cannot be a proper power.
+The exceptional seed $i=k=1,\ell=0$ is already covered by
+Theorem~\ref{rays}.
+
+Let $X=R^t$ with $R$ primitive, $r=|R|>0$, $t\ge1$. Index the
+bi-infinite periodic word $R^{\mathbb Z}$ so that position zero begins a
+copy of $R$. By the \emph{phase} of a factor we mean its starting or
+ending position modulo $r$, as specified. Two equal factors of length
+at least $r$ have the same starting phase (and the same ending phase),
+since the $r$ rotations of a primitive word are distinct. We will
+compare factors of separate powers of $X$ in this coordinate system.
+
+We use two classical facts. First, if a factor of $R^{\mathbb Z}$ equals
+$U^m$ and has length at least $r+u-\gcd(r,u)$, then Fine--Wilf gives
+period $\gcd(r,u)$. Its length is at least $r$ and $u$, so the primitive
+roots of $U$ and $R$ are conjugate and $r\mid u$. If $U$ is also a prefix
+or suffix of $X$, those roots are equal, hence $U\in R^*$. This prefix
+or suffix property holds in \eqref{ph:eq} as $i+\ell>0$ and $x>u$.
+Second, two noncommuting words freely generate a rank-two subgroup of
+the ambient free group (see Hadravov\'a--Holub, \cite{hh}, Lemma 1).
+Thus, if $R,U$ do not commute, on $\langle R,U\rangle$ there is a
+homomorphism $\nu$ to $\mathbb Z$ with $\nu(R)=0$, $\nu(U)=1$.
+We use this exponent-count homomorphism only after expressing all
+relevant words as group products of $R$ and $U$. All original word
+equalities remain literal monoid equalities; inverses are used only in
+these auxiliary group computations.
+
+\paragraph{Transport of a prefix or suffix.}
+If $B$ is a positive power of $R$ and $Y$ is a prefix of $BY$, then $Y$
+is a prefix of $R^\omega$, and $BY=YZ$ where $Z$ is a power of the
+rotation of $R$ at phase $y$. The prefix assertion follows by repeatedly
+using $Y[j]=Y[j-|B|]$ for $j\ge |B|$; the equation and rotation follow
+by reading $BY$ on $R^\omega$. Dually, if $Y$ is a suffix of $YB$,
+then $Y$ is a suffix of a sufficiently long power of $R$, and $YB=ZY$
+where $Z$ is a power of the rotation of $R$ at phase $-y$.
+
+\subsection{An exact cancellation identity in the nested region}
+Put
+\[
+ L=2D-id,\quad Q=D-\ell d,\quad
+ H=Q-id=\frac{k-2(i+\ell)}3d,\quad
+ F=L-\ell d=\frac{2k-i-\ell}3d.
+\]
+Here $F-H=D$. If $L,Q\ge0$, the middle $U^k$ lies wholly inside the
+middle $X^k$ (the left minus right boundary displacements are
+$id,id-D,id-2D,(i+k)d-2D,-\ell d,0$). Define words $C,B,P,A$ by
+\begin{equation}\label{ph:factor}
+ X^i=U^i C,\qquad X^\ell=B U^\ell,\qquad
+ X^k=P U^k A.
+\end{equation}
+Their lengths are $id,\ell d,L,Q$, respectively. For zero outer
+exponents the corresponding word is empty. Comparing suffixes of the
+common expansion and cancelling $U^\ell$ gives $V=AYB$. Cancelling the
+prefix $U^i$ and the common suffix $U^k AYB U^\ell$ gives
+\begin{equation}\label{ph:cancel}
+ C Y^2 P=(A Y B)^2.
+\end{equation}
+In particular $C,A$ are prefix-comparable and $P,B$ are suffix-comparable.
+These comparisons are of literal words, independent of the size of $Y$.
+
+\begin{lemma}\label{ph:phase}
+In the nested region, if $i>0$ and
+\[
+ \min(iu,ku)+\min(id,Q)\ge r,
+\]
+then $r\mid H$. If $\ell>0$ and
+\[
+ \min(\ell u,ku)+\min(\ell d,L)\ge r,
+\]
+then $r\mid F$.
+\end{lemma}
+\begin{proof}
+For the first comparison extend the matching prefixes of $C,A$ on
+the left by the common suffix of $U^i,U^k$, of length $\min(iu,ku)$.
+The resulting two equal factors of powers of $X$ have phases that
+differ by $(-Q)-(-id)=-H$. Their length is at least $r$. For the
+second, extend the matching suffixes of $P,B$ on the right by the
+common prefix of $U^k,U^\ell$. Their ending phases differ by $L-\ell
+d=F$. Apply primitive rotation uniqueness.
+\end{proof}
+
+\begin{lemma}\label{ph:prop}
+In the nested region, either $r\mid D$ or $XU=UX$ suffices to force
+periodicity.
+\end{lemma}
+\begin{proof}
+If $r\mid D$, then $r\mid Sd$ and hence $r\mid Su$ since $r\mid x$.
+The factor $U^i$ starts at phase zero, $U^k$ at phase $L\equiv iu$
+(modulo $r$), and $U^\ell$ starts at phase $-\ell u\equiv(i+k)u$.
+For zero exponents the corresponding condition is vacuous. Therefore
+$U^S$ equals the prefix of $R^\omega$ of length $Su$, which is a
+positive power of $R$. Uniqueness of primitive roots gives $U\in R^*$.
+Conversely, if $XU=UX$, then $r\mid u,d$ and the occurrence of the
+full word $U^k$ at phase $L$ yields $r\mid L$. So $r\mid2D$ and
+$r\mid3D=Sd$, whence $r\mid D$.
+
+In either case $r$ divides $Q$ and $\ell d$. Thus
+$V=AYB=R^{Q/r}Y R^{\ell d/r}$. If $R,Y$ do not commute they form a
+two-word code, and substituting this expression into \eqref{ph:eq}
+gives two unequal sequences of codewords: the left has adjacent
+$Y$ tokens while the first two $Y$ tokens on the right are separated
+by $(Q+\ell d)/r=D/r>0$ copies of $R$. Injectivity is contradicted.
+Consequently $Y,V\in R^*$ too.
+\end{proof}
+
+\subsection{Positive outer exponents}
+Suppose $i,k,\ell\ge1$. First assume $Q,L\ge d$. Both lengths in
+Lemma~\ref{ph:phase} are at least $u+d=x\ge r$. Hence $r\mid H,F$,
+so $r\mid F-H=D$, and Lemma~\ref{ph:prop} applies. This proves a useful subregion of part 4 of Theorem~\ref{ph:main}.
+
+For part 3, put $c=i+\ell$, $M=2k-c>0$. We have $Q>0$ and
+$L=F+\ell d>\ell d$, so the nested identity applies. The second
+comparison in Lemma~\ref{ph:phase} has length at least $u+d=x$,
+whence $r\mid F=Md/3$. In particular $r\mid Md$, and $r\mid Mu$.
+If $M\le k-1$, Fine--Wilf on $U^k$ forces $U\in R^*$, since
+$ku\ge r+u$. If $M=k$ and $r<ku$, then $r$ is a proper divisor
+of $ku$, so $r\le ku/2\le(k-1)u$ ($k\ge2$). If $M=k$ and $r=ku$,
+the length-$r$ factor $U^k$ would be an imprimitive rotation of $R$,
+a contradiction. Thus all cases $M\le k$ are settled.
+
+It remains to consider $M>k$ (equivalently $k>c$) and assume
+$U\notin R^*$. The same Fine--Wilf argument gives $r>(k-1)u$.
+Since $c\ge2$, $M\le2(k-1)$; a proper divisor of $Mu$ is at most
+$(k-1)u$. Consequently $r=Mu$. Since $r\mid F$, the start of
+$U^k$ has phase $L\equiv\ell d\equiv-\ell u$. As $k>\ell$ and
+$ku<r$, the portion crossing phase zero consists of $U^\ell$ at the
+end and $U^{k-\ell}$ at the beginning of $R$. In particular
+\[
+ R=U^{k-\ell}G U^\ell,
+ \qquad |G|=(M-k)u=(k-c)u>0.
+\]
+Here $A$ begins at phase $(k-\ell)u$, so begins with $G$ if its
+length permits; $C$ begins at phase $iu<(k-\ell)u$, so begins with
+$U^{k-c}$ if its length permits. We check both lengths explicitly.
+Since $x\ge r$, $d\ge(M-1)u$, and $id\ge(k-c)u$. If $k\ge2c$,
+then $Q\ge id$ and hence $Q\ge(k-c)u$. If $k<2c$, then
+$Q\ge d/3\ge(M-1)u/3\ge(k-c)u$, the last inequality being
+$k\le2c-1$. Prefix comparability in \eqref{ph:cancel} now gives
+$G=U^{k-c}$, contradicting the primitivity of $R$ ($M>1$).
+This proves part 3.
+
+\subsection{The rest of the strictly nested region with $k\ge2$}
+We prove part 4. Thus $Q,L>0$ and $L+Q=kd\ge2d$; at least one of
+$Q,L$ is at least $d$. The case $F>0$ has just been proved in part 3.
+If $F=0$, then $i+\ell=2k$ and $S=3k$. The inequality $Q>0$ implies
+$i>\ell$, so $k<i<2k$ and $i+k>2k$. The balanced-prefix theorem
+(Theorem~\ref{balanced}) applies, and none of its nonforcing exceptions
+is in this region. Hence we assume $F<0$.
+
+If $L\ge d$, the second comparison in Lemma~\ref{ph:phase} gives
+$r\mid F$. Put $M=i+\ell-2k>0$, $m=\max(i,k,\ell)\ge2$. Then
+$r\mid Mu$. A run of $U^m$ is a factor of a power of $X$ (the outer
+runs are common prefixes or suffixes; the middle is nested).
+If $r\le(m-1)u$, Fine--Wilf settles the case. If $M<m$, this is
+immediate; if $M=m$ and $r=mu$, $U^m$ is a length-$r$ factor of
+$R^{\mathbb Z}$, impossible by primitivity. Otherwise $M>m$ and
+$M\le2m-2$ because $k\ge1$. The only divisor of $Mu$ greater than
+$(m-1)u$ is $Mu$ itself. Thus $r=Mu$. Both $i,\ell<M$, and $R$
+has prefix $U^i$ and suffix $U^\ell$. These cover $R$, since
+$i+\ell=M+2k>M$, and their $u$-letter blocks are aligned because
+$r=Mu$. This makes $R=U^M$, impossible. We have shown that $r\mid F$
+with $F<0$ always suffices in the nested region.
+
+It remains that $Q\ge d$ (in particular if $L<d$). The first
+comparison gives $r\mid H$. Write $C=AE$, $B=GP$ using comparability.
+Here $|E|=-H=D-F>D$, $|G|=-F>0$, and $E=R^e$ with $e\ge1$.
+Cancel $A$ and the terminal $P$ in \eqref{ph:cancel} to obtain
+\begin{equation}\label{ph:negative}
+ E Y^2=Y B A Y G.
+\end{equation}
+Transport $EY=YZ$ with $Y$ a prefix of $R^\omega$, $Z$ a power
+of the rotation at phase $y$. Then $ZY=B A Y G$.
+In particular $T=BA$, of length $D<|Z|$, is a prefix of $Z$.
+If $\ell d\ge r$, the occurrence of $B$ at the start of $T$ and
+at phase zero in $X^\ell$ gives $r\mid y$. Hence $Y\in R^*$.
+As $r\mid H$, the phase of $A$ is $-Q\equiv iu$, so
+$A=U^{-i}R^a$ in the free group. From \eqref{ph:factor} we have
+$B=R^{t\ell}U^{-\ell}$ and $P=R^{tk-a}U^{i-k}$. Hence
+$G=B P^{-1}=R^{t\ell}U^{k-i-\ell}R^{a-tk}$.
+If $R,U$ do not commute, applying $\nu$ to \eqref{ph:negative}
+yields $0=k-2(i+\ell)$, impossible for $F<0$. Otherwise apply
+Lemma~\ref{ph:prop}.
+
+Suppose finally that $\ell d<r$ and $R,U$ do not commute. Since
+$Q\ge d$, we have $i+k\ge2\ell+3$. If $\ell\ge2$, the largest
+of $i,k$ is at least four. Fine--Wilf on that run then forces
+$u<d/2$, so $r\le x<3d/2<\ell d$, a contradiction. Thus $\ell=1$.
+The conditions $F<0$ and $Q\ge d$ give $i\ge2k$ and $i+k\ge5$,
+so $i\ge4$. Fine--Wilf on $U^i$ gives both $r>(i-1)u$ and
+$(i-2)u<d$, so $r\le x<2d$; as $r>d$ and $r\mid x$, $X=R$.
+The divisor condition $r\mid H$ implies $r\mid M'u$ where
+$M'=2i+2-k$. Since $M'\le2i+1\le3(i-1)$ for $i\ge4$,
+the quotient $M'u/r$ is one or two. If two, then
+$r=(i+1-k/2)u$. For $k\ge4$, this is at most $(i-1)u$,
+impossible. For $k=3$ the Fine--Wilf threshold is $iu$ exactly
+($\gcd(r,u)=u/2$), and for $k=2$ the prefix $U^i$ equals $R$,
+impossible. For $k=1$ (not needed for part 4, but included in
+this argument), $r=(i+1/2)u$ and the prefix $U^i$ overlaps the
+suffix $U$ by $u/2$. The two halves of $U$ are equal, so the
+prefix and suffix make $R$ a power of this half, again impossible.
+
+If the quotient is one, $r=M'u$, and $R$ has prefix $U^i$ and
+suffix $U$, so $R=U^i K U$ with $|K|=(i+1-k)u=gu$ say. Here
+$1\le g\le i$. The phase of $A$ is $iu$, hence $A$ begins with
+$KU$ (it is a suffix of powers of $R$ with that phase).
+Also $B$ is $R$ with its final $U$ removed. The factor $T=BA$
+of $R^{\mathbb Z}$ therefore begins with $U^i K K U$, of length
+$r+gu$. Its period $r$ makes its first $gu$ letters, namely
+$U^g$, equal its letters at positions $r$ through $r+gu-1$,
+namely the suffix of $K$ after its first $u$ letters followed by
+$U$. Consequently $K=J U^{g-1}$ with $|J|=u$.
+The first $r$ letters of $T$ now have the form $U^i J U^{g-1}J$,
+a cyclic rotation of $R=U^i J U^g$. There are $M'=i+g+1>4$
+blocks of length $u$. If $J\ne U$, a rotation of $R$ has at least
+$M'-2$ blocks equal to the same rotation of $U$, since at most
+two blocks touch $J$. The proposed rotation has exactly two $J$
+blocks and $M'-2>2$ blocks equal to $U$. The repeated rotated
+block must be $U$, so the rotation fixes $U^{M'}$. Its Hamming
+distance from $U^{M'}$ must then be invariant, but it changes
+from $h$ to $2h$, where $h>0$ is the distance between $J,U$.
+Thus $J=U$ and $R$ is imprimitive, a contradiction.
+This completes part 4.
+
+\subsection{The zero-tail slice $\ell=0$}
+Assume $i,k\ge1$, $k\ne2i$, and $i+k\ge3$; the excluded small seed
+was already proved. Then $D\ge d$. First suppose $i\le2k$, so
+$L\ge0$, $Q=D>0$ and the nested factorization applies. Here $B$ is
+empty. Lemma~\ref{ph:phase} gives $r\mid H=D-id$, since its first
+comparison has length at least $u+d$. Consequently
+\begin{equation}\label{ph:zeroarithmetic}
+ r\mid (k-2i)d,\qquad r\mid (k-2i)u.
+\end{equation}
+If $k>i$, then $0<|k-2i|\le k-1$, giving $r\le(k-1)u$ and
+Fine--Wilf on $U^k$ followed by Lemma~\ref{ph:prop} settles the case.
+
+Now $k\le i\le2k$. Set $C=A E$ (prefix comparison), so
+$|E|=id-D>0$ is a multiple of $r$. Since $C$ ends at phase zero,
+$E=R^e$, $e\ge1$. Cancelling $A$ in \eqref{ph:cancel} gives
+\begin{equation}\label{ph:tail1}
+ E Y^2 P=Y A Y.
+\end{equation}
+Then $Y$ is a prefix of $EY$; transport gives $EY=YZ$ with $Z$
+of phase $y$ and length $|E|$. Cancelling $Y$ shows $ZYP=AY$.
+As $|E|=id-D\le D=|A|$, $Z$ is a prefix of $A$. Comparing at
+least $r$ letters gives $y\equiv-D\equiv iu\pmod r$.
+
+Both $Y$ and $U^i$ are prefixes of $R^\omega$ with lengths congruent
+modulo $r$, and $A$ is a suffix of a power of $R$ of length $D$.
+In the free group there exist integers $b,a$ such that
+\[
+ Y=R^b U^i,\qquad A=U^{-i}R^a.
+\]
+Indeed $U^i A$ reads continuously on $R^\omega$ and has length a
+multiple of $r$. Moreover $X^k=P U^k A$ implies
+$P=R^{tk-a}U^{i-k}$. If $R,U$ do not commute, apply $\nu$ to
+\eqref{ph:tail1}: $2i+(i-k)=i-i+i$, so $k=2i$, excluded.
+Thus they commute. Lemma~\ref{ph:prop} concludes this nested case.
+
+For $i>2k$, the middle run is not nested. Define $C$ by
+$X^i=U^i C$ and write $V=AY$ from the final suffix comparison
+($Y$ is a suffix of $V$), $|A|=D$. Then $C=A E$ with
+$|E|=id-D>D>0$. Let $J$ be the left overflow just after the second
+$Y$ (length $id-2D>0$). Corresponding prefix cancellations give
+\begin{equation}\label{ph:tail2}
+ E Y^2=Y A Y J,\qquad J X^k=U^k A.
+\end{equation}
+These also follow by cancelling the common $U^i$ and final $Y$
+and comparing the intermediate prefix lengths.
+
+We claim $r\mid |E|$. If $D\ge kx$, then $X^k$ is a suffix of $A$
+by \eqref{ph:tail2}; this full power occurs in $X^i$ at phase
+$iu+D-kx$, yielding $r\mid iu+D$, hence $r\mid id-D$. If $D<kx$,
+then $A$ is a suffix of $X^k$. The word before $A$ in $X^k$ is a
+suffix of $U^k$, of length $kx-D$, since $J X^k=U^k A$ and $J$
+is longer than zero. Compare the two occurrences of $A$ in $X^i$
+and $X^k$, extending to the left by $\min(iu,kx-D)$ common
+letters from $U^i,U^k$; the total length is
+$\min(D+iu,kx)\ge x$ because $D\ge d$. The phases yield the same
+conclusion. In either case $E=R^e$ with $e\ge1$, and $A$ is a
+suffix of a power of $R$ (from $X^i=U^i A E$).
+
+We next show that $D\ge r$ unless $R,U$ already commute. If they do
+not commute, the common prefix $U^i$ cannot satisfy the Fine--Wilf
+threshold with periods $r,u$, so $(i-2)u<d$ because $r\le x=u+d$.
+If $i\ge4$, $x<3d/2$ while $D\ge5d/3$, hence $D>r$.
+Otherwise $i>2k$ implies $(i,k)=(3,1)$, so $D=4d/3$, $|E|=5d/3$.
+If $D<r$, divisibility gives $r=5d/3$. Since $x<2d$ and $r\mid x$,
+$x=r$, $u=2d/3$. Then $3u=r+u-\gcd(r,u)$, the Fine--Wilf
+threshold, contradicting noncommutation. If $R,U$ already commute,
+$r\mid d$ and $D\ge d\ge r$. Thus in every case $D\ge r$.
+
+From \eqref{ph:tail2}, $Y$ is a prefix of $EY$; again transport
+$EY=YZ$ with phase $y$. The equality $ZY=AYJ$ and $|Z|>|A|\ge r$
+give $y\equiv-D\equiv iu\pmod r$. As before in the free group
+$Y=R^b U^i$, $A=U^{-i}R^a$, and now
+$J=U^{k-i}R^{a-tk}$. If $R,U$ do not commute, applying $\nu$ to
+$E Y^2=Y A Y J$ yields $2i=i-i+i+k-i=k$, impossible. Thus
+$R,U$ commute. Now $r\mid d$ and $r\mid id-D$ give $r\mid D$;
+$y\equiv-D$ yields $r\mid y$ and $Y\in R^*$, and $V=AY\in R^*$.
+This finishes the whole zero-tail slice.
+
+\subsection{The zero-head slice $i=0$, $k>2\ell>0$}
+Now $L=2D$, $Q=(k-2\ell)d/3>0$, $F=(2k-\ell)d/3>0$.
+The second comparison in Lemma~\ref{ph:phase} yields $r\mid F$,
+as $L>\ell d$. By suffix comparability write $P=E B$,
+$E=R^e$, $e\ge1$. Note $|E|=F=D+Q$. Equation \eqref{ph:cancel}
+reduces after cancelling $B$ to
+\begin{equation}\label{ph:head}
+ Y^2 E=A Y B A Y.
+\end{equation}
+Thus $Y$ is a suffix of $YE$. The suffix transport gives
+$YE=ZY$, where $Z$ is a rotation of $R^e$ of phase $-y$.
+Cancelling the final $Y$ in \eqref{ph:head}, we obtain
+$YZ=A Y T$, $T=BA$. Since $|T|=D<|Z|$, $T$ is a suffix of $Z$
+and is a factor of $R^{\mathbb Z}$ ending at phase $-y$.
+
+If $Q=|A|\ge r$, compare $A$ as the suffix of $Z$ and the suffix of
+$X^k$. This gives $r\mid y$, so $Y,Z$ are powers of $R$.
+Now $A$ is a prefix of $YZ$ and has length at least $r$, giving
+$r\mid Q$. Since $r\mid F=D+Q$, we have $r\mid D$, and apply
+Lemma~\ref{ph:prop}.
+
+If $|B|=\ell d\ge r$, compare $B$ as a prefix of $X^\ell$ and as the
+prefix of $T$ in $Z$ at phase $-y-D$. It gives $y\equiv-D$.
+Since $r\mid D+Q$, the suffixes $A$ and $Y$ of powers of $R$ have
+congruent lengths. Therefore $A=Y R^a$ for some integer $a$ in the
+free group. From $B U^\ell=X^\ell$ and $X^k=E B U^k A$, we also
+obtain $B=R^{t\ell}U^{-\ell}$ and $A=U^{\ell-k}R^{tk-e-t\ell}$.
+In particular $Y$ belongs to $\langle R,U\rangle$. If $R,U$ do not
+commute, apply $\nu$ to \eqref{ph:head} to get
+$2(\ell-k)=4(\ell-k)-\ell$, hence $\ell=2k$, impossible. If they
+commute, apply Lemma~\ref{ph:prop} directly.
+
+It remains to consider $\ell d<r$ and $Q<r$ with $R,U$ not commuting.
+Fine--Wilf in the nested middle run gives
+$ku<r+u-\gcd(r,u)$; hence $(k-2)u<d$. If $\ell\ge2$ then $k\ge5$
+and $x<3d/2<\ell d$, contradiction. Thus $\ell=1$, $k\ge3$.
+Now $d<r\le x<2d$, so $X=R$ (a proper divisor of $x$ is at most
+$x/2<d$). Because $r\mid F=(2k-1)d/3$ and $r\mid x$, we have
+$r\mid(2k-1)u$. Since $r>(k-1)u$, the quotient $(2k-1)u/r$ is
+one or two. If two, $r=(k-1/2)u$ with $u$ even and
+$\gcd(r,u)=u/2$, giving $ku=r+u-\gcd(r,u)$, a contradiction.
+If one, $r=(2k-1)u$, $d=(2k-2)u$ and $F/r=(2k-2)/3$ is integral.
+So $k\equiv1$ modulo three. For $k\ge7$,
+$Q=2(k-1)(k-2)u/3\ge(2k-1)u=r$, contradiction. Only $k=4$
+remains.
+
+Here $r=x=7u$, $d=6u$, $D=10u$, $Q=4u$, $F=14u$.
+The middle $U^4$ starts at phase $-u$, so $R$ begins with $U^3$
+and ends with $U$. Since $T=BA$ has period $7u$ and length $10u$,
+its first and last $3u$ letters agree. Its first $3u$ letters are
+$U^3$ (a prefix of $B$), its last $3u$ letters are a suffix of $R$.
+Thus $R=U^3 K U^3$ with $|K|=u$. The length-$7u$ prefix of
+$T=U^3 K U^2 K U^3$ must be a cyclic rotation of $R$.
+
+For completeness, if $U\ne K$ this is impossible: a rotation of
+$U^3 K U^3$ read in seven blocks of size $u$ has at least five blocks
+that are the same rotation of $U$, since at most two blocks touch
+the unique $K$ block (including cyclic wraparound). But the proposed
+rotation $U^3 K U^2 K$ has exactly five $U$ blocks and two $K$
+blocks. The repeated rotated block must equal $U$, so this rotation
+fixes $U^7$. Cyclic Hamming distance to $U^7$ is invariant under it.
+The two words have distances $h$ and $2h$, respectively, where
+$h$ is the positive Hamming distance between $K$ and $U$. This is a
+contradiction. Consequently $K=U$, and $R=U^7$ is imprimitive.
+The final exceptional length regime is thereby eliminated. This
+completes the proof of Theorem~\ref{ph:main}.
+
+\paragraph{Status.}
+Intersecting Theorem~\ref{ph:main} with the previously unresolved
+lists removes $27$ of $63$ tuples through exponent four, and $90$
+of $210$ through exponent six. The remaining counts are $36$ and
+$120$, respectively. These are unconditional proofs for those removed
+tuples, subject to ordinary independent mathematical review; no bound
+on $d$ was needed. The other residual tuples, and a polynomial bound
+on $d$ for them, remain open in this work.
+
 \section{Verification and priority}
-Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Sections~7--9 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Sections~7--10 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
 
 The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
 
 \paragraph{Contribution disclosure.}
-The author selected the problem from the WORDS 2025 collection, directed the investigation, and audited and independently re-verified the results, including compiling the Lean proof with Lean~4.33.0 and \texttt{leanchecker}, rerunning the exhaustive search, and checking small cases by direct enumeration. The AI system Astra~6.2 developed the written proof, implemented the searches, wrote the Lean formalization and drafted the manuscript under this direction. The reductions and periodicity arguments of Sections~7--9 came from AI-assisted work (Anthropic's Claude, OpenAI's Codex and Astra) and were checked line by line and against the search data.
+The author selected the problem from the WORDS 2025 collection, directed the investigation, and audited and independently re-verified the results, including compiling the Lean proof with Lean~4.33.0 and \texttt{leanchecker}, rerunning the exhaustive search, and checking small cases by direct enumeration. The AI system Astra~6.2 developed the written proof, implemented the searches, wrote the Lean formalization and drafted the manuscript under this direction. The reductions and periodicity arguments of Sections~7--10 came from AI-assisted work (Anthropic's Claude, OpenAI's Codex and Astra) and were checked line by line and against the search data.
 
 \begin{thebibliography}{99}
 \bibitem{words}\v S. Holub, Periodicity forcing, WORDS 2025 Open Problems, Nancy, 1 July 2025, slides 3--5. \href{https://words2025.loria.fr/files/2025/07/webpage-open-problems.pdf}{Conference collection}.

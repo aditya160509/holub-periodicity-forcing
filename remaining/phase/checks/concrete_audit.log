@@ -1,0 +1,5 @@
+literal graph: {'solutions': 15360, 'nonunary_roots': 706, 'nested_identities': 4932, 'suffix_phase': 3996, 'propagation': 4894, 'new_region_solutions': 6272, 'zero_head_transport': 144, 'prefix_phase': 4607, 'nonperiodic': 38, 'nested_nonperiodic_controls': 38, 'nested_zero_tail_transport': 468, 'negative_F_transport': 234}
+nonunary periodic instantiations: {'solutions': 9216, 'nonunary_roots': 9216, 'nested_identities': 4928, 'suffix_phase': 3968, 'propagation': 4928, 'new_region_solutions': 4096, 'zero_head_transport': 192, 'prefix_phase': 4640, 'nested_zero_tail_transport': 448, 'negative_F_transport': 288}
+explicit B/C/D/sporadic nonforcing controls: 21
+rotation obstruction tests: 158964
+PASS
