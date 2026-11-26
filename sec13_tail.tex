@@ -381,3 +381,44 @@ In every case Lemma~\ref{tail:rp} gives a contradiction.
 \begin{corollary}\label{tail:gencor}
 The hypotheses of Theorem~\ref{tail:general} hold for \((1,2,4)\), \((1,3,4)\), \((1,3,6)\), \((1,4,5)\), \((1,4,6)\), \((2,2,4)\), \((2,2,5)\), \((2,3,6)\), \((3,2,5)\), \((3,2,6)\) and \((3,3,6)\). Hence all eleven force periodicity.
 \end{corollary}
+
+\begin{lemma}\label{tail:astar}
+For every \(y\), put \(\kappa=\min(D,h,y+id)\). Then \(\Pi[t]=\Pi[t+p]\) for \(D-\kappa\le t<kx\).
+\end{lemma}
+\begin{proof}
+From \(TY=YT'\) and \(GCY=YH\), the word \(T'\) is the suffix of \(ACY\) of length \(D\), and \(H\) is the suffix of \(GCY\) of length \(h\). These two words share the suffix \(CY\), so \(T'\) and \(H\) share a suffix \(\sigma\) of length \(\kappa\). Therefore \(\sigma AU^k\) occurs in \(X^kG=T'AU^k\) at position \(D-\kappa\) and in \(X^\ell=HAU^\ell\) at position \(h-\kappa\), as in the proof of Lemma~\ref{tail:twoper}. The two positions differ by \(p\).
+\end{proof}
+
+\begin{theorem}\label{tail:214}
+The triples \((2,1,4)\) and \((0,3,4)\) force periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Write \(d=3e\). In both cases \(|m|=c\), so Lemma~\ref{tail:rp} applies. Note that whenever \(\Pi\) has a global period \(q\mid p\), Lemma~\ref{tail:rp} gives a contradiction.
+
+\emph{\((2,1,4)\).} Here \(|A|=e\), \(|G|=5e\), \(p=4e\), \(D=7e\), \(h=11e\), \(id=6e\), \(kx=x=u+3e\), and \(4u<3e\).
+
+If \(y\ge e\), then \(\kappa=D\), and Lemma~\ref{tail:astar} gives period \(4e\) on \([0,x+4e)\). Fine--Wilf with the period \(x\) gives a global period \(\gcd(4e,x)\mid p\).
+
+If \(y<e\), Lemma~\ref{tail:twoper}(i) gives period \(4e+y\) on \([0,9e)\). Since \(9e\ge(4e+y)+x\), \(\Pi\) has global period \(g_1=\gcd(4e+y,x)\). Because \(x<4e+y<2x\), we have \(g_1\le x/2\le x-e\). Lemma~\ref{tail:astar} gives period \(4e\) on \([e-y,x+4e)\), of length \(x+3e+y\ge4e+g_1\). So \(\Pi\) has global period \(\gcd(4e,g_1)\mid p\).
+
+\emph{\((0,3,4)\).} Here \(C=\varepsilon\), \(|A|=D=7e\), \(|G|=h=5e\), \(p=-2e\), \(kx=3u+9e\), and \(2u<3e\).
+
+By Lemma~\ref{tail:astar} with \(\kappa=\min(5e,y)\), period \(2e\) holds on \([5e-\kappa,kx)\), of length \(3u+4e+\kappa\). If \(2u+\kappa\ge e\), this is at least \(2e+x\), and we obtain a global period \(\gcd(2e,x)\mid p\).
+
+Otherwise \(y<e-2u\). Then Lemma~\ref{tail:twoper}(i) gives period \(2e-y\) on \([y-2e,5e-y)\), of length \(7e-2y\ge(2e-y)+x\). So \(\Pi\) has global period \(g_1=\gcd(2e-y,x)\le2e-y<x\). The first window has length \(3u+4e+y\ge2e+g_1\), so \(\Pi\) has global period \(\gcd(2e,g_1)\mid p\).
+\end{proof}
+
+\begin{theorem}\label{tail:023}
+The triple \((0,2,3)\) forces periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Write \(d=3e\). Then \(C=\varepsilon\), \(|A|=D=5e\), \(|G|=h=4e\), \(p=-e\), \(kx=2u+6e\), \(x=u+3e\), \(u<3e\), and \(|m|=c=1\). As before, a global period \(q\mid p\) of \(\Pi\) contradicts Lemma~\ref{tail:rp}.
+
+By Lemma~\ref{tail:astar} with \(\kappa=\min(4e,y)\), period \(e\) holds on \(W_a=[4e-\kappa,kx)\), of length \(2u+2e+\kappa\). If \(u+\kappa\ge2e\), this length is at least \(e+x\), and we obtain the global period \(\gcd(e,x)\mid p\).
+
+Now let \(y<2e-u\), so \(\kappa=y\). Here \(T'=A[y,5e)\,Y\) and \(X^2G=T'AU^2\), so \(\Pi[0,5e-y)=A[y,5e)=\Pi[4e+y,9e)\). Put \(\sigma=4e+y-x=e+y-u\).
+
+If \(\sigma\ne0\), then \(\Pi\) has period \(|\sigma|\) on a window of length \(5e-y+|\sigma|\ge x+|\sigma|\). So \(\Pi\) has global period \(g_1=\gcd(|\sigma|,x)\le|\sigma|\le e+y+u\). As \(|W_a|=2u+2e+y\ge e+g_1\), we obtain the global period \(\gcd(e,g_1)\mid p\).
+
+If \(\sigma=0\), then \(u=e+y\), \(x=4e+y\), and \(y<e/2\). By Lemma~\ref{tail:twoper}(i), period \(e-y\) holds on \(W_b=[y-e,4e-y)\). Its translate \(W_b+x=[3e+2y,8e)\) meets \(W_a=[4e-y,8e+2y)\) in an interval of length at least \(\min(4e+y,5e-2y)\ge2e-y\). By Fine--Wilf the union has period \(\gcd(e,e-y)=\gcd(e,y)\). The union is \([\min(4e-y,3e+2y),\,8e+2y)\), of length \(\min(4e+3y,\,5e)\). This is at least \(x+\gcd(e,y)=4e+y+\gcd(e,y)\): if \(y>0\), then \(\gcd(e,y)\le y<e/2\); if \(y=0\), the length is \(5e=x+e\). So we obtain a global period dividing \(e\).
+\end{proof}
