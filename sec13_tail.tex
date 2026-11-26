@@ -268,3 +268,31 @@ Equality is Theorem~\ref{tail:diagonal}. If $k>\ell$, then
 $2k-i-\ell=3(k-\ell)+(2\ell-i-k)>3(k-\ell)\ge3$.
 Apply Lemma~\ref{tail:div} and its seam consequence.
 \end{proof}
+
+\begin{theorem}\label{tail:112full}
+The triple \((1,1,2)\) forces periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Assume \(XU\ne UX\) and write \(d=3e\), \(x=u+3e\). By Lemma~\ref{tail:112} and the corollary following Lemma~\ref{tail:013}, \(u<e\) and \(y<2e-u\). We use \eqref{eq:tail}: \(X=UC\), \(X^2=HAU^2\), \(YXG=ACYAU\), \(YH=GCY\), with \(|A|,|G|,|C|,|H|=e,2e,3e,5e\); \(H=X^\omega[0,5e)\). Write \(c_j\) for the letters of \(X^\omega\), and put \(s=u+y-e\) and \(\delta=2e-y-u\in(0,2e)\).
+
+\emph{Two shifts.} Since \(y<2e=|G|\), the relation \(YH=GCY\) gives \(G=YG_1\), \(H=G_1CY\) with \(|G_1|=2e-y\), so \(C=X^\omega[2e-y,5e-y)\). As also \(C=X^\omega[u,u+3e)\),
+\begin{equation}\label{eq:112shift}
+c_{u+j}=c_{u+j+\delta}\qquad(0\le j<3e).
+\end{equation}
+Since \(y<4e\), the relation \(YXG=ACYAU\) makes \(Y\) the prefix of \(AC\) of length \(y\), and \(XG=(AC)[y,4e)\,Y\,AU\). Thus \(X\) is the length-\(x\) prefix of \((AC)[y,4e)\,(AC)^\omega\).
+
+For \(j\ge e+y+u\), the index \(u+j+\delta\) exceeds \(x\); writing \(j'=j+\delta-3e\in[0,\delta)\) and using \(x\)-periodicity, \eqref{eq:112shift} becomes
+\begin{equation}\label{eq:112wrap}
+c_{j'}=c_{j'+e+y+2u}\qquad(0\le j'<\delta).
+\end{equation}
+
+\emph{Case \(s<0\).} Then \(y\le e\) and \(4e-y\ge x\), so \(X=A[y,e)\,C[0,2e+u+y)\). Comparison with \(X=UC\) shows that \(C\) has period \(-s\). For \(j<e+y+u\), \eqref{eq:112shift} stays inside \(C\), and the period \(-s\) gives \(c_{u+j}=c_{u+j+e}\). Fine--Wilf on \(C[0,2e+u+y)\), whose length is at least \(e-s\), gives period \(g=\gcd(e,-s)\), and then all of \(C\) has period \(g\). Here \(g\mid u+y\), so \(e+y+2u\equiv u\pmod g\). By \eqref{eq:112wrap}, \(C[i]=C[i+u]\) on an interval of length \(\delta-u=e-u-s\ge g\), so \(C\) has period \(g'=\gcd(g,u)\). For \(j'<u\), \eqref{eq:112wrap} shows that \(U\) is the factor of \(C\) at offset \(e+y+u\equiv0\pmod{g'}\). Since \(g'\) divides \(u\) and \(3e\), both \(U\) and \(C\) are powers of \(C[0,g')\), so \(XU=UX\).
+
+\emph{Case \(s=0\).} Then \(X=A[y,e)C\), so \(U=A[y,e)\), and \(\delta=e\). By \eqref{eq:112shift}, \(C=\rho^3\) with \(|\rho|=e\). By \eqref{eq:112wrap}, \(X[0,e)=\rho\), so \(\rho=U\rho[0,e-u)\) has period \(u\) and prefix \(U\). The relation \(G=YAU=YX[0,e+u)\) gives \(U=X[e,e+u)\), the suffix of \(\rho\). Hence \(U\) equals its rotation by \(e\bmod u\), and \(U\), \(\rho\) and \(X\) are powers of one word of length \(\gcd(u,e)\).
+
+\emph{Case \(0<s\le u\).} Now \(y\le e\), and \(X=A[y,e)\,C\,Y[0,s)\). Comparison with \(X=UC\) gives period \(s\) on \(X[e-y,x)\). For \(j<2e\), \eqref{eq:112shift} and the period \(s\) give \(c_{u+j}=c_{u+j+\delta+s}=c_{u+j+e}\), since \(\delta+s=e\). So \(C\) has periods \(e\) and \(s\), hence period \(g=\gcd(e,s)\), and so does \(X[e-y,x)\). Let \(P\) be this \(g\)-periodic pattern. Because \(U\) is a suffix of \(X\) (from \(X^2=HAU^2\)) and \(x-u=3e\equiv0\pmod g\), also \(c_j=P(j)\) for \(j<u\). Since \(e-y<u\), every letter of \(X\) is \(P(j)\). As \(g\mid e\) and \(g\mid u+y\), \eqref{eq:112wrap} reads \(P(j')=P(j'+u)\) for \(0\le j'<\delta\). But \(\delta=e-s\) is a positive multiple of \(g\), so this holds for every residue. Hence \(P\), and so \(X\), has period \(\gcd(g,u)\). That number divides \(u\) and \(x\), so \(XU=UX\).
+
+\emph{Case \(s>u\).} Now \(e<y<2e-u\), and \(X=C[y-e,3e)\,Y[0,s)\). Comparison with \(X=UC\) gives period \(s\) on all of \(X\). As in the previous case, \(C\) has periods \(e\) and \(s\), so \(X\) has period \(g=\gcd(e,s)\). Then \eqref{eq:112wrap} with \(\delta=e-s\in g\mathbb{Z}_{>0}\) gives period \(\gcd(g,u)\) as before, and \(XU=UX\).
+
+Each case contradicts \(XU\ne UX\). Lemma~\ref{commouter} completes the proof.
+\end{proof}
