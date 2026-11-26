@@ -1,0 +1,270 @@
+\section{An equal middle and final run in the tail}\label{tail:diagonal-sec}
+\begin{theorem}\label{tail:diagonal}
+For every $k\ge1$ and $0\le i<k$, the triple $(i,k,k)$ forces
+periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Orient a solution with unequal corresponding lengths so $d=x-u>0$.
+Put $p=(k-i)d/3>0$. This is an integer since $D=(i+2k)d/3=kd-p$
+is an integer. With $\ell=k$, the hypotheses of the factorization
+\eqref{eq:tail} hold: $id\le D$ and $i+k<2k$.
+In its notation $|G|=p$, $|A|=2p$, $|T'|=D$, and $|H|=D-p$.
+The words $H$ and $T'$ are prefixes of the very same $X^k$:
+for $H$ use $X^k=HAU^k$, and for $T'$ use $X^kG=T'AU^k$
+and $D<kx$. Write $T'=HK$, where $|K|=p$.
+Then
+\[
+ ACY=YT'=YHK=GCYK .
+\]
+Comparing the initial $p$ letters gives $A=GJ$ with $|J|=p$.
+Cancelling $G$ gives $JCY=CYK$.
+A second use of the equality of the two run exponents gives
+\[
+ HAU^kG=X^kG=HKAU^k,\qquad KAU^k=AU^kG .
+\]
+In particular $A$ is the prefix of $KA$ of length $2p$.
+Its first $p$ letters are $K$ and its next $p$ letters repeat them.
+Hence $A=KK$, and $A=GJ$ gives $G=J=K$.
+Cancelling $A=K^2$ shows $KU^k=U^kK$; also $KCY=CYK$.
+As $K$ is nonempty, the commutation theorem puts $U$ and
+$V=CYA$ in the powers of the primitive root of $K$, including
+the possibility of empty images. Thus the right morphism is periodic.
+Lemma~\ref{perred} finishes: family A has equal internal exponents,
+family B has zero middle exponent here, and the single-$a$ sporadics
+have $S=1$, whereas $S=i+2k\ge2$.
+\end{proof}
+
+\begin{lemma}\label{tail:112}
+For $(1,1,2)$ write $d=3e$. A counterexample must have $u<e$.
+\end{lemma}
+\begin{proof}
+Suppose otherwise. We can assume $XU\ne UX$ by Lemma~\ref{commouter},
+so $e\le u<3e$ by Corollary~\ref{outerbound}. In \eqref{eq:tail}
+the lengths of $A,G,C,T',H$ are respectively $e,2e,3e,4e,5e$.
+Since $4e\le x$, both $T'$ and $H$ are prefixes of $X^\omega$,
+and $H=T'K$ with $|K|=e$. Now $GCY=YH=ACYK$ gives $G=AJ$
+and $JCY=CYK$, $|J|=e$. The latter equation makes $CY$ a prefix
+of $J^\omega$, by iteration; thus $C=J^3$.
+The word $X=UC$ ends with $U$, so $u<3e$ makes $U$ a suffix of $C$.
+Consequently $X$ is a factor of $J^{\mathbb Z}$ ending at phase zero.
+Its prefix $T'$ has length $4e$, hence is a fourth power of a rotation
+of $J$. Its conjugate $AC=AJ^3$ is likewise a fourth power of a
+length-$e$ word. Comparing the four blocks shows $A=J$ and $G=J^2$.
+Finally $XG=T'AU$ reads $UJ^5=T'JU$. On the left the whole word
+has period the primitive root length $r$ of $J$ and starts at phase
+$-u$. On the right a full $J$ starts at offset $4e$. Primitivity
+forces $-u+4e\equiv0\pmod r$, so $r\mid u$. The suffix $U$ of
+$J^3$ therefore commutes with $J$ and $X$, a contradiction.
+\end{proof}
+
+\begin{lemma}\label{tail:013}
+For $(0,1,3)$ put $d=3e$. If $y+\min(x,4e)\ge8e$, all images
+commute.
+\end{lemma}
+\begin{proof}
+Assume $XU\ne UX$, so $0<u<3e$ by the outer bound and the
+periodic-morphism reduction. Write $A,G$ for the words of lengths
+$4e,5e$ in \eqref{eq:tail}. Here $C$ is empty,
+$AY=YT'$, $GY=YH$, $XG=T'AU$, and $X^3=HAU^3$.
+Thus $Y$ is a common prefix of $A^\omega,G^\omega$. After this
+prefix those two infinite words continue with $T'$ and $H$
+respectively. These two continuations agree for at least
+$\min(x,4e)$ letters: $T'$ starts the word $XG$ and $H$ starts
+$X^3$. Fine--Wilf on the common prefix gives period $e$, so
+$A=P^4$, $G=P^5$ where $|P|=e$. Write $r$ for the primitive
+root length of $P$. The equation $XG=T'AU$ ends in $U$, so
+$U$ is a suffix of $P^5$. In this same equation the two
+$P$-periodic intervals $[x,x+5e)$ and $[4e,8e)$ start at phase zero.
+Their overlap has length at least $2e$, since $3e<x<6e$ and
+$x+5e>8e$. Equality of a full primitive rotation gives $r\mid x-4e$,
+hence $r\mid u$. It follows that $AU^3$ is a power of the primitive
+root of $P$. As a suffix of $X^3$ it has periods $r,x$ and length
+$4e+3u\ge x+r$. Fine--Wilf makes this suffix periodic with period
+$\gcd(r,x)$, which divides $x$ and $u$. Its terminal length-$x$
+and length-$u$ words are $X$ and $U$ at the same ending phase.
+They commute, giving the desired contradiction.
+\end{proof}
+
+\begin{corollary}
+In the remaining range $u<e$ of Lemma~\ref{tail:112}, a
+counterexample also requires $y<2e-u$.
+\end{corollary}
+\begin{proof}
+Align the two bi-infinite repetitions of $AC$ and $GC$ at the starts
+of these written blocks. Immediately to the left they agree on $C$
+of length $3e$. To the right they agree on $Y$, after which they
+start with $T'$ and $H$. These agree for the first $x$ positions,
+since $x<4e$ and both start with $X$. The common interval thus has
+length at least $3e+y+x$. If $y\ge2e-u$ this is at least $8e$,
+the Fine--Wilf threshold for $4e,5e$. Consequently the two entire
+bi-infinite repetitions coincide with period $e$: extend the common
+$e$-periodic interval using the periods $4e$ and $5e$, which are
+multiples of $e$ and each at most its length. At the common origin
+this yields $A=J,G=J^2,C=J^3$ for one length-$e$ word $J$.
+The final phase argument in Lemma~\ref{tail:112} now applies verbatim:
+$U$ is a suffix of $J^3$ and $UJ^5=T'JU$, so the primitive root
+length of $J$ divides $u$.
+\end{proof}
+
+\begin{theorem}[An exponent criterion on either side of the band]\label{tail:windows}
+Assume $i+k<2\ell$, $k\ge1$, and define integers
+\[
+ c=i+\ell-2,\quad m=i+\ell-2k\ne0,\quad
+ a=\min(3i,i+k+\ell),\quad
+ b=3k+\min(0,2m),\quad s=3k+\max(m,2m).
+\]
+If $c>0$, $|m|\le c+1$, and $c(a+b-s)\ge3(c+1)$,
+the tuple forces periodicity.
+\end{theorem}
+\begin{proof}
+In a counterexample all words are nonempty by Lemma~\ref{perred}
+and $r>(c+1)u$, $u<d/c$ by Corollary~\ref{outerbound}.
+We construct two bi-infinite words, of periods $D$ and
+$h=(i+\ell)d-D$, agreeing on three consecutive pieces
+$L,Y,F$. Here $L$ is a suffix of $X^i$ of length $ad/3$;
+$F$ is a prefix of $X^\omega$ of length $bd/3$.
+The longer period is $Q=sd/3$, the shorter is $q$, and
+$p=Q-q=|m|d/3$; indeed $D=kd+md/3$, $h=kd+2md/3$.
+
+When $id\le D$, align $(AC)^{\mathbb Z}$ and $(GC)^{\mathbb Z}$
+at the starts of the indicated blocks. The preceding common suffix
+is $L=C$. The two right continuations start with $Y$ and then
+with $T'$ and $H$, respectively, by \eqref{eq:tail}.
+Here $H$ starts $X^\ell$ in the sense that it is a prefix thereof,
+and the first $\min(D,kx)$ letters of $T'$ are a prefix of $X^k$.
+Since $bd/3=\min(kd,D,h)$, these continuations agree on $F$.
+
+When $id>D$, write $X^i=U^i C$, $X^\ell=B U^\ell$.
+Cancelling the outer powers gives $CYYX^kYB=VVU^kV$.
+Since $D<id<2D$ (the latter follows from $i+k<2\ell$),
+$CY=VZ$, $|Z|=id-D$; since $\ell d>D$, $YB=GV$,
+$|G|=\ell d-D$. Cancelling gives $ZYX^kG=VU^k$.
+Since $|Z|<D$, $V=ZYJ$, $|J|=2D-id$ and $X^kG=JU^k$.
+Now $CY=ZYJZ$ starts with $Z$, and $|C|>|Z|$, so $C=ZT$.
+Consequently $TY=YJZ$ and $(GC)Y=Y(BZ)$.
+Align $T^{\mathbb Z}$ and $(GC)^{\mathbb Z}$ at the starts of
+these blocks. Their common left suffix is $L=T$, of length $D$,
+and their right continuations start with $Y$, then $JZ$ and $BZ$.
+In this band $i>k$ and $\ell>k$: $2i>k+\ell$ and
+$2\ell>i+k$ imply both inequalities by substitution.
+Thus $m>0$, $bd/3=kd$. Both $J$ and $B$ have at least this length
+since $|J|-kd=(2\ell-i-k)d/3>0$ and $|B|=\ell d$.
+The initial $kd$ letters of each are read at the start of a power of $X$.
+This completes the construction.
+
+Write $f=|F|$, $n=|L|$, and index the common interval as
+$[0,n+y+f)$. We have $f\le q$ in both cases.
+The first $r+p$ letters are inside $L$, and each of their first $r$
+positions $j$ satisfies $j+Q<n+y+f$. Indeed
+\[
+ n+f-Q=(a+b-s)d/3\ge (1+1/c)d>x\ge r ,
+ \qquad n-p=(n+f-Q)+(q-f)\ge r.
+\]
+Using period $Q$ and then period $q$ on this common interval gives
+the identical letters at $j,j+Q,j+p$. Thus two length-$r$ factors
+inside $L\subset X^\omega$ agree at shift $p$. Primitivity implies
+$r\mid p$. Since $r\mid x$ and $3p=|m|d$, it follows that
+$r\mid |m|u$. But $0<|m|u\le(c+1)u<r$. This contradiction proves
+the criterion.
+\end{proof}
+
+\begin{theorem}[The entire upper band]\label{tail:band}
+Suppose $i+k<2\ell$ and $2i>k+\ell$. Then the tuple forces
+periodicity without a length restriction.
+\end{theorem}
+\begin{proof}
+Use the band factorization in the proof of Theorem~\ref{tail:windows},
+with $J=V''$. In particular $YB=GZYJ$ and $X^kG=JU^k$.
+Put $m=i+\ell-2k>0$, $p=md/3$.
+Since $|B|-|J|=p$, suffix comparison gives $B=KJ$, $|K|=p$.
+Thus the first $\min(|J|,kx)$ letters of $J$ are read at phases
+zero and $p$ of $X^\omega$: one occurrence begins $X^kG$ and
+the other is inside $B$, a prefix of $X^\ell$. If $|J|\ge r$,
+primitivity gives $r\mid p$ and hence $r\mid mu$. This contradicts
+the outer bound $r>(i+\ell-1)u\ge mu>0$ in a counterexample.
+
+It remains to consider $|J|<r\le x$. Write $c=i+\ell-2$.
+Both outer exponents exceed $k$, as shown above. Thus $c\ge2$.
+We have $|J|=kd+(2\ell-i-k)d/3\ge kd+d/3$.
+If $k\ge2$, this exceeds $x$ since $u<d/c$. If $c\ge3$,
+even for $k=1$ it exceeds $x$ by the same bound.
+The only remaining possibility is $(i,k,\ell)=(2,1,2)$.
+Here $d=3e$, $|K|=2e$, $|J|=4e$, and $|J|<x$ gives
+$e<u<3e/2$. As $J$ starts $XG$ and is shorter than $X$, write
+$X=JP$, $|P|=u-e$. Also $B=KJ$ starts with $J$ since $B$
+is a length-$6e$ prefix of $X^2$. Hence $J$ is a length-$4e$
+prefix of $KJ$, forcing $J=K^2$.
+
+Let $T$ be the length-$e$ suffix of $K$. Since $X=K^2P$
+ends in $U$, we have $U=TP$. Since $X$ also begins with $U$,
+$K$ begins with $T$. Its length is $2e$ and it ends with $T$,
+so $K=T^2$. Finally $U^2$ is a prefix of $X^2$,
+and $2u<3e<4e$, so it is a prefix of $T^4$.
+Let $r_0$ denote the primitive root length of $T$. The two copies
+of $U$ start at phases $0,u$ in $T^\omega$, and $u>e\ge r_0$.
+Thus $r_0\mid u$, and $U$ is a power of the root of $T$.
+Since $U=TP$, so is $P$, hence also $X=T^4P$.
+This contradicts noncommutation and finishes the band.
+\end{proof}
+
+\begin{corollary}[A second low-band comparison]\label{tail:seam}
+Suppose $i+k<2\ell$ and $3\le m'=2k-i-\ell\le i+\ell-1$.
+Then the tuple forces periodicity.
+\end{corollary}
+\begin{proof}
+Here $i<k$ and $id\le D$ (indeed $i<\ell$ and $i<k$).
+Put $p=m'd/3\ge d$. The identities
+$X^\ell=HAU^\ell$, $X^kG=T'AU^k$ give two occurrences
+of $A U^{\min(k,\ell)}$, starting at $|H|$ and $D$, differing
+by $p$. We have $|A|=|G|+p\ge p$ and $kx-D=ku+p\ge u+p$.
+Thus at least the first $u+p\ge x$ letters in both occurrences
+are inside the indicated powers of $X$. Comparison of a full primitive
+rotation gives $r\mid p$. As before $r\mid m'u$ contradicts the
+outer bound. Empty images are disposed of by Lemma~\ref{perred}.
+\end{proof}
+
+\begin{lemma}[Divisibility obstruction for $2k>i+\ell$]\label{tail:div}
+Suppose $i+k<2\ell$, $m'=2k-i-\ell>0$, and $p=m'd/3$.
+If $r\mid p$, all four images commute. In particular the preceding seam
+corollary holds for every $m'\ge3$, without an upper bound on $m'$.
+\end{lemma}
+\begin{proof}
+Assume $X,U$ do not commute. Here $i<k$, $i<\ell$, $id\le D$,
+$D=kd-p<kx$, and $|H|=D-p$. As in the diagonal proof $T'=HK$,
+$A=GJ$, $|J|=|K|=p$, and $JCY=CYK$.
+The words $K$ and $A$ start at the same phase $|H|$ in $X^\omega$:
+use $T'\preceq X^k$ for $K$ and $HA\preceq X^\ell$ for $A$,
+where $\preceq$ denotes prefix. Since $r\mid p$ and $J$ is the
+length-$p$ suffix of $A$, both $KA$ and $AJ$ read the same periodic
+interval starting at $|H|$. Hence $JV=VJ$ by $V=CYA$.
+Let $R_1$ be the length-$r$ rotation starting at the end phase of $A$,
+namely $\ell d$ modulo $r$; then $J=R_1^{p/r}$ and $V$ is a power
+of $R_1$. The factor $U^\ell$ starts at this phase and ends at zero
+in $X^\ell$, whence $R_1U^\ell=U^\ell R$. In particular both $J$
+and $V$ belong to the group generated by $R,U$.
+
+Also $T'=R^{p/r}H$ because these two prefixes of $X^\omega$ have the
+same length and $T'=HK$. From $X^kG=T'AU^k$ and $HA=X^\ell U^{-\ell}$
+one obtains
+\[
+ G=X^{-k}R^{p/r} X^\ell U^{k-\ell}.
+\]
+Thus $A=GJ$, $C=U^{-i}X^i$ and $Y=C^{-1}VA^{-1}$ are in that
+same subgroup. Apply the free-group homomorphism $\nu(R)=0$, $\nu(U)=1$
+from Section~\ref{sec:phase-comparisons}. Both $J$ and $V$ have value
+zero since $R_1$ is conjugate to $R$ in this subgroup.
+Hence $\nu(G)=\nu(A)=k-\ell$, $\nu(C)=-i$ and
+$\nu(Y)=i+\ell-k$. The original equation gives
+$3(i+\ell-k)=S$, or $i+\ell=2k$, a contradiction.
+For $m'\ge3$ the two seam occurrences in the preceding corollary
+give $r\mid p$ independently of its former upper bound.
+\end{proof}
+
+\begin{corollary}
+Every tuple of the requested tail with $k\ge\ell$ forces periodicity.
+\end{corollary}
+\begin{proof}
+Equality is Theorem~\ref{tail:diagonal}. If $k>\ell$, then
+$2k-i-\ell=3(k-\ell)+(2\ell-i-k)>3(k-\ell)\ge3$.
+Apply Lemma~\ref{tail:div} and its seam consequence.
+\end{proof}
