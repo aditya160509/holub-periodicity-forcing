@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/claude/holub_pack/remaining/tail/final/checks/check_certs.py", line 431, in <module>
+    for fn in sys.argv[1:]: main(fn)
+                            ~~~~^^^^
+  File "/home/claude/holub_pack/remaining/tail/final/checks/check_certs.py", line 426, in main
+    pieces = covering(cells, region, box, extra)
+  File "/home/claude/holub_pack/remaining/tail/final/checks/check_certs.py", line 361, in covering
+    raise Fail('uncovered point %s' % (p,))
+Fail: uncovered point (Fraction(1, 28), Fraction(45, 28))

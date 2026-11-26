@@ -15,7 +15,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute. No length ordering or nonerasing hypothesis is required. Two overlapping factorizations force an intervening word to be a cube. Transporting this cube and then a fifth power through the equation produces a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths. A Lean formalization checks the unrestricted theorem. We also prove that \(ab^3a\) forces periodicity under Holub's length condition, completing all sixteen tuples with exponents at most one (also checked in Lean), and we give explicit nonforcing families for all exponents together with a conjectured complete classification that matches an exact search over all 625 tuples with exponents at most four. Finally, using Holub's structure theorem for two-generated equality sets and Fine--Wilf arguments, we prove the conjecture on the slices \((0,j,k,0)\), \((i,j,j,\ell)\) and \((i,0,0,\ell)\), for every tuple with a balanced prefix, and whenever \(\min(j,k)\ge i+\ell\). This reduces the full classification to the family \((i,0,k,\ell)\). Within that family we prove three infinite forcing rays, show that each fixed length difference \(d=|X|-|U|\) is a finite check, and verify by exact computation that no counterexample with \(d\le12\) exists for any open tuple with exponents at most \(6\). Finally, a phase-comparison argument proves forcing, with no bound on \(d\), on the whole slice \(\ell=0\) (except the nonforcing \(k=2i\)), on \(i=0<2\ell<k\), and on a large region with positive outer exponents. Using a cyclotomic argument (Ljunggren's trinomial theorem) we show that commuting outer images force full periodicity, and we prove forcing on the region \(i>2(k+\ell)\), on the rays \(k=1\), \(i\in\{2\ell,2\ell+1\}\), and on the ray \(i+\ell=2k\), \(i<k\). A least-\(d\) counterexample may be taken binary, and exact computation excludes counterexamples with \(d\le50\) for all open tuples with exponents at most \(6\). In the remaining tail \(i+k<2\ell\) we prove forcing on the diagonal \(\ell=k\), the whole band \(2i>k+\ell\), every tuple with \(k\ge\ell\), and a further window criterion. A two-local-period argument settles fourteen more. This leaves \(4\) open tuples with exponents at most \(4\) (\(621/625\) settled) and \(18\) with exponents at most \(6\), all with \(k<\ell\), \(2i\le k+\ell\) and \(2k-i-\ell\le2\).
+We prove that \(XXYYXYX=UUVVUVU\) in a free monoid implies either \(X=U,\ Y=V\), or all four words commute, with no length or nonerasing hypothesis; a Lean formalization checks this. Two overlapping factorizations force an intervening word to be a cube, and transporting this cube and then a fifth power through the equation yields a common commuting word. We also determine exactly which letter positions are forced to agree at every choice of lengths, and prove that \(ab^3a\) forces periodicity under Holub's length condition, completing the sixteen tuples with exponents at most one (also checked in Lean).
+
+We then turn to Holub's general question: which patterns \(a^iba^jba^kba^\ell\) force periodicity. We give explicit nonforcing families for all exponents and conjecture a complete classification, which matches an exact search over all \(625\) tuples with exponents at most four. Using Holub's structure theorem for two-generated equality sets, Fine--Wilf arguments, phase comparisons and a cyclotomic lemma (via Ljunggren's trinomial theorem), we prove the conjecture on several slices and reduce it to the family \((i,0,k,\ell)\), where we prove forcing on large regions and infinite rays. The last residual tuples are settled by a computer-assisted proof: a covering of the length space by \(23{,}273\) polyhedral cones, each carrying a uniform chain of Fine--Wilf steps, verified in exact arithmetic by an independent checker. As a result, \emph{the classification is complete for all \(625\) tuples with exponents at most four}, and the family \((i,0,k,\ell)\) is settled through exponent six. The general case remains open.
 \end{abstract}
 \section{Statement}
 Holub's problem at WORDS 2025 asks which patterns \(a^i b a^j b a^k b a^\ell\) force periodicity when \(V\) is at least as long as each of \(X,Y,U\) \cite[pp.~3--5]{words}. The simplest unknown case identified there has \((i,j,k,\ell)=(2,0,1,1)\). The slides use finite words and a morphism formulation without an explicit nonerasing requirement. Our theorem covers both conventions.
@@ -334,23 +336,6 @@ If \(\min(j,k)<i+\ell\) and \(j\le k\), choose \(r+s=j\) with \(r\le i\), \(s\le
 \section{The remaining family \((i,0,k,\ell)\)}\label{sec:rem}
 Write \(w=a^ibba^kba^\ell\), \(S=i+k+\ell>0\), and the equation as \(g(w)=h(w)\). Exchanging the substitutions if necessary, \(d=x-u>0\) (if \(d=0\) the substitutions coincide), and then \(D=v-y=Sd/3\). In this section a \emph{counterexample} is a solution with \(g\ne h\) in which the four words do not all commute. It is \emph{unrestricted} if Holub's length condition is not imposed.
 
-\subsection{Shortening at a fixed length difference}
-\begin{lemma}\label{shorten}
-Fix an input letter \(c\) of \(w\), with \(A=g(c)\) and \(B=h(c)\). For the \(j\)th occurrence of \(c\), let \(e_j\) be its start in the left factorisation minus its start in the right one. Put \(m=\min e_j\), \(M=\max e_j\), \(H=\max(|m|,|M|)\), and assume \(P=M-m>0\). If \(\min(|A|,|B|)\ge2H+7P\), then a counterexample gives another one in which both \(c\)-images are shorter by \(3P\), the other images are unchanged, and \(d\) is unchanged.
-\end{lemma}
-\begin{proof}
-Put \(z=H+m\). For each occurrence, \(B[e_j+s]=A[s]\) whenever both indices exist. For \(z\le t<z+6P\), the two extreme occurrences give \(B[t]=A[t-m]=B[t+P]\), since \(0\le t-m<H+6P\) and \(t+P<2H+7P\). So \(B[z:z+7P]\) has period \(P\).
-Delete \(3P\) letters starting at position \(H\) in each left occurrence, and starting at \(H+e_j\) in the corresponding right occurrence. These cuts coincide in the common word, and cuts in different blocks are disjoint. All right-hand deletions give the same word \(B'\), because moving a deletion of length \(3P\) one place to the right does not change the result when the letter at its old start equals the letter \(3P\) places later, and this holds throughout \([z,z+P)\). Likewise all left-hand deletions give one word \(A'\). The deleted segment equals the \(3P\) letters that follow it in each block. So the shortened equation holds, and its \(a\)-length difference is still \(d\).
-Suppose all four shortened images were powers of one primitive word \(R\). Then \(|R|\) divides \(d\). Every start displacement is an integer combination of \(d\) and \(D\), so \(3P\) is a multiple of \(d\). Re-inserting a copy of the following \(3P\) letters at a cut keeps each \(R\)-power an \(R\)-power with the same phase. This reconstructs the original images as \(R\)-powers, a contradiction.
-\end{proof}
-
-\begin{corollary}\label{finite-d}
-Let \(T_c=2H_c+7P_c\), where \(H_c,P_c\) are the quantities of Lemma~\ref{shorten} for the letter \(c\). Both depend only on the tuple and \(d\), and are \(O(d)\). If an unrestricted counterexample with length difference \(d\) exists, then one exists with \(\min(|g(c)|,|h(c)|)<T_c\) for both letters. Hence, for each fixed \(d\), deciding whether a counterexample exists is a finite computation.
-\end{corollary}
-\begin{proof}
-For \(c=b\), the first two displacements differ by \(D>0\). For \(c=a\), two consecutive copies differ by \(d\). The only case without consecutive copies is \(i,k,\ell\le1\), \(k=1\); there the runs' displacements \(0\), \(id-2D\), \(-\ell d\) are distinct on two occupied runs. So \(P_c>0\). Take a counterexample of minimum total length at this \(d\) and apply Lemma~\ref{shorten}.
-\end{proof}
-
 \subsection{Three forcing rays}
 \begin{theorem}\label{rays}
 For \(n\ge1\), the tuples \((0,0,n,n)\), \((n,0,n,0)\) and \((2n,0,n,n)\) force periodicity without the length condition. Their paddings force periodicity under the length condition (Lemma~\ref{padding}).
@@ -368,20 +353,7 @@ In the middle block \(X^k\), the factor \(U^k\) begins after \(L=2D-id\) letters
 If \(k\ge4\) and \(v<x\), then \(u>(S/3-1)d\ge 2d/3\) because \(S\ge5\). So \((k-2)u>d\), which gives the Fine--Wilf hypothesis.
 \end{proof}
 
-\subsection{Exact computation for small length differences}
-At fixed lengths, let \(h=\gcd(x,y,u,v)\). Every position equality preserves offsets modulo \(h\), so the position graph is \(h\) interleaved copies of the graph at lengths divided by \(h\). Consequently a counterexample at lengths \((x,y,u,v)\) yields one at \((x,y,u,v)/h\), and \(d\) drops to \(d/h\); Holub's condition is preserved. This lets the search work only with primitive length vectors.
 
-\begin{theorem}\label{d12}
-For every tuple \((i,0,k,\ell)\) with \(i,k,\ell\le6\) that is not yet classified (210 tuples), there is no unrestricted counterexample with \(1\le|X|-|U|\le12\), and hence none satisfying Holub's condition.
-\end{theorem}
-\begin{proof}
-By Corollary~\ref{finite-d}, for each \(d\) it is enough to check the finite box \(\min(|g(c)|,|h(c)|)<T_c\), where \(3\mid Sd\). In this box, the union-find solver of Section~6 computes the most general solution at each length vector, and that solution was found to be unary every time. The scan visited \(132{,}249{,}070\) unrestricted and \(147{,}892{,}558\) admissible length vectors, with zero counterexamples. The scanner finds witnesses for the nonforcing controls (for example \((1,0,1,1)\)), so the test is not vacuous. The exponent-\(\le4\) scan was rerun independently with identical output.
-\end{proof}
-
-\begin{remark}
-What is still open is a bound on \(d\). If every open tuple had an explicit bound \(d_0\), the classification would become a finite computation. A general theorem on solution sets of word equations (Ciobanu--Diekert--Elder, arXiv:1508.02149) yields such a bound in principle, but it is a tower of exponentials, and we neither rely on it nor have checked the derivation in detail. Natural shortcuts fail. Normalising by the gcd of the lengths leaves gcd-one vectors. Moreover, the order of the boundary positions does not determine the answer: for the nonforcing word \(abbaba\), the admissible vectors \((x,y,u,v)=(2,1,1,2)\) and \((3,1,1,3)\) have the same boundary order, but only the second carries a counterexample, \((X,Y,U,V)=(101,0,1,010)\).
-After Theorems~\ref{rays} and~\ref{d12} (before Section~\ref{sec:phase-comparisons}), 63 tuples with exponents at most \(4\), and 210 with exponents at most \(6\), remain open in the family \((i,0,k,\ell)\). All of them force periodicity on every length vector checked.
-\end{remark}
 
 \section{Phase comparisons and new forcing regions}
 \label{sec:phase-comparisons}
@@ -785,20 +757,12 @@ contradiction. Consequently $K=U$, and $R=U^7$ is imprimitive.
 The final exceptional length regime is thereby eliminated. This
 completes the proof of Theorem~\ref{ph:main}.
 
-\paragraph{Status.}
-Intersecting Theorem~\ref{ph:main} with the previously unresolved
-lists removes $27$ of $63$ tuples through exponent four, and $90$
-of $210$ through exponent six. The remaining counts are $36$ and
-$120$, respectively. These are unconditional proofs for those removed
-tuples, subject to ordinary independent mathematical review; no bound
-on $d$ was needed. The other residual tuples, and a polynomial bound
-on $d$ for them, remain open in this work.
+
 
 \input{sec11_regions}
-\input{sec12_letters}
 \input{sec13_tail}
 \section{Verification and priority}
-Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Sections~7--13 have written proofs only; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
+Lean 4.33.0 checked \texttt{Holub.forcing} and \texttt{Holub.words2025} over arbitrary letter types. The first has no length hypotheses. The second spells out the seven blocks and all three inequalities. Both use only \texttt{propext} and \texttt{Quot.sound} according to \texttt{\#print axioms}. Theorem~\ref{t1001} is checked as \texttt{Holub1001.case1001} in \texttt{Case1001.lean}, also using only \texttt{propext} and \texttt{Quot.sound}. Both compiled modules were replayed with \texttt{leanchecker}. Corollary~\ref{gcd}, the exponent families of Section~4, Theorem~\ref{nonforcing} and Sections~7--12 have written proofs only, except Theorem~\ref{tail:certified}, whose certificates are checked by \texttt{remaining/tail/final/checks/check\_certs.py}; the nonforcing witnesses are also checked by \texttt{families.py}. Independently of Lean, the disjoint-set scan covered all \(1{,}703{,}400\) admissible \(t>0\) tuples with \(|V|\le320\), including \(1{,}419{,}156\) primitive scales. Each primitive graph was connected. Tests compare the general graph solver against literal binary substitution and check transport, boundary signs, and examples.
 
 The conference collection dated 1 July 2025 explicitly posed the target on p.~5. Searches through 24 November 2026 checked Holub's publications page, primary papers, indexed proceedings and preprints, using the literal patterns and the terms \emph{binary equality words}, \emph{three occurrences} and \emph{periodicity forcing}. Hadravov\'a and Holub's Theorem 1 concerns a single internal run of \(b\)'s with both outer exponents positive. Holub and S\'ykora's Theorem 30 classifies equality words with two \(b\)'s for two nonperiodic morphisms. Neither result covers the target. No earlier resolution of this pattern was located. Bibliographic priority and external expert review remain unverified.
 

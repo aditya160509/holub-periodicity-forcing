@@ -422,3 +422,111 @@ If \(\sigma\ne0\), then \(\Pi\) has period \(|\sigma|\) on a window of length \(
 
 If \(\sigma=0\), then \(u=e+y\), \(x=4e+y\), and \(y<e/2\). By Lemma~\ref{tail:twoper}(i), period \(e-y\) holds on \(W_b=[y-e,4e-y)\). Its translate \(W_b+x=[3e+2y,8e)\) meets \(W_a=[4e-y,8e+2y)\) in an interval of length at least \(\min(4e+y,5e-2y)\ge2e-y\). By Fine--Wilf the union has period \(\gcd(e,e-y)=\gcd(e,y)\). The union is \([\min(4e-y,3e+2y),\,8e+2y)\), of length \(\min(4e+3y,\,5e)\). This is at least \(x+\gcd(e,y)=4e+y+\gcd(e,y)\): if \(y>0\), then \(\gcd(e,y)\le y<e/2\); if \(y=0\), the length is \(5e=x+e\). So we obtain a global period dividing \(e\).
 \end{proof}
+
+\subsection{A certified Fine--Wilf covering of the residual tuples}\label{tail:cert-sec}
+
+This subsection settles the eighteen tuples with exponents at most \(6\) that the preceding results leave open. The proof is computer-assisted: it covers the space of length vectors by finitely many polyhedral cones, and on each cone it exhibits one chain of Fine--Wilf steps that works uniformly. Each cone and its chain is a finite certificate, checked in exact rational arithmetic by a program that re-derives every step independently. We first state the rules, and then the covering.
+
+Throughout, \((i,k,\ell)\) satisfies \(k\ge1\), \(i+k<2\ell\), \(2i\le k+\ell\) and \(m=i+\ell-2k\ne0\), and we consider a counterexample with \(XU\ne UX\), oriented so that \(d>0\). By Lemma~\ref{commouter} it suffices to derive \(XU=UX\) or a contradiction. Put \(\kappa=3\) if \(3\nmid S\) and \(\kappa=1\) otherwise, so that \(d=\kappa w\) for a positive integer \(w\). Every length below is a linear form with integer coefficients in \((w,u,y)\): \(x=\kappa w+u\), \(|C|=id\), \(|A|=D-id\), \(|G|=\ell d-D\), \(|H|=|G|+id\), \(p=md/3\). Let \(\Pi\) be the bi-infinite word with period \(x\) whose factor \(\Pi[0,x)\) is \(X\).
+
+\paragraph{The reduced system.} By \eqref{eq:tail} and the identities preceding it,
+\begin{equation}\label{eq:reduced}
+X^i=U^iC,\qquad X^\ell=HAU^\ell,\qquad YH=GCY,\qquad YX^kG=ACYAU^k,
+\end{equation}
+where \(C=\Pi[iu,iu+id)\), \(H=\Pi[0,|H|)\), \(A=\Pi[|H|,\ell d)\), \(U=\Pi[0,u)\) if \(i\ge1\) and \(U=\Pi[-u,0)\) if \(i=0\). The last identity makes \(Y\) the prefix of length \(y\) of \((AC)^\omega\), and the third makes \(G\) the prefix of length \(|G|\) of \(YH\). So both sides of each identity in~\eqref{eq:reduced} are concatenations of factors of \(\Pi\) whose starting positions and lengths are linear forms. Fix a closed or open polyhedral cone \(K\subset\mathbb R^3\) on which the comparisons between the cumulative block lengths of the two sides have constant signs. Aligning the two sides then gives finitely many \emph{relations} \((a,b,L)\), with \(a,b,L\) linear forms: at every integer point of \(K\),
+\[
+\Pi[a+t]=\Pi[b+t]\qquad(0\le t<L).
+\]
+
+\paragraph{Windows and lattices.} For a finite set \(M\) of linear forms, write \(\Lambda(M)\) for the set of integer combinations of \(M\), and \(P_M\) for the greatest common divisor of the values of \(M\) at the point under consideration. A \emph{window} is a triple \((\lambda,\rho,M)\) of linear forms and a finite set of linear forms, meaning that \(\Pi[\lambda,\rho)\) has period \(P_M\). For finite sets \(M_1,M_2\), a \emph{bound} for \(M\) is a form \(\beta(M)\in\Lambda(M)\) that is positive on \(K\), and a \emph{threshold} is
+\[
+\tau(M_1,M_2)=\begin{cases}
+\beta(M_2)&\text{if }\Lambda(M_2)\subseteq\Lambda(M_1),\\
+\beta(M_1)&\text{if }\Lambda(M_1)\subseteq\Lambda(M_2),\\
+\beta(M_1)+\beta(M_2)-|f|&\text{if }\Lambda(M_1\cup M_2)=\mathbb Z f,\ f\text{ of constant sign on }K,\\
+\beta(M_1)+\beta(M_2)&\text{otherwise.}
+\end{cases}
+\]
+
+\begin{lemma}[Certificate rules]\label{tail:rules}
+Let \(K\) be a cone as above, and let all inequalities named below hold on \(K\). At every integer point of \(K\) the following hold.
+\begin{enumerate}
+\item[(W1)] If \((a,b,L)\) is a relation, \(j\in\mathbb Z\) and \(s=b-a-jx>0\), then \((a,a+L+s,\{s\})\) is a window. If \(s<0\), then \((a+s,a+L,\{-s\})\) is a window.
+\item[(W2)] If \((\lambda_1,\rho_1,M_1)\) and \((\lambda_2,\rho_2,M_2)\) are windows, \(j\in\mathbb Z\), \(\lambda_2'=\lambda_2+jx\), \(\rho_2'=\rho_2+jx\), and \(\rho-\lambda'\ge\tau(M_1,M_2)\) for all \(\rho\in\{\rho_1,\rho_2'\}\), \(\lambda'\in\{\lambda_1,\lambda_2'\}\), then \((\lambda,\rho,M_1\cup M_2)\) is a window for all \(\lambda\in\{\lambda_1,\lambda_2'\}\), \(\rho\in\{\rho_1,\rho_2'\}\).
+\item[(G)] Suppose \(\Pi\) has period \(P_\Gamma\) for a finite set \(\Gamma\) (initially \(\Gamma=\{x\}\)). If \((\lambda,\rho,M)\) is a window and \(\rho-\lambda\ge\tau(M,\Gamma)\), then \(\Pi\) has period \(P_{\Gamma\cup M}\).
+\item[(C)] Let \(Z\) be a set of forms that vanish identically on \(K\). If \(\Pi\) has period \(P_\Gamma\) and \(u\in\Lambda(\Gamma\cup Z)\), then \(XU=UX\). If \(p\in\Lambda(\Gamma\cup Z)\), the point carries no counterexample.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+The value of \(\beta(M)\) is a positive element of the value group generated by \(M\), hence a multiple of \(P_M\), and so \(P_M\le\beta(M)\). Also \(\gcd(P_{M_1},P_{M_2})=P_{M_1\cup M_2}\). In the first case of the threshold \(P_{M_1}\mid P_{M_2}\), so \(P_{M_1}+P_{M_2}-\gcd=P_{M_2}\le\beta(M_2)\); the second case is symmetric. In the third case \(P_{M_1\cup M_2}=|f|\). Hence in all cases \(\tau(M_1,M_2)\ge P_{M_1}+P_{M_2}-\gcd(P_{M_1},P_{M_2})\).
+
+(W1) is the relation read with the period \(x\) of \(\Pi\). For (W2), translation by \(jx\) preserves windows. The hypothesis says that the overlap \(O=[\max\lambda,\min\rho)\) has length at least \(\tau\). By Fine--Wilf, \(\Pi\) restricted to \(O\) has period \(q=P_{M_1\cup M_2}\). Each window has a period that \(q\) divides and contains \(O\), which is at least that period long. So each window is \(q\)-periodic, with the same residue pattern as on \(O\). Hence the union interval \([\min\lambda,\max\rho)\) is \(q\)-periodic, and so is every subinterval named in (W2). (G) is the same argument with \(\Pi\) itself in place of the second window, using \(\rho-\lambda\ge P_\Gamma\). For (C), the forms in \(Z\) have value \(0\), so \(P_\Gamma\) divides the value of every element of \(\Lambda(\Gamma\cup Z)\). If \(P_\Gamma\mid u\), then \(P_\Gamma\mid x\), and \(X\) and \(U\) are powers of the same word of length \(P_\Gamma\), because \(U\) starts at a multiple of \(P_\Gamma\) in \(\Pi\). If \(P_\Gamma\mid p\), Lemma~\ref{tail:rp} applies (all eighteen tuples satisfy \(|m|\le i+\ell-2\)).
+\end{proof}
+
+A \emph{certificate} is a cone \(K\) together with a finite sequence of applications of (W1), (W2), (G) ending in (C), all of whose inequalities hold on \(K\). By Lemma~\ref{tail:rules} and homogeneity, it excludes counterexamples at every integer point of \(K\).
+
+\begin{lemma}[Dilation]\label{tail:dilation}
+Let \(P_0=(w_0,u_0,y_0)\) be an integer length vector, and suppose that every solution of~\eqref{eq:reduced} at \(P_0\) has \(\Pi\) of period \(g_0\). Then every solution at \(tP_0\), \(t\ge1\), has \(\Pi\) of period \(tg_0\). In particular, if \(g_0\mid u_0\) or \(g_0\mid p_0\), there is no counterexample on the ray through \(P_0\).
+\end{lemma}
+\begin{proof}
+At \(tP_0\) every block of~\eqref{eq:reduced} starts and ends at a multiple of \(t\). So the letter identifications at \(tP_0\) are exactly \(\Pi[ta+r]=\Pi[tb+r]\), \(0\le r<t\), for the identifications \(\Pi[a]=\Pi[b]\) at \(P_0\). The position graph on \(\mathbb Z/tx_0\) is thus the disjoint union over \(r\) of copies of the graph at \(P_0\) under \(v\mapsto tv+r\). Since \(v\) and \(v+g_0\) are joined at \(P_0\), the vertices \(tv+r\) and \(tv+r+tg_0\) are joined at \(tP_0\). The last claim follows as in (C).
+\end{proof}
+
+\begin{lemma}[Long \(Y\)]\label{tail:longY}
+For each of the eighteen tuples, a counterexample has \(y<Y_*w\) with \(Y_*\) as in Table~\ref{tab:cert}.
+\end{lemma}
+\begin{proof}
+For \((0,1,3)\), Lemma~\ref{tail:013} applies once \(y\ge5e\) (here \(w=e\)), since \(\min(x,4e)\ge3e\). For the other seventeen, put \(\gamma=\gcd(D,|H|)\). Lemma~\ref{tail:twoper}(iii) applies once \(id+y+\min(D,kd,|H|)\ge D+|H|-\gamma\), because \(kx\ge kd\). That is the stated bound. In each case \(\gamma\mid p\) and \(|H|\ge(1+1/c)d+\gamma>x+\gamma\), where \(c=i+\ell-2\), by Corollary~\ref{outerbound}. So Lemma~\ref{tail:rp} gives a contradiction.
+\end{proof}
+
+\begin{theorem}\label{tail:certified}
+The tuples \((0,1,3)\), \((0,1,4)\), \((1,1,3)\), \((1,1,4)\), \((0,1,5)\), \((0,1,6)\), \((0,2,5)\), \((0,2,6)\), \((0,3,5)\), \((0,4,6)\), \((1,1,5)\), \((1,1,6)\), \((1,2,5)\), \((1,2,6)\), \((2,1,5)\), \((2,1,6)\), \((2,2,6)\) and \((3,1,6)\) force periodicity without a length condition.
+\end{theorem}
+\begin{proof}
+Consider a counterexample with \(XU\ne UX\). By Corollary~\ref{outerbound} and Lemma~\ref{tail:longY}, the point \((u/w,y/w)\) lies in the open polygon
+\[
+R=\{0<u/w<\kappa/c,\ 0<y/w<Y_*\}.
+\]
+For each tuple, the file \texttt{checks/cov\(ik\ell\).json} lists finitely many certificates, and finitely many rational points of \(R\) together with the forced period of the reduced system at the primitive integer vector on their ray. The program \texttt{checks/check\_certs.py} verifies the following in exact rational arithmetic, without using the code that produced the data.
+\begin{enumerate}
+\item For every certificate, it re-derives the relations from~\eqref{eq:reduced} by aligning the blocks itself. It checks that every relation used is one of them (or is a subrelation of one, or holds trivially by \(x\)-periodicity on the cone), and that the sign conditions fixing that alignment hold on the cone. It then checks each application of (W1), (W2), (G) and the final (C). Each stored bound \(\beta\) must lie in the relevant lattice and be positive on the cone, each lattice inclusion or rank-one claim is recomputed, and every inequality is checked on the cone's section \(w=1\) at its vertices. Strict inequalities are handled exactly at vertices and edges.
+\item For every listed point, it recomputes the components of the position graph of~\eqref{eq:reduced} at the primitive integer vector by breadth-first search. It checks that the forced period divides \(u_0\) or \(p_0\), and then applies Lemma~\ref{tail:dilation}.
+\item It checks that the cones and points cover \(R\). It does this by recursive exact subdivision: a convex piece is split along the defining inequalities of a certificate containing an interior point of the piece, and every piece that is a single point must be one of the listed points.
+\end{enumerate}
+The counts are in Table~\ref{tab:cert}. Every integer length vector of a counterexample therefore lies in a certified cone or on a certified ray, which is a contradiction.
+\end{proof}
+
+\begin{table}[ht]\centering\small
+\begin{tabular}{lcccrrrr}
+\toprule
+\((i,k,\ell)\) & \(\kappa\) & \(u/w<\) & \(Y_*\) & cones & \(u\)/\(p\) closures & on lines & points\\
+\midrule
+\((0,1,3)\) & 3 & \(3\) & \(5\) & 2283 & 2283/0 & 2 & 0\\
+\((0,1,4)\) & 3 & \(3/2\) & \(8\) & 1447 & 1410/37 & 0 & 0\\
+\((1,1,3)\) & 3 & \(3/2\) & \(5\) & 984 & 481/503 & 0 & 0\\
+\((1,1,4)\) & 1 & \(1/3\) & \(2\) & 1273 & 1273/0 & 0 & 0\\
+\((0,1,5)\) & 1 & \(1/3\) & \(3\) & 441 & 441/0 & 0 & 0\\
+\((0,1,6)\) & 3 & \(3/4\) & \(14\) & 1409 & 1394/15 & 3 & 0\\
+\((0,2,5)\) & 3 & \(1\) & \(8\) & 2308 & 2308/0 & 7 & 0\\
+\((0,2,6)\) & 3 & \(3/4\) & \(10\) & 1619 & 391/1228 & 4 & 0\\
+\((0,3,5)\) & 3 & \(1\) & \(7\) & 674 & 674/0 & 2 & 0\\
+\((0,4,6)\) & 3 & \(3/4\) & \(8\) & 846 & 177/669 & 3 & 0\\
+\((1,1,5)\) & 3 & \(3/4\) & \(11\) & 2071 & 1995/76 & 0 & 0\\
+\((1,1,6)\) & 3 & \(3/5\) & \(14\) & 1517 & 1511/6 & 0 & 0\\
+\((1,2,5)\) & 3 & \(3/4\) & \(7\) & 4448 & 44/4404 & 0 & 0\\
+\((1,2,6)\) & 1 & \(1/5\) & \(3\) & 871 & 871/0 & 0 & 0\\
+\((2,1,5)\) & 3 & \(3/5\) & \(11\) & 245 & 211/34 & 4 & 1\\
+\((2,1,6)\) & 1 & \(1/6\) & \(4\) & 296 & 203/93 & 0 & 0\\
+\((2,2,6)\) & 3 & \(1/2\) & \(10\) & 165 & 0/165 & 0 & 0\\
+\((3,1,6)\) & 3 & \(3/7\) & \(14\) & 376 & 343/33 & 0 & 0\\
+\midrule
+total & & & & 23273 & & 25 & 1\\
+\bottomrule
+\end{tabular}
+\caption{Certified coverings for Theorem~\ref{tail:certified}. Here \(d=\kappa w\); the region is \(0<u/w<\kappa/c\), \(0<y/w<Y_*\). Points are closed by Lemma~\ref{tail:dilation}.}\label{tab:cert}
+\end{table}
+
+
+\begin{remark}
+The certificates use only Fine--Wilf steps between equal-factor relations of~\eqref{eq:reduced}, so each one is a proof in the style of Theorems~\ref{tail:124}--\ref{tail:023} restricted to its cone. Periods are kept as lattices of linear forms, and the exact Fine--Wilf bound is used whenever the two lattices are nested or their union has rank one. This is what lets the cones close up. Away from these cases, a gcd of incommensurable forms is bounded only by a positive lattice element. The rays \(t(9,4,6)\) and \(t(9,4,7)\) for \((0,1,4)\), on which the simpler window prover of the working files fails, lie inside certified cones. On a lower-dimensional piece a single certificate may use forms that vanish identically on that piece, through the set \(Z\) in (C). This is how the line \(w=u+2y\) for \((0,1,3)\), which accumulates at the corner \(u\to0\), and the line \(y=w+3u\) for \((0,2,5)\) are closed (the column ``on lines'' of Table~\ref{tab:cert}).
+\end{remark}

@@ -1,0 +1,1 @@
+(0, 5, 9) certificates verified: 554 covering pieces: 556 extra points: 2 OK

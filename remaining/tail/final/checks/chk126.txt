@@ -1,0 +1,1 @@
+(1, 2, 6) certificates verified: 871 covering pieces: 871 extra points: 0 OK
